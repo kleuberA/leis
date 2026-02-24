@@ -1,0 +1,161 @@
+# config/leis.yaml
+# Catálogo de leis brasileiras para o scraper.
+#
+# Campos por lei:
+#   nome     — nome completo para exibição e logs
+#   url      — URL da versão compilada/consolidada
+#   fonte    — planalto | senado | camara
+#   encoding — latin-1 (padrão Planalto) | utf-8 | auto (detecta automaticamente)
+#   tags     — lista de tags para agrupamento (ex: civil, penal, educacao)
+
+leis:
+  # ── Educação ─────────────────────────────────────────────────
+  "9394":
+    nome: "LDB — Lei de Diretrizes e Bases da Educação Nacional"
+    url: "https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [educacao]
+
+  # ── Civil ────────────────────────────────────────────────────
+  "10406":
+    nome: "Código Civil"
+    url: "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [civil]
+
+  # ── Consumidor ───────────────────────────────────────────────
+  "8078":
+    nome: "Código de Defesa do Consumidor — CDC"
+    url: "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [consumidor, civil]
+
+  # ── Trabalho ─────────────────────────────────────────────────
+  "clt":
+    nome: "CLT — Consolidação das Leis do Trabalho"
+    url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [trabalho]
+
+  # ── Penal ────────────────────────────────────────────────────
+  "cp":
+    nome: "Código Penal"
+    url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [penal]
+
+  "cpp":
+    nome: "Código de Processo Penal — CPP"
+    url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [penal, processual]
+
+  # ── Processo Civil ───────────────────────────────────────────
+  "13105":
+    nome: "Código de Processo Civil — CPC/2015"
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105compilado.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [civil, processual]
+
+  # ── Administrativo / Licitações ──────────────────────────────
+  "14133":
+    nome: "Nova Lei de Licitações e Contratos"
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133compilado.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [administrativo, licitacoes]
+
+  "8666":
+    nome: "Lei de Licitações (revogada — referência histórica)"
+    url: "https://www.planalto.gov.br/ccivil_03/leis/l8666cons.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [administrativo, licitacoes, historico]
+
+  # ── Tributário ───────────────────────────────────────────────
+  "5172":
+    nome: "CTN — Código Tributário Nacional"
+    url: "https://www.planalto.gov.br/ccivil_03/leis/l5172compilado.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [tributario]
+
+  # ── Saúde ────────────────────────────────────────────────────
+  "8080":
+    nome: "Lei Orgânica da Saúde — SUS"
+    url: "https://www.planalto.gov.br/ccivil_03/leis/l8080.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [saude]
+
+  # ── Criança e Adolescente ────────────────────────────────────
+  "8069":
+    nome: "ECA — Estatuto da Criança e do Adolescente"
+    url: "https://www.planalto.gov.br/ccivil_03/leis/l8069.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [crianca, social]
+
+  # ── Ambiental ────────────────────────────────────────────────
+  "9605":
+    nome: "Lei de Crimes Ambientais"
+    url: "https://www.planalto.gov.br/ccivil_03/leis/l9605.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [ambiental, penal]
+
+  # ── Constitucional ───────────────────────────────────────────
+  "cf88":
+    nome: "Constituição Federal de 1988"
+    url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [constitucional]
+
+  # ── Digital / LGPD ───────────────────────────────────────────
+  "13709":
+    nome: "LGPD — Lei Geral de Proteção de Dados"
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [digital, privacidade]
+
+  "12965":
+    nome: "Marco Civil da Internet"
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l12965.htm"
+    fonte: planalto
+    encoding: latin-1
+    tags: [digital]
+
+# ── Configurações por fonte ──────────────────────────────────
+fontes:
+  planalto:
+    dominio: "www.planalto.gov.br"
+    encoding_padrao: latin-1
+    rate_limit_rpm: 20
+    retry_attempts: 4
+    timeout_segundos: 25
+    selector_principal: "body"
+
+  senado:
+    dominio: "legis.senado.leg.br"
+    encoding_padrao: utf-8
+    rate_limit_rpm: 15
+    retry_attempts: 3
+    timeout_segundos: 30
+    selector_principal: ".textoNorma"
+
+  camara:
+    dominio: "www.camara.leg.br"
+    encoding_padrao: utf-8
+    rate_limit_rpm: 15
+    retry_attempts: 3
+    timeout_segundos: 30
+    selector_principal: ".corpo-artigo"

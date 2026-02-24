@@ -1,0 +1,14 @@
+# HTTP e scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+
+# Retry robusto
+tenacity>=8.2.0
+
+# Neo4j (para fase de grafo)
+neo4j>=5.14.0
+
+# Utilitários opcionais
+python-dotenv>=1.0.0   # para credenciais Neo4j em .env
+pyyaml>=6.0            # para config/leis.yaml futuro
