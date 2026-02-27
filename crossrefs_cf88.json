@@ -1,0 +1,1766 @@
+[
+  {
+    "origem": "lei-cf88-art-5",
+    "destino_art": "84",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 84"
+  },
+  {
+    "origem": "lei-cf88-art-15",
+    "destino_art": "5º",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 5º"
+  },
+  {
+    "origem": "lei-cf88-art-15",
+    "destino_art": "37",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 37, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-22",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 37"
+  },
+  {
+    "origem": "lei-cf88-art-22",
+    "destino_art": "173",
+    "destino_para": "1°",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 173, § 1°"
+  },
+  {
+    "origem": "lei-cf88-art-27",
+    "destino_art": "39",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 39, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-28",
+    "destino_art": "77",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 77"
+  },
+  {
+    "origem": "lei-cf88-art-28",
+    "destino_art": "38",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 38"
+  },
+  {
+    "origem": "lei-cf88-art-29",
+    "destino_art": "28",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 28, parágrafo único"
+  },
+  {
+    "origem": "lei-cf88-art-32",
+    "destino_art": "27",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 27"
+  },
+  {
+    "origem": "lei-cf88-art-37",
+    "destino_art": "39",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 39, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-37",
+    "destino_art": "5º",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 5º"
+  },
+  {
+    "origem": "lei-cf88-art-39",
+    "destino_art": "7º",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 7º"
+  },
+  {
+    "origem": "lei-cf88-art-39",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 37"
+  },
+  {
+    "origem": "lei-cf88-art-39",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 37"
+  },
+  {
+    "origem": "lei-cf88-art-40",
+    "destino_art": "51",
+    "destino_para": null,
+    "destino_inc": "XIII",
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 51, o inciso XIII"
+  },
+  {
+    "origem": "lei-cf88-art-40",
+    "destino_art": "202",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 202"
+  },
+  {
+    "origem": "lei-cf88-art-42",
+    "destino_art": "14",
+    "destino_para": "8º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 14, § 8º"
+  },
+  {
+    "origem": "lei-cf88-art-42",
+    "destino_art": "40",
+    "destino_para": "9º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 40, § 9º"
+  },
+  {
+    "origem": "lei-cf88-art-42",
+    "destino_art": "142",
+    "destino_para": "3º",
+    "destino_inc": "X",
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 142, § 3º, inciso X"
+  },
+  {
+    "origem": "lei-cf88-art-42",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": "XVI",
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 37, inciso XVI"
+  },
+  {
+    "origem": "lei-cf88-art-48",
+    "destino_art": "39",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 39, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-49",
+    "destino_art": "167-B",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 167-B"
+  },
+  {
+    "origem": "lei-cf88-art-51",
+    "destino_art": "89",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 89"
+  },
+  {
+    "origem": "lei-cf88-art-52",
+    "destino_art": "89",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 89"
+  },
+  {
+    "origem": "lei-cf88-art-61",
+    "destino_art": "84",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 84"
+  },
+  {
+    "origem": "lei-cf88-art-62",
+    "destino_art": "167",
+    "destino_para": "3º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 167, § 3º"
+  },
+  {
+    "origem": "lei-cf88-art-63",
+    "destino_art": "166",
+    "destino_para": "3º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 166, § 3º"
+  },
+  {
+    "origem": "lei-cf88-art-72",
+    "destino_art": "166",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 166, §1º"
+  },
+  {
+    "origem": "lei-cf88-art-84",
+    "destino_art": "73",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 73"
+  },
+  {
+    "origem": "lei-cf88-art-84",
+    "destino_art": "89",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 89"
+  },
+  {
+    "origem": "lei-cf88-art-84",
+    "destino_art": "62",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 62"
+  },
+  {
+    "origem": "lei-cf88-art-84",
+    "destino_art": "167-B",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 167-B"
+  },
+  {
+    "origem": "lei-cf88-art-93",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 37"
+  },
+  {
+    "origem": "lei-cf88-art-93",
+    "destino_art": "40",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 40"
+  },
+  {
+    "origem": "lei-cf88-art-95",
+    "destino_art": "93",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 93"
+  },
+  {
+    "origem": "lei-cf88-art-95",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 37"
+  },
+  {
+    "origem": "lei-cf88-art-96",
+    "destino_art": "169",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 169, parágrafo único"
+  },
+  {
+    "origem": "lei-cf88-art-96",
+    "destino_art": "169",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 169"
+  },
+  {
+    "origem": "lei-cf88-art-102",
+    "destino_art": "52",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 52"
+  },
+  {
+    "origem": "lei-cf88-art-104",
+    "destino_art": "94",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 94"
+  },
+  {
+    "origem": "lei-cf88-art-105",
+    "destino_art": "102",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 102"
+  },
+  {
+    "origem": "lei-cf88-art-111-A",
+    "destino_art": "94",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 94"
+  },
+  {
+    "origem": "lei-cf88-art-114",
+    "destino_art": "102",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 102"
+  },
+  {
+    "origem": "lei-cf88-art-115",
+    "destino_art": "94",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 94"
+  },
+  {
+    "origem": "lei-cf88-art-127",
+    "destino_art": "169",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 169"
+  },
+  {
+    "origem": "lei-cf88-art-128",
+    "destino_art": "39",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 39, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-128",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 37"
+  },
+  {
+    "origem": "lei-cf88-art-128",
+    "destino_art": "95",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 95, parágrafo único"
+  },
+  {
+    "origem": "lei-cf88-art-129",
+    "destino_art": "93",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 93"
+  },
+  {
+    "origem": "lei-cf88-art-134",
+    "destino_art": "99",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 99, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-134",
+    "destino_art": "93",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 93"
+  },
+  {
+    "origem": "lei-cf88-art-135",
+    "destino_art": "39",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 39, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-142",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": "XVI",
+    "destino_alinea": "c",
+    "lei_externa": null,
+    "trecho": "art. 37, inciso XVI, alínea \"c\""
+  },
+  {
+    "origem": "lei-cf88-art-142",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": "XVI",
+    "destino_alinea": "c",
+    "lei_externa": null,
+    "trecho": "art. 37, inciso XVI, alínea \"c\""
+  },
+  {
+    "origem": "lei-cf88-art-142",
+    "destino_art": "7º",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 7º"
+  },
+  {
+    "origem": "lei-cf88-art-142",
+    "destino_art": "37",
+    "destino_para": null,
+    "destino_inc": "XVI",
+    "destino_alinea": "c",
+    "lei_externa": null,
+    "trecho": "art. 37, inciso XVI, alínea \"c\""
+  },
+  {
+    "origem": "lei-cf88-art-148",
+    "destino_art": "150",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 150"
+  },
+  {
+    "origem": "lei-cf88-art-149",
+    "destino_art": "146",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 146"
+  },
+  {
+    "origem": "lei-cf88-art-149",
+    "destino_art": "195",
+    "destino_para": "6º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 195, § 6º"
+  },
+  {
+    "origem": "lei-cf88-art-149-A",
+    "destino_art": "150",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 150"
+  },
+  {
+    "origem": "lei-cf88-art-149-B",
+    "destino_art": "195",
+    "destino_para": "7º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 195, § 7º"
+  },
+  {
+    "origem": "lei-cf88-art-149-C",
+    "destino_art": "156-A",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A"
+  },
+  {
+    "origem": "lei-cf88-art-149-C",
+    "destino_art": "150",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 150"
+  },
+  {
+    "origem": "lei-cf88-art-150",
+    "destino_art": "155",
+    "destino_para": "2",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 155, § 2"
+  },
+  {
+    "origem": "lei-cf88-art-155",
+    "destino_art": "153",
+    "destino_para": "5º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153, § 5º"
+  },
+  {
+    "origem": "lei-cf88-art-155",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-155",
+    "destino_art": "150",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 150"
+  },
+  {
+    "origem": "lei-cf88-art-156",
+    "destino_art": "182",
+    "destino_para": "4º",
+    "destino_inc": "II",
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 182, § 4º, inciso II"
+  },
+  {
+    "origem": "lei-cf88-art-156-A",
+    "destino_art": "158",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158"
+  },
+  {
+    "origem": "lei-cf88-art-158",
+    "destino_art": "153",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-158",
+    "destino_art": "156-A",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A"
+  },
+  {
+    "origem": "lei-cf88-art-159",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-159",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-159",
+    "destino_art": "177",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 177, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-159",
+    "destino_art": "157",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 157"
+  },
+  {
+    "origem": "lei-cf88-art-159",
+    "destino_art": "158",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158, § 1º"
+  },
+  {
+    "origem": "lei-cf88-art-159",
+    "destino_art": "158",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-159",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-159-A",
+    "destino_art": "3º",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 3º"
+  },
+  {
+    "origem": "lei-cf88-art-160",
+    "destino_art": "198",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 198, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-161",
+    "destino_art": "158",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158, § 1º"
+  },
+  {
+    "origem": "lei-cf88-art-166",
+    "destino_art": "165",
+    "destino_para": "9º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 165, § 9º"
+  },
+  {
+    "origem": "lei-cf88-art-167",
+    "destino_art": "198",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 198, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-167",
+    "destino_art": "165",
+    "destino_para": "8º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 165, § 8º"
+  },
+  {
+    "origem": "lei-cf88-art-167",
+    "destino_art": "165",
+    "destino_para": "5º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 165, § 5º"
+  },
+  {
+    "origem": "lei-cf88-art-167",
+    "destino_art": "62",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 62"
+  },
+  {
+    "origem": "lei-cf88-art-168",
+    "destino_art": "165",
+    "destino_para": "9º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 165, § 9º"
+  },
+  {
+    "origem": "lei-cf88-art-177",
+    "destino_art": "150",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 150"
+  },
+  {
+    "origem": "lei-cf88-art-195",
+    "destino_art": "154",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 154"
+  },
+  {
+    "origem": "lei-cf88-art-195",
+    "destino_art": "150",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 150"
+  },
+  {
+    "origem": "lei-cf88-art-195",
+    "destino_art": "156-A",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A, § 1º"
+  },
+  {
+    "origem": "lei-cf88-art-195",
+    "destino_art": "100",
+    "destino_para": "15",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 100, § 15"
+  },
+  {
+    "origem": "lei-cf88-art-198",
+    "destino_art": "195",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 195"
+  },
+  {
+    "origem": "lei-cf88-art-212",
+    "destino_art": "213",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 213"
+  },
+  {
+    "origem": "lei-cf88-art-212-A",
+    "destino_art": "212",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 212"
+  },
+  {
+    "origem": "lei-cf88-art-212-A",
+    "destino_art": "156-A",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-212-A",
+    "destino_art": "155",
+    "destino_para": null,
+    "destino_inc": "II",
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 155, o inciso II"
+  },
+  {
+    "origem": "lei-cf88-art-220",
+    "destino_art": "5º",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 5º"
+  },
+  {
+    "origem": "lei-cf88-art-220",
+    "destino_art": "221",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 221"
+  },
+  {
+    "origem": "lei-cf88-art-223",
+    "destino_art": "64",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 64, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-227",
+    "destino_art": "7º",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 7º"
+  },
+  {
+    "origem": "lei-cf88-art-227",
+    "destino_art": "204",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 204"
+  },
+  {
+    "origem": "lei-cf88-art-231",
+    "destino_art": "174",
+    "destino_para": "3º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 174, § 3º"
+  },
+  {
+    "origem": "lei-cf88-art-240",
+    "destino_art": "195",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 195"
+  },
+  {
+    "origem": "lei-cf88-art-243",
+    "destino_art": "5º",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 5º"
+  },
+  {
+    "origem": "lei-cf88-art-244",
+    "destino_art": "227",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 227, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-4",
+    "destino_art": "16",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 16"
+  },
+  {
+    "origem": "lei-cf88-art-5",
+    "destino_art": "16",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 16"
+  },
+  {
+    "origem": "lei-cf88-art-10",
+    "destino_art": "7º",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 7º"
+  },
+  {
+    "origem": "lei-cf88-art-10",
+    "destino_art": "233",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 233"
+  },
+  {
+    "origem": "lei-cf88-art-13",
+    "destino_art": "234",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 234"
+  },
+  {
+    "origem": "lei-cf88-art-16",
+    "destino_art": "32",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 32, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-16",
+    "destino_art": "72",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 72"
+  },
+  {
+    "origem": "lei-cf88-art-24",
+    "destino_art": "39",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 39"
+  },
+  {
+    "origem": "lei-cf88-art-27",
+    "destino_art": "104",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 104, parágrafo único"
+  },
+  {
+    "origem": "lei-cf88-art-27",
+    "destino_art": "107",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 107"
+  },
+  {
+    "origem": "lei-cf88-art-28",
+    "destino_art": "123",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 123, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-32",
+    "destino_art": "236",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 236"
+  },
+  {
+    "origem": "lei-cf88-art-34",
+    "destino_art": "150",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 150"
+  },
+  {
+    "origem": "lei-cf88-art-35",
+    "destino_art": "165",
+    "destino_para": "7º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 165, § 7º"
+  },
+  {
+    "origem": "lei-cf88-art-35",
+    "destino_art": "165",
+    "destino_para": "9º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 165, § 9º"
+  },
+  {
+    "origem": "lei-cf88-art-41",
+    "destino_art": "23",
+    "destino_para": "6º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 23, § 6º"
+  },
+  {
+    "origem": "lei-cf88-art-44",
+    "destino_art": "176",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 176, § 1º"
+  },
+  {
+    "origem": "lei-cf88-art-44",
+    "destino_art": "176",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 176, § 1º"
+  },
+  {
+    "origem": "lei-cf88-art-44",
+    "destino_art": "176",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 176, § 1º"
+  },
+  {
+    "origem": "lei-cf88-art-45",
+    "destino_art": "177",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 177, § 1º"
+  },
+  {
+    "origem": "lei-cf88-art-65",
+    "destino_art": "220",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 220, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-70",
+    "destino_art": "125",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 125, § 1º"
+  },
+  {
+    "origem": "lei-cf88-art-72",
+    "destino_art": "153",
+    "destino_para": "5º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "artigos 153, § 5º"
+  },
+  {
+    "origem": "lei-cf88-art-74",
+    "destino_art": "153",
+    "destino_para": "5º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 153, § 5º"
+  },
+  {
+    "origem": "lei-cf88-art-74",
+    "destino_art": "195",
+    "destino_para": "6º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 195, § 6º"
+  },
+  {
+    "origem": "lei-cf88-art-77",
+    "destino_art": "74",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 74"
+  },
+  {
+    "origem": "lei-cf88-art-77",
+    "destino_art": "198",
+    "destino_para": "3º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 198, § 3º"
+  },
+  {
+    "origem": "lei-cf88-art-80",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": "VII",
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153, inciso VII"
+  },
+  {
+    "origem": "lei-cf88-art-80",
+    "destino_art": "159",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 159"
+  },
+  {
+    "origem": "lei-cf88-art-81",
+    "destino_art": "80",
+    "destino_para": null,
+    "destino_inc": "IV",
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 80, inciso IV"
+  },
+  {
+    "origem": "lei-cf88-art-81",
+    "destino_art": "165",
+    "destino_para": "9º",
+    "destino_inc": "II",
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 165, § 9º, inciso II"
+  },
+  {
+    "origem": "lei-cf88-art-82",
+    "destino_art": "155",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 155, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-82",
+    "destino_art": "158",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158"
+  },
+  {
+    "origem": "lei-cf88-art-86",
+    "destino_art": "100",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 100"
+  },
+  {
+    "origem": "lei-cf88-art-86",
+    "destino_art": "78",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 78"
+  },
+  {
+    "origem": "lei-cf88-art-89",
+    "destino_art": "36",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 36"
+  },
+  {
+    "origem": "lei-cf88-art-93",
+    "destino_art": "159",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 159"
+  },
+  {
+    "origem": "lei-cf88-art-94",
+    "destino_art": "146",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 146"
+  },
+  {
+    "origem": "lei-cf88-art-97",
+    "destino_art": "100",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 100"
+  },
+  {
+    "origem": "lei-cf88-art-97",
+    "destino_art": "33",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 33"
+  },
+  {
+    "origem": "lei-cf88-art-102",
+    "destino_art": "101",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 101"
+  },
+  {
+    "origem": "lei-cf88-art-102",
+    "destino_art": "101",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 101"
+  },
+  {
+    "origem": "lei-cf88-art-103",
+    "destino_art": "101",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 101"
+  },
+  {
+    "origem": "lei-cf88-art-105",
+    "destino_art": "101",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 101"
+  },
+  {
+    "origem": "lei-cf88-art-107-A",
+    "destino_art": "194",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 194"
+  },
+  {
+    "origem": "lei-cf88-art-107-A",
+    "destino_art": "194",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 194"
+  },
+  {
+    "origem": "lei-cf88-art-125",
+    "destino_art": "156-A",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A"
+  },
+  {
+    "origem": "lei-cf88-art-125",
+    "destino_art": "156-A",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A"
+  },
+  {
+    "origem": "lei-cf88-art-125",
+    "destino_art": "156-B",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-B, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-126",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-126",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-126",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-127",
+    "destino_art": "156-A",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "156-A",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "155",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 155"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "136",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 136"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "156-A",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "156",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "150",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 150"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "153",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 153"
+  },
+  {
+    "origem": "lei-cf88-art-130",
+    "destino_art": "156-A",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "149-C",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 149-C"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "158",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "155",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 155"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "158",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "155",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 155"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "156",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "156",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "158",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "158",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "156-A",
+    "destino_para": "5º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A, § 5º"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "165",
+    "destino_para": "8º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 165, § 8º"
+  },
+  {
+    "origem": "lei-cf88-art-131",
+    "destino_art": "167",
+    "destino_para": "4º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 167, § 4º"
+  },
+  {
+    "origem": "lei-cf88-art-132",
+    "destino_art": "131",
+    "destino_para": "1º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 131, § 1º"
+  },
+  {
+    "origem": "lei-cf88-art-132",
+    "destino_art": "149-C",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 149-C"
+  },
+  {
+    "origem": "lei-cf88-art-132",
+    "destino_art": "158",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 158"
+  },
+  {
+    "origem": "lei-cf88-art-132",
+    "destino_art": "131",
+    "destino_para": "2º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 131, § 2º"
+  },
+  {
+    "origem": "lei-cf88-art-132",
+    "destino_art": "131",
+    "destino_para": "5º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 131, § 5º"
+  },
+  {
+    "origem": "lei-cf88-art-134",
+    "destino_art": "155",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 155"
+  },
+  {
+    "origem": "lei-cf88-art-134",
+    "destino_art": "20",
+    "destino_para": "5º",
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 20, § 5º"
+  },
+  {
+    "origem": "lei-cf88-art-134",
+    "destino_art": "156-A",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "art. 156-A"
+  },
+  {
+    "origem": "lei-cf88-art-134",
+    "destino_art": "158",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 158"
+  },
+  {
+    "origem": "lei-cf88-art-136",
+    "destino_art": "130",
+    "destino_para": null,
+    "destino_inc": null,
+    "destino_alinea": null,
+    "lei_externa": null,
+    "trecho": "arts. 130"
+  }
+]

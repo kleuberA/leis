@@ -47,6 +47,6 @@ class AdapterSenado(AdapterBase):
 
         if bloco is None:
             bloco = soup.find("body") or soup
-
-        texto = bloco.get_text(separator="\n")
+ 
+        texto = self._extrair_texto_formatado(bloco)
         return self._limpar_linhas(texto)

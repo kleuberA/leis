@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from parser import (
     parse_lei, normalizar_texto, limpar_texto_final,
     extrair_metadados, extrair_incisos, extrair_alineas, extrair_paragrafos,
-    _PADRAO_ANO, _PADRAO_NORMA, _extrair_ano,
+    _PAT_ANO, _PAT_NORMA
 )
 from tests.fixtures import (
     ART_SIMPLES, ART_INCISOS_TODOS_FORMATOS, ART_INCISOS_COM_ALINEAS,
@@ -153,26 +153,28 @@ class TestLimpezaTexto(unittest.TestCase):
 class TestMetadados(unittest.TestCase):
 
     def test_ano_formato_padrao(self):
-        m = _PADRAO_ANO.search("(Redação dada pela Lei nº 12.796, de 2013)")
+        m = _PAT_ANO.search("(Redação dada pela Lei nº 12.796, de 2013)")
         self.assertIsNotNone(m)
-        self.assertEqual(_extrair_ano(m), "2013")
+        ano = (m.group(1) or m.group(2)) if m else None
+        self.assertEqual(ano, "2013")
 
     def test_ano_formato_data_completa(self):
-        m = _PADRAO_ANO.search("(Redação dada pela Lei nº 10.793, de 1º.12.2003)")
+        m = _PAT_ANO.search("(Redação dada pela Lei nº 10.793, de 1º.12.2003)")
         self.assertIsNotNone(m)
-        self.assertEqual(_extrair_ano(m), "2003")
+        ano = (m.group(1) or m.group(2)) if m else None
+        self.assertEqual(ano, "2003")
 
     def test_norma_lei_maiusculo(self):
-        self.assertIsNotNone(_PADRAO_NORMA.search("pela Lei nº 12.796, de 2013"))
+        self.assertIsNotNone(_PAT_NORMA.search("pela Lei nº 12.796, de 2013"))
 
     def test_norma_lei_minusculo(self):
-        self.assertIsNotNone(_PADRAO_NORMA.search("pela lei nº 13.415, de 2017"))
+        self.assertIsNotNone(_PAT_NORMA.search("pela lei nº 13.415, de 2017"))
 
     def test_norma_adin(self):
-        self.assertIsNotNone(_PADRAO_NORMA.search("(Vide Adin 3324-7, de 2005)"))
+        self.assertIsNotNone(_PAT_NORMA.search("(Vide Adin 3324-7, de 2005)"))
 
     def test_norma_decreto(self):
-        self.assertIsNotNone(_PADRAO_NORMA.search("(Vide Decreto nº 11.713, de 2023)"))
+        self.assertIsNotNone(_PAT_NORMA.search("(Vide Decreto nº 11.713, de 2023)"))
 
     def test_meta_tipo_redacao(self):
         _, metas = extrair_metadados("texto (Redação dada pela Lei nº 1, de 2020) fim")

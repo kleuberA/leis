@@ -47,6 +47,7 @@ logger = logging.getLogger(__name__)
 def normalizar_texto(texto: str) -> str:
     texto = texto.replace("\r", "")
     texto = texto.replace("\xa0", " ")
+    texto = texto.replace("║", "º")
 
     linhas = [re.sub(r"  +", " ", l) for l in texto.splitlines()]
     texto = "\n".join(linhas)
@@ -225,7 +226,7 @@ _PAT_META = re.compile(
 _PAT_NORMA = re.compile(
     r"(Lei(?:\s+Complementar)?|Decreto(?:-Lei)?|Emenda\s+Constitucional"
     r"|Medida\s+Provisória|Resolução|Portaria|Instrução\s+Normativa"
-    r"|Ato\s+(?:Institucional|Normativo)|Convênio)"
+    r"|Ato\s+(?:Institucional|Normativo)|Convênio|Adin|ADPF)"
     r"[\s\w./º\-nº]*",
     re.IGNORECASE,
 )
@@ -358,8 +359,10 @@ def extrair_paragrafos(txt_art: str) -> list:
         if re.search(r"único", marcador, re.IGNORECASE):
             numero = "único"
         else:
-            m = re.search(r"(\d+[°oº]?(?:-[A-Za-z])?)", marcador)
+            m = re.search(r"(\d+[°oº║]?(?:-[A-Za-z])?)", marcador)
             numero = m.group(1) if m else None
+            if numero:
+                numero = re.sub(r"[°oº║]", "", numero)
 
         estrutura.append({
             "tipo":     "paragrafo",

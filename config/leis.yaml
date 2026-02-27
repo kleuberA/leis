@@ -114,7 +114,7 @@ leis:
   # ── Constitucional ───────────────────────────────────────────
   "cf88":
     nome: "Constituição Federal de 1988"
-    url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    url: "https://www.planalto.gov.br/ccivil_03/Constituicao/ConstituicaoCompilado.htm"
     fonte: planalto
     encoding: latin-1
     tags: [constitucional]

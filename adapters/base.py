@@ -117,6 +117,66 @@ class AdapterBase(ABC):
         for comentario in soup.find_all(string=lambda t: isinstance(t, Comment)):
             comentario.extract()
 
+    def _extrair_texto_formatado(self, entry_tag: Tag) -> str:
+        """
+        Extrai o texto de uma tag preservando quebras de linha em tags de bloco
+        e mantendo a integridade de linhas para tags inline.
+
+        Tags de bloco (p, div, br, li, etc.) geram quebras de linha.
+        Tags inline (span, font, sup, b, etc.) são mescladas no fluxo.
+        """
+        # Elementos que definem quebra de linha (bloco)
+        BLOCK_TAGS = {
+            "p", "div", "br", "tr", "li", "h1", "h2", "h3", "h4", "h5", "h6",
+            "table", "blockquote", "pre"
+        }
+
+        fragmentos = []
+
+        def _walk(tag):
+            if isinstance(tag, str):
+                # Se for texto, adiciona ao último fragmento ou cria um novo
+                # Normaliza espaços internos
+                txt = re.sub(r"\s+", " ", tag)
+                if txt and txt != " ":
+                    fragmentos.append(txt)
+                return
+
+            # Se for uma tag de bloco, garante que o fragmento anterior termina em newline
+            is_block = tag.name.lower() in BLOCK_TAGS
+
+            if is_block and fragmentos and fragmentos[-1] != "\n":
+                # Se já tem texto mas não termina em newline, adiciona um
+                # (Mas apenas se o último fragmento não for apenas espaço)
+                fragmentos.append("\n")
+
+            for child in tag.children:
+                _walk(child)
+
+            # Se for uma tag de bloco, garante que termina em newline
+            if is_block and fragmentos and fragmentos[-1] != "\n":
+                fragmentos.append("\n")
+
+        _walk(entry_tag)
+
+        # Une os fragmentos cuidando para não duplicar espaços entre texto e newlines
+        resultado = []
+        for f in fragmentos:
+            if f == "\n":
+                if resultado and resultado[-1] == " ":
+                    resultado[-1] = "\n"
+                elif not resultado or resultado[-1] != "\n":
+                    resultado.append("\n")
+            else:
+                # Se o anterior for texto (não newline), garante um espaço se o atual não começar com pontuação
+                if resultado and resultado[-1] != "\n" and resultado[-1] != " ":
+                    # Verificação simples: se o atual não é pontuação colada, adiciona espaço
+                    if not re.match(r"^[.,;:)\]º°o]", f):
+                        resultado.append(" ")
+                resultado.append(f)
+
+        return "".join(resultado)
+
     def _limpar_linhas(self, texto: str) -> str:
         """
         Normaliza o texto bruto extraído do HTML:

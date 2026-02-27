@@ -1,0 +1,410 @@
+﻿python : 
+test_alinea_tipo_correto (__mai
+n__.TestAlineas.test_alinea_tip
+o_correto) ... ok
+No linha:1 caractere:1
++ python tests/test_parser.py 
+2>&1 | Out-File -FilePath 
+test_failures.t ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~
+    + CategoryInfo          :  
+   NotSpecified: (test_alinea  
+  _tip...correto) ... ok:Str   
+ ing) [], RemoteException
+    + FullyQualifiedErrorId :  
+   NativeCommandError
+ 
+test_extrai_alineas_corretas (_
+_main__.TestAlineas.test_extrai
+_alineas_corretas) ... ok
+test_sem_falso_positivo_e_no_me
+io (__main__.TestAlineas.test_s
+em_falso_positivo_e_no_meio)
+'e)' no meio de frase nÒo Ú 
+alÝnea. ... ok
+test_sem_falso_positivo_o_paren
+teses (__main__.TestAlineas.tes
+t_sem_falso_positivo_o_parentes
+es) ... ok
+test_texto_sem_alineas_retorna_
+dict (__main__.TestAlineas.test
+_texto_sem_alineas_retorna_dict
+) ... ok
+test_artigos_dentro_de_livro (_
+_main__.TestHierarquia.test_art
+igos_dentro_de_livro) ... ok
+test_capitulo_extraido (__main_
+_.TestHierarquia.test_capitulo_
+extraido) ... ok
+test_capitulo_quebrado_em_linha
+ (__main__.TestHierarquia.test_
+capitulo_quebrado_em_linha) 
+... ok
+test_livro_extraido (__main__.T
+estHierarquia.test_livro_extrai
+do) ... ok
+test_parte_extraida (__main__.T
+estHierarquia.test_parte_extrai
+da) ... ok
+test_secao_extraida (__main__.T
+estHierarquia.test_secao_extrai
+da) ... ok
+test_subsecao_extraida (__main_
+_.TestHierarquia.test_subsecao_
+extraida) ... ok
+test_titulo_extraido (__main__.
+TestHierarquia.test_titulo_extr
+aido) ... ok
+test_alineas_dentro_de_inciso (
+__main__.TestIncisos.test_aline
+as_dentro_de_inciso)
+AlÝneas ficam dentro do 
+conteudo do inciso. ... ok
+test_formato_endash_latin1 (__m
+ain__.TestIncisos.test_formato_
+endash_latin1)
+VIII \x96 texto ... ok
+test_formato_inciso_com_sufixo 
+(__main__.TestIncisos.test_form
+ato_inciso_com_sufixo)
+VII-A - texto ... ok
+test_formato_mesmo_linha_traco_
+ascii (__main__.TestIncisos.tes
+t_formato_mesmo_linha_traco_asc
+ii)
+III - texto ... ok
+test_formato_numeral_linha_prop
+ria_traco_linha_seguinte (__mai
+n__.TestIncisos.test_formato_nu
+meral_linha_propria_traco_linha
+_seguinte)
+I\n- texto ... ok
+test_sem_falso_positivo_sigla (
+__main__.TestIncisos.test_sem_f
+also_positivo_sigla) ... ok
+test_sem_inciso_aninhado_dentro
+_de_outro (__main__.TestIncisos
+.test_sem_inciso_aninhado_dentr
+o_de_outro) ... ok
+test_todos_os_5_formatos_no_mes
+mo_artigo (__main__.TestIncisos
+.test_todos_os_5_formatos_no_me
+smo_artigo) ... ok
+test_art15_caput_sem_ponto (__m
+ain__.TestIntegracaoLDB.test_ar
+t15_caput_sem_ponto) ... 
+skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_art3_tem_incisos_suficient
+es (__main__.TestIntegracaoLDB.
+test_art3_tem_incisos_suficient
+es) ... skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_art4_tem_alineas (__main__
+.TestIntegracaoLDB.test_art4_te
+m_alineas) ... skipped 
+'Arquivo nÒo encontrado: C:\\Us
+ers\\kleub\\OneDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_art4a_numero_correto (__ma
+in__.TestIntegracaoLDB.test_art
+4a_numero_correto) ... skipped 
+'Arquivo nÒo encontrado: C:\\Us
+ers\\kleub\\OneDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_conteudo_sempre_dict_na_ld
+b (__main__.TestIntegracaoLDB.t
+est_conteudo_sempre_dict_na_ldb
+)
+Nenhum bloco pode ter conte·do 
+em formato lista (schema 
+legado). ... skipped 'Arquivo 
+nÒo encontrado: C:\\Users\\kleu
+b\\OneDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_metadados_sem_ano_abaixo_5
+pct (__main__.TestIntegracaoLDB
+.test_metadados_sem_ano_abaixo_
+5pct) ... skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_metadados_sem_norma_abaixo
+_5pct (__main__.TestIntegracaoL
+DB.test_metadados_sem_norma_aba
+ixo_5pct) ... skipped 'Arquivo 
+nÒo encontrado: C:\\Users\\kleu
+b\\OneDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_precisao_estrutural_minima
+ (__main__.TestIntegracaoLDB.te
+st_precisao_estrutural_minima)
+REGRESS├O: artigos vazios nÒo 
+podem superar 5%. ... skipped 
+'Arquivo nÒo encontrado: C:\\Us
+ers\\kleub\\OneDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_sem_ids_duplicados (__main
+__.TestIntegracaoLDB.test_sem_i
+ds_duplicados) ... skipped 
+'Arquivo nÒo encontrado: C:\\Us
+ers\\kleub\\OneDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_sem_incisos_aninhados (__m
+ain__.TestIntegracaoLDB.test_se
+m_incisos_aninhados) ... 
+skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_todos_ids_com_codigo_lei (
+__main__.TestIntegracaoLDB.test
+_todos_ids_com_codigo_lei) ... 
+skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_total_alineas (__main__.Te
+stIntegracaoLDB.test_total_alin
+eas) ... skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_total_artigos (__main__.Te
+stIntegracaoLDB.test_total_arti
+gos) ... skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_total_incisos (__main__.Te
+stIntegracaoLDB.test_total_inci
+sos) ... skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_total_titulos (__main__.Te
+stIntegracaoLDB.test_total_titu
+los) ... skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_zero_nbsp (__main__.TestIn
+tegracaoLDB.test_zero_nbsp) 
+... skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_zero_newlines_em_textos (_
+_main__.TestIntegracaoLDB.test_
+zero_newlines_em_textos) ... 
+skipped 'Arquivo nÒo 
+encontrado: C:\\Users\\kleub\\O
+neDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_zero_pontos_iniciais (__ma
+in__.TestIntegracaoLDB.test_zer
+o_pontos_iniciais) ... skipped 
+'Arquivo nÒo encontrado: C:\\Us
+ers\\kleub\\OneDrive\\┴rea de 
+Trabalho\\lei\\raw_9394.txt'
+test_art_alineas_sem_newline (_
+_main__.TestInvariantesTexto.te
+st_art_alineas_sem_newline) 
+... ok
+test_art_incisos_sem_newline (_
+_main__.TestInvariantesTexto.te
+st_art_incisos_sem_newline) 
+... ok
+test_art_ponto_sem_ponto_inicia
+l (__main__.TestInvariantesText
+o.test_art_ponto_sem_ponto_inic
+ial) ... ok
+test_art_simples_sem_newline (_
+_main__.TestInvariantesTexto.te
+st_art_simples_sem_newline) 
+... ok
+test_art_sufixo_sem_ponto_inici
+al (__main__.TestInvariantesTex
+to.test_art_sufixo_sem_ponto_in
+icial) ... ok
+test_hierarquia_livro_sem_newli
+ne (__main__.TestInvariantesTex
+to.test_hierarquia_livro_sem_ne
+wline) ... ok
+test_meta_data_completa_sem_new
+line (__main__.TestInvariantesT
+exto.test_meta_data_completa_se
+m_newline) ... ok
+test_texto_newlines_corrigidos 
+(__main__.TestInvariantesTexto.
+test_texto_newlines_corrigidos)
+ ... ok
+test_newline_vira_espaco (__mai
+n__.TestLimpezaTexto.test_newli
+ne_vira_espaco) ... ok
+test_normaliza_endash (__main__
+.TestLimpezaTexto.test_normaliz
+a_endash) ... ok
+test_remove_espaco_duplo (__mai
+n__.TestLimpezaTexto.test_remov
+e_espaco_duplo) ... ok
+test_remove_ponto_inicial (__ma
+in__.TestLimpezaTexto.test_remo
+ve_ponto_inicial) ... ok
+test_string_so_espaco (__main__
+.TestLimpezaTexto.test_string_s
+o_espaco) ... ok
+test_string_vazia (__main__.Tes
+tLimpezaTexto.test_string_vazia
+) ... ok
+test_ano_formato_data_completa 
+(__main__.TestMetadados.test_an
+o_formato_data_completa) ... ok
+test_ano_formato_padrao (__main
+__.TestMetadados.test_ano_forma
+to_padrao) ... ok
+test_meta_multiplos (__main__.T
+estMetadados.test_meta_multiplo
+s) ... ok
+test_meta_remove_anotacao_do_te
+xto (__main__.TestMetadados.tes
+t_meta_remove_anotacao_do_texto
+) ... ok
+test_meta_sem_norma_interna_e_l
+egitimo (__main__.TestMetadados
+.test_meta_sem_norma_interna_e_
+legitimo) ... ok
+test_meta_tipo_incluido (__main
+__.TestMetadados.test_meta_tipo
+_incluido) ... ok
+test_meta_tipo_redacao (__main_
+_.TestMetadados.test_meta_tipo_
+redacao) ... ok
+test_meta_tipo_revogado (__main
+__.TestMetadados.test_meta_tipo
+_revogado) ... ok
+test_norma_adin (__main__.TestM
+etadados.test_norma_adin) ... 
+FAIL
+test_norma_decreto (__main__.Te
+stMetadados.test_norma_decreto)
+ ... ok
+test_norma_lei_maiusculo (__mai
+n__.TestMetadados.test_norma_le
+i_maiusculo) ... ok
+test_norma_lei_minusculo (__mai
+n__.TestMetadados.test_norma_le
+i_minusculo) ... ok
+test_colapsa_capitulo_quebrado 
+(__main__.TestNormalizacao.test
+_colapsa_capitulo_quebrado) 
+... ok
+test_colapsa_livro_quebrado (__
+main__.TestNormalizacao.test_co
+lapsa_livro_quebrado) ... ok
+test_colapsa_secao_quebrada (__
+main__.TestNormalizacao.test_co
+lapsa_secao_quebrada) ... ok
+test_colapsa_titulo_quebrado (_
+_main__.TestNormalizacao.test_c
+olapsa_titulo_quebrado) ... ok
+test_normaliza_nbsp (__main__.T
+estNormalizacao.test_normaliza_
+nbsp) ... ok
+test_remove_carriage_return (__
+main__.TestNormalizacao.test_re
+move_carriage_return) ... ok
+test_artigo_com_ordinal (__main
+__.TestNumeracaoArtigos.test_ar
+tigo_com_ordinal) ... ok
+test_artigo_com_ponto_apos_nume
+ro (__main__.TestNumeracaoArtig
+os.test_artigo_com_ponto_apos_n
+umero) ... ok
+test_artigo_com_sufixo_a (__mai
+n__.TestNumeracaoArtigos.test_a
+rtigo_com_sufixo_a) ... ok
+test_id_contem_codigo_lei (__ma
+in__.TestNumeracaoArtigos.test_
+id_contem_codigo_lei) ... ok
+test_ids_unicos (__main__.TestN
+umeracaoArtigos.test_ids_unicos
+) ... ok
+test_ordem_sequencial (__main__
+.TestNumeracaoArtigos.test_orde
+m_sequencial) ... ok
+test_caput_extraido (__main__.T
+estParagrafos.test_caput_extrai
+do) ... ok
+test_caput_sem_newlines (__main
+__.TestParagrafos.test_caput_se
+m_newlines) ... ok
+test_caput_sem_ponto_inicial (_
+_main__.TestParagrafos.test_cap
+ut_sem_ponto_inicial) ... ok
+test_conteudo_e_sempre_dict (__
+main__.TestParagrafos.test_cont
+eudo_e_sempre_dict)
+Conteudo de caput/parßgrafo 
+deve SEMPRE ser dict (nunca 
+lista). ... ok
+test_paragrafo_unico (__main__.
+TestParagrafos.test_paragrafo_u
+nico) ... ok
+test_paragrafos_numerados (__ma
+in__.TestParagrafos.test_paragr
+afos_numerados) ... FAIL
+
+===============================
+===============================
+========
+FAIL: test_norma_adin (__main__
+.TestMetadados.test_norma_adin)
+-------------------------------
+-------------------------------
+--------
+Traceback (most recent call 
+last):
+  File 
+"C:\Users\kleub\OneDrive\┴rea 
+de Trabalho\lei\tests\test_pars
+er.py", line 174, in 
+test_norma_adin
+    self.assertIsNotNone(_PAT_N
+ORMA.search("(Vide Adin 
+3324-7, de 2005)"))
+AssertionError: unexpectedly 
+None
+
+===============================
+===============================
+========
+FAIL: 
+test_paragrafos_numerados (__ma
+in__.TestParagrafos.test_paragr
+afos_numerados)
+-------------------------------
+-------------------------------
+--------
+Traceback (most recent call 
+last):
+  File 
+"C:\Users\kleub\OneDrive\┴rea 
+de Trabalho\lei\tests\test_pars
+er.py", line 344, in 
+test_paragrafos_numerados
+    self.assertIn("1", numeros)
+AssertionError: '1' not found 
+in ['1║', '2║']
+
+-------------------------------
+-------------------------------
+--------
+Ran 83 tests in 0.024s
+
+FAILED (failures=2, skipped=18)

@@ -28,7 +28,7 @@ class AdapterPlanalto(AdapterBase):
         self._remover_elementos_navegacao(soup)
 
         corpo = soup.find("body") or soup
-        texto = corpo.get_text(separator="\n")
+        texto = self._extrair_texto_formatado(corpo)
         return self._limpar_linhas(texto)
 
     def _remover_elementos_navegacao(self, soup: BeautifulSoup) -> None:

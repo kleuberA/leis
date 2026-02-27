@@ -1,0 +1,73 @@
+{
+  "lei": {
+    "codigo": "cp",
+    "ementa": "Alteração de limites Art."
+  },
+  "timestamp": "2026-02-27T14:59:00.511669",
+  "total_artigos": 427,
+  "total_titulos": 2,
+  "artigos_por_titulo": {
+    "Título GERAL — ": 120,
+    "Título ESPECIAL — ": 307
+  },
+  "artigos_vazios": [],
+  "artigos_sem_texto_caput": [
+    "lei-cp-art-185",
+    "lei-cp-art-190",
+    "lei-cp-art-191",
+    "lei-cp-art-194",
+    "lei-cp-art-195",
+    "lei-cp-art-196",
+    "lei-cp-art-222",
+    "lei-cp-art-223",
+    "lei-cp-art-231",
+    "lei-cp-art-231-A",
+    "lei-cp-art-240"
+  ],
+  "artigos_revogados": [
+    "lei-cp-art-110",
+    "lei-cp-art-121",
+    "lei-cp-art-150",
+    "lei-cp-art-157",
+    "lei-cp-art-185",
+    "lei-cp-art-189",
+    "lei-cp-art-190",
+    "lei-cp-art-191",
+    "lei-cp-art-192",
+    "lei-cp-art-193",
+    "lei-cp-art-194",
+    "lei-cp-art-195",
+    "lei-cp-art-196",
+    "lei-cp-art-214",
+    "lei-cp-art-216",
+    "lei-cp-art-217",
+    "lei-cp-art-218-B",
+    "lei-cp-art-219",
+    "lei-cp-art-220",
+    "lei-cp-art-221",
+    "lei-cp-art-222",
+    "lei-cp-art-223",
+    "lei-cp-art-224",
+    "lei-cp-art-225",
+    "lei-cp-art-226",
+    "lei-cp-art-231",
+    "lei-cp-art-231-A",
+    "lei-cp-art-232",
+    "lei-cp-art-240",
+    "lei-cp-art-279",
+    "lei-cp-art-280",
+    "lei-cp-art-281",
+    "lei-cp-art-350",
+    "lei-cp-art-51",
+    "lei-cp-art-88",
+    "lei-cp-art-90"
+  ],
+  "ids_duplicados": [],
+  "incisos_sem_conteudo": [],
+  "alineas_fora_de_lugar": [],
+  "estatisticas": {
+    "total_incisos": 347,
+    "total_alineas": 75
+  },
+  "warnings": []
+}

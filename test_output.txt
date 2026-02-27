@@ -1,0 +1,26 @@
+﻿python : Traceback (most 
+recent call last):
+No linha:1 caractere:1
++ python tests/test_parser.py 
+2>&1 | Out-File -FilePath 
+test_output.txt ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~
+    + CategoryInfo          :  
+   NotSpecified: (Traceback (  
+  most recent call last)::St   
+ ring) [], RemoteException
+    + FullyQualifiedErrorId :  
+   NativeCommandError
+ 
+  File 
+"C:\Users\kleub\OneDrive\┴rea 
+de Trabalho\lei\tests\test_pars
+er.py", line 19, in <module>
+    from parser import (
+ImportError: cannot import 
+name '_PADRAO_ANO' from 
+'parser' 
+(C:\Users\kleub\OneDrive\┴rea 
+de Trabalho\lei\tests\..\parser
+.py)
