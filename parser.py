@@ -81,7 +81,7 @@ def normalizar_texto(texto: str) -> str:
         while i < len(linhas):
             l = linhas[i]
             s = l.strip()
-            m = re.match(r'^(Art\.\s*\d+[°oº]?(?:-[A-Za-z])?)\s*$', s)
+            m = re.match(r'^(Art\.?\s*\d+[°oº]?(?:-[A-Za-z])?)\s*$', s)
             if m and i + 1 < len(linhas):
                 prox = linhas[i + 1].strip()
                 if prox == '.':
@@ -89,7 +89,7 @@ def normalizar_texto(texto: str) -> str:
                     while k < len(linhas) and not linhas[k].strip():
                         k += 1
                     terceira = linhas[k].strip() if k < len(linhas) else ''
-                    if terceira.startswith('Art.'):
+                    if terceira.startswith('Art'):
                         resultado.append(f"referência_interna: {s}.")
                         i += 2
                         continue
@@ -180,7 +180,7 @@ def _id_num(numero: str) -> str:
 # Detecta "Art. N" ou "§ N" precedidos de espaço (embutidos no meio de uma linha)
 # Não usa re.IGNORECASE aqui: "Art." normativo é sempre maiúsculo (BUG1).
 _RE_ARTIGO_OU_PARA_EMBUTIDO = re.compile(
-    r"\s+(?:Art\.\s*\d|§\s*\d)"
+    r"\s+(?:Art\.?\s*\d|§\s*\d)"
 )
 
 
@@ -333,7 +333,7 @@ _SPLIT_PARAGRAFO = re.compile(
 )
 
 _RE_STRIP_ART = re.compile(
-    r"^Art\.\s*\d+[°oº]?(?:-[A-Za-z])?(?:\s*[-–.]\s*|\s+)"
+    r"^Art\.?\s*\d+[°oº]?(?:-[A-Za-z])?(?:\s*[-–.]\s*|\s+)"
 )
 
 
@@ -377,8 +377,8 @@ def extrair_paragrafos(txt_art: str) -> list:
 # FASE 5 — PARSE DE ARTIGOS
 # ═══════════════════════════════════════════════════════
 
-_SPLIT_ARTIGO = re.compile(r"\n(?=Art\.\s*\d)")   # SEM IGNORECASE
-_RE_ART_NUM   = re.compile(r"Art\.\s*(\d+[°oº]?(?:-[A-Za-z])?)")
+_SPLIT_ARTIGO = re.compile(r"\n(?=Art\.?\s*\d)")   # SEM IGNORECASE
+_RE_ART_NUM   = re.compile(r"Art\.?\s*(\d+[°oº]?(?:-[A-Za-z])?)")
 
 
 def _coletar_metas(obj) -> list:
@@ -399,7 +399,7 @@ def _parse_artigos(bloco: str, lei: str, ordem: list) -> list:
     for txt in _SPLIT_ARTIGO.split(bloco):
         txt = txt.strip()
 
-        if not txt.startswith("Art."):
+        if not txt.startswith("Art"):
             continue
 
         if txt.startswith("referência_interna:"):
@@ -474,7 +474,7 @@ _RE_NUM = {
 
 _RE_ESTRUTURAL = re.compile(
     r"^(?:T[IÍ]TULO|CAP[IÍ]TULO|SE[ÇC][ÃA]O|SUBSE[ÇC][ÃA]O"
-    r"|LIVRO|PARTE|Art\.\s*\d|§\s*\d|[IVXLCDM]{1,7}\s*[-–])",
+    r"|LIVRO|PARTE|Art\.?\s*\d|§\s*\d|[IVXLCDM]{1,7}\s*[-–])",
     re.IGNORECASE,
 )
 

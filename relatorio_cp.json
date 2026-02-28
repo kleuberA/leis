@@ -3,12 +3,12 @@
     "codigo": "cp",
     "ementa": "Alteração de limites Art."
   },
-  "timestamp": "2026-02-27T14:59:00.511669",
-  "total_artigos": 427,
+  "timestamp": "2026-02-27T20:04:19.030355",
+  "total_artigos": 429,
   "total_titulos": 2,
   "artigos_por_titulo": {
     "Título GERAL — ": 120,
-    "Título ESPECIAL — ": 307
+    "Título ESPECIAL — ": 309
   },
   "artigos_vazios": [],
   "artigos_sem_texto_caput": [
@@ -30,6 +30,8 @@
     "lei-cp-art-150",
     "lei-cp-art-157",
     "lei-cp-art-185",
+    "lei-cp-art-187",
+    "lei-cp-art-188",
     "lei-cp-art-189",
     "lei-cp-art-190",
     "lei-cp-art-191",
