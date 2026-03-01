@@ -138,6 +138,51 @@ def _contar_incisos_e_alineas(artigos: list) -> dict:
     return {"total_incisos": total_incisos, "total_alineas": total_alineas}
 
 
+def _detectar_gaps_numeracao(artigos: list) -> list:
+    """Detecta saltos na numeração dos artigos (ex: Art. 10 -> Art. 12)."""
+    import re
+    gaps = []
+    def _to_int(num_str):
+        if not num_str: return None
+        m = re.search(r"(\d+)", str(num_str))
+        return int(m.group(1)) if m else None
+
+    # Filtra apenas os que têm número legível
+    nums = []
+    for art in artigos:
+        val = _to_int(art.get("numero"))
+        if val is not None:
+            nums.append((val, art.get("id")))
+
+    for i in range(len(nums) - 1):
+        atual, id_atual = nums[i]
+        proximo, id_prox = nums[i+1]
+        if proximo > atual + 1:
+            gaps.append(f"Salto de {atual} para {proximo} entre {id_atual} e {id_prox}")
+    return gaps
+
+
+def _validar_hierarquia(no: dict, relatorio: dict) -> None:
+    """Verifica inconsistências semânticas na hierarquia (ex: Capítulo sem artigos)."""
+    tipo = no.get("tipo")
+    if not tipo: return
+    nome = no.get("nome", "?")
+    num  = no.get("numero", "?")
+    ident = f"{tipo.capitalize()} {num} ({nome})"
+
+    if tipo in ("parte", "livro", "titulo", "capitulo", "secao", "subsecao"):
+        filhos = no.get("filhos", [])
+        artigos = no.get("artigos", [])
+        
+        if not filhos and not artigos:
+            relatorio["blocos_vazios"].append(ident)
+        
+        for f in filhos:
+            _validar_hierarquia(f, relatorio)
+        for a in artigos:
+            _validar_hierarquia(a, relatorio)
+
+
 # ═══════════════════════════════════════════════════════════════
 # VALIDAÇÃO PRINCIPAL
 # ═══════════════════════════════════════════════════════════════
@@ -162,6 +207,8 @@ def validar_estrutura(dados: dict | list) -> dict:
         "ids_duplicados": [],
         "incisos_sem_conteudo": [],
         "alineas_fora_de_lugar": [],
+        "gaps_numeracao": [],
+        "blocos_vazios": [],
         "estatisticas": {},
         "warnings": [],
     }
@@ -174,11 +221,18 @@ def validar_estrutura(dados: dict | list) -> dict:
     # Estatísticas adicionais
     relatorio["estatisticas"] = _contar_incisos_e_alineas(todos_artigos)
 
+    # Detecção de Gaps
+    relatorio["gaps_numeracao"] = _detectar_gaps_numeracao(todos_artigos)
+
+    # Validação de Hierarquia
+    for t in arvore:
+        _validar_hierarquia(t, relatorio)
+
     # Artigos por título
     for titulo in arvore:
         arts_do_titulo: list[dict] = []
         _coletar_artigos(titulo, arts_do_titulo)
-        chave = f"Título {titulo.get('numero', '?')} — {titulo.get('nome', '')}"
+        chave = f"{titulo.get('tipo', 'Título').capitalize()} {titulo.get('numero', '?')} — {titulo.get('nome', '')}"
         relatorio["artigos_por_titulo"][chave] = len(arts_do_titulo)
 
     # Valida cada artigo
@@ -212,7 +266,7 @@ def validar_estrutura(dados: dict | list) -> dict:
     relatorio["ids_duplicados"] = sorted(ids_repetidos)
 
     for chave in ("artigos_vazios", "artigos_sem_texto_caput", "artigos_revogados",
-                  "incisos_sem_conteudo", "alineas_fora_de_lugar"):
+                  "incisos_sem_conteudo", "alineas_fora_de_lugar", "blocos_vazios"):
         relatorio[chave] = sorted(set(relatorio[chave]))
 
     return relatorio
@@ -250,6 +304,8 @@ def imprimir_relatorio(r: dict) -> None:
     _linha("🟡 Artigos revogados",        r["artigos_revogados"])
     _linha("🟡 Incisos sem conteúdo",     r["incisos_sem_conteudo"])
     _linha("🟡 Alíneas fora de lugar",    r["alineas_fora_de_lugar"])
+    _linha("🟠 Gaps de numeração",        r["gaps_numeracao"])
+    _linha("🟠 Blocos estruturais vazios", r["blocos_vazios"])
 
     if r.get("warnings"):
         print(f"\n⚠️  Warnings ({len(r['warnings'])}):")

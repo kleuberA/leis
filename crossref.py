@@ -14,9 +14,21 @@ Cada referência vira uma aresta REFERENCIA no grafo Neo4j:
 
 import re
 import logging
+import yaml
+from pathlib import Path
 from typing import Optional
 
 logger = logging.getLogger(__name__)
+
+# Carrega o catálogo de leis para resolução de referências
+CATALOGO_LEIS = []
+caminho_config = Path(__file__).parent / "config" / "leis.yaml"
+if caminho_config.exists():
+    try:
+        with open(caminho_config, 'r', encoding='utf-8') as f:
+            CATALOGO_LEIS = yaml.safe_load(f) or []
+    except Exception as e:
+        logger.error(f"Erro ao carregar leis.yaml: {e}")
 
 # ─────────────────────────────────────────────────────────────
 # Regex principal de cross-reference
@@ -33,7 +45,9 @@ _RE_CROSSREF = re.compile(
     r"(?:[,\s°oº]+inciso\s+([IVXLCDM]+))?"            # g4: inciso
     r"(?:[,\s]+al[\xed\xec]nea\s+[\x27\x22]?([a-z])[\x27\x22]?)?",
     re.IGNORECASE,
-)# Detecta se a referência é para uma lei externa
+)
+
+# Detecta se a referência é para uma lei externa
 _RE_LEI_EXTERNA = re.compile(
     r"(?:desta\s+Lei|desta\s+Lei\s+Complementar|"
     r"do\s+presente\s+diploma|"
@@ -54,23 +68,6 @@ def extrair_crossrefs(
 ) -> list[dict]:
     """
     Extrai todas as referências cruzadas de um texto de artigo.
-
-    Args:
-        texto:            Texto limpo do artigo (caput + parágrafos + incisos).
-        artigo_origem_id: ID canônico do artigo de origem (ex: 'lei-9394-art-5º').
-        codigo_lei:       Código da lei atual (ex: '9394').
-
-    Returns:
-        Lista de dicts, cada um representando uma referência:
-        {
-            "origem":        "lei-9394-art-3º",
-            "destino_art":   "5",          # número do artigo referenciado
-            "destino_para":  "1",          # § (opcional)
-            "destino_inc":   "III",        # inciso (opcional)
-            "destino_alinea": "a",         # alínea (opcional)
-            "lei_externa":   None,         # número da lei, se externa
-            "trecho":        "nos termos do art. 5º, § 1º",
-        }
     """
     refs = []
 
@@ -86,25 +83,31 @@ def extrair_crossrefs(
         trecho = m.group(0).strip()
 
         # Determina se é referência interna ou externa
-        # Olha contexto ao redor do match (50 chars antes)
         inicio = max(0, m.start() - 60)
         contexto_antes = texto[inicio:m.start()]
 
         lei_externa = None
-        lei_ext_m   = _RE_LEI_OUTRA.search(contexto_antes + trecho)
+        id_resolvido = None
+        
+        lei_ext_m = _RE_LEI_OUTRA.search(contexto_antes + trecho)
         if lei_ext_m:
-            lei_externa = lei_ext_m.group(1)
+            lei_externa = lei_ext_m.group(1).replace(".", "")
+            # Tenta resolver o ID no catálogo
+            for lei_config in CATALOGO_LEIS:
+                config_num = str(lei_config.get("codigo", "")).replace(".", "")
+                if config_num == lei_externa:
+                    id_resolvido = lei_config.get("id")
+                    break
 
-        # Filtra referências ambíguas: "art. X" isolado sem contexto verbal nem §/inciso
-        # é muito provável que seja numeração acidental (ex: "Art. 5. define...")
+        # Filtra referências ambíguas
         _CTX_VERBAL = re.compile(
             r"(?:"
             r"nos?\s+termos?\s+d[oa]s?|"
-            r"(?:conforme\s+)?disposto\s+n[oa]s?|"          # 'disposto no' e 'conforme disposto no'
+            r"(?:conforme\s+)?disposto\s+n[oa]s?|"
             r"previsto\s+n[oa]s?|"
             r"na\s+forma\s+d[oa]s?|"
             r"nos\s+moldes\s+d[oa]s?|"
-            r"a\s+que\s+se\s+refere[mn]?\s+(?:\w+\s+){0,3}d[oa]|"  # 'a que se refere ... do'
+            r"a\s+que\s+se\s+refere[mn]?\s+(?:\w+\s+){0,3}d[oa]|"
             r"referidos?\s+n[oa]s?"
             r")\s*$",
             re.IGNORECASE,
@@ -112,7 +115,7 @@ def extrair_crossrefs(
         tem_contexto = bool(_CTX_VERBAL.search(contexto_antes))
         tem_detalhe  = bool(para_num or inc_num)
 
-        if not tem_contexto and not tem_detalhe:
+        if not tem_contexto and not tem_detalhe and not lei_externa:
             continue
 
         refs.append({
@@ -122,7 +125,8 @@ def extrair_crossrefs(
             "destino_inc":    inc_num,
             "destino_alinea": alinea,
             "lei_externa":    lei_externa,
-            "trecho":         trecho[:120],  # limita tamanho
+            "id_resolvido":   id_resolvido,
+            "trecho":         trecho[:120],
         })
 
     return refs
@@ -131,16 +135,13 @@ def extrair_crossrefs(
 def extrair_crossrefs_estrutura(estrutura: dict, codigo_lei: str) -> list[dict]:
     """
     Extrai cross-references de toda a estrutura JSON de uma lei.
-
-    Args:
-        estrutura:  Dict retornado por parse_lei().
-        codigo_lei: Código da lei.
-
-    Returns:
-        Lista de todas as referências encontradas na lei.
     """
     todas_refs = []
-    artigos = _coletar_artigos(estrutura)
+    
+    # Import local para evitar circular dependência (embora pipeline já importe ambos)
+    from parser import iterar_artigos
+    
+    artigos = list(iterar_artigos(estrutura))
 
     for artigo in artigos:
         texto_completo = _texto_artigo(artigo)
@@ -160,32 +161,18 @@ def extrair_crossrefs_estrutura(estrutura: dict, codigo_lei: str) -> list[dict]:
     return todas_refs
 
 
-def _coletar_artigos(obj) -> list[dict]:
-    """Coleta todos os nós de artigo recursivamente."""
-    result = []
-    if isinstance(obj, dict):
-        if obj.get("tipo") == "artigo":
-            result.append(obj)
-        for v in obj.values():
-            if isinstance(v, (dict, list)):
-                result.extend(_coletar_artigos(v))
-    elif isinstance(obj, list):
-        for item in obj:
-            result.extend(_coletar_artigos(item))
-    return result
-
-
 def _texto_artigo(artigo: dict) -> str:
-    """Extrai todo o texto visível de um artigo (caput + parágrafos + incisos)."""
+    """Extrai todo o texto visível de um artigo."""
     partes = []
 
     def _extrair(obj):
         if isinstance(obj, dict):
             if "texto" in obj and isinstance(obj["texto"], str):
                 partes.append(obj["texto"])
-            for v in obj.values():
-                if isinstance(v, (dict, list)):
-                    _extrair(v)
+            # Iterar sobre estrutura e conteúdo do caput/parágrafo
+            for k in ("estrutura", "conteudo", "incisos", "alineas"):
+                if k in obj:
+                    _extrair(obj[k])
         elif isinstance(obj, list):
             for item in obj:
                 _extrair(item)

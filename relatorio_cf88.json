@@ -3,19 +3,19 @@
     "codigo": "cf88",
     "ementa": "Instituições Democráticas CAPÍTULO I DO ESTADO DE DEFESA E DO ESTADO DE SÍTIO Seção I DO ESTADO DE DEFESA Art."
   },
-  "timestamp": "2026-02-26T15:32:30.393514",
+  "timestamp": "2026-02-28T20:49:40.924260",
   "total_artigos": 425,
   "total_titulos": 9,
   "artigos_por_titulo": {
-    "Título I — Dos Princípios Fundamentais": 4,
-    "Título II — Dos Direitos e Garantias Fundamentais": 13,
-    "Título III — Da Organização do Estado": 28,
-    "Título IV — DA ORGANIZAÇÃO DOS PODERES": 96,
-    "Título V — Da Defesa do Estado e Das Instituições Democráticas": 9,
-    "Título VI — Da Tributação e do Orçamento": 42,
-    "Título VII — Da Ordem Econômica e Financeira": 23,
-    "Título VIII — Da Ordem Social": 44,
-    "Título IX — Das Disposições Constitucionais Gerais": 166
+    "Titulo I — Dos Princípios Fundamentais": 4,
+    "Titulo II — Dos Direitos e Garantias Fundamentais": 13,
+    "Titulo III — Da Organização do Estado": 28,
+    "Titulo IV — DA ORGANIZAÇÃO DOS PODERES": 96,
+    "Titulo V — Da Defesa do Estado e Das Instituições Democráticas": 9,
+    "Titulo VI — Da Tributação e do Orçamento": 42,
+    "Titulo VII — Da Ordem Econômica e Financeira": 23,
+    "Titulo VIII — Da Ordem Social": 44,
+    "Titulo IX — Das Disposições Constitucionais Gerais": 166
   },
   "artigos_vazios": [],
   "artigos_sem_texto_caput": [
@@ -208,6 +208,8 @@
   ],
   "incisos_sem_conteudo": [],
   "alineas_fora_de_lugar": [],
+  "gaps_numeracao": [],
+  "blocos_vazios": [],
   "estatisticas": {
     "total_incisos": 1433,
     "total_alineas": 357

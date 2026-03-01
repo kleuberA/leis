@@ -12,3 +12,6 @@ neo4j>=5.14.0
 # Utilitários opcionais
 python-dotenv>=1.0.0   # para credenciais Neo4j em .env
 pyyaml>=6.0            # para config/leis.yaml futuro
+
+# IA Adaptativa
+google-generativeai>=0.3.0

@@ -1,0 +1,43 @@
+{
+  "lei": {
+    "codigo": "9394",
+    "ementa": "Estabelece as diretrizes e bases da educação nacional."
+  },
+  "timestamp": "2026-02-28T20:43:15.576471",
+  "total_artigos": 120,
+  "total_titulos": 9,
+  "artigos_por_titulo": {
+    "Titulo I — Da Educação": 1,
+    "Titulo II — Dos Princípios e Fins da Educação Nacional": 2,
+    "Titulo III — Do Direito à Educação e do Dever de Educar": 7,
+    "Titulo IV — Da Organização da Educação Nacional": 14,
+    "Titulo V — Dos Níveis e das Modalidades de Educação e Ensino": 55,
+    "Titulo VI — Dos Profissionais da Educação": 9,
+    "Titulo VII — Dos Recursos financeiros": 10,
+    "Titulo VIII — Das Disposições Gerais": 14,
+    "Titulo IX — Das Disposições Transitórias": 8
+  },
+  "artigos_vazios": [],
+  "artigos_sem_texto_caput": [
+    "lei-9394-art-20",
+    "lei-9394-art-35-A"
+  ],
+  "artigos_revogados": [
+    "lei-9394-art-20",
+    "lei-9394-art-35-A",
+    "lei-9394-art-36",
+    "lei-9394-art-41",
+    "lei-9394-art-82",
+    "lei-9394-art-87"
+  ],
+  "ids_duplicados": [],
+  "incisos_sem_conteudo": [],
+  "alineas_fora_de_lugar": [],
+  "gaps_numeracao": [],
+  "blocos_vazios": [],
+  "estatisticas": {
+    "total_incisos": 307,
+    "total_alineas": 28
+  },
+  "warnings": []
+}

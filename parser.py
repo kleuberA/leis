@@ -418,14 +418,26 @@ def _parse_artigos(bloco: str, lei: str, ordem: list) -> list:
         ordem[0] += 1
         id_art = f"lei-{lei}-art-{_id_num(numero)}" if _id_num(numero) else f"lei-{lei}-art-{ordem[0]}"
 
+        # Cálculo de Confiança do Artigo
+        confianca = 1.0
+        if not txt.startswith("Art"): confianca -= 0.3
+        if len(txt) < 10: confianca -= 0.5
+        if "referência_interna" in txt: confianca -= 0.2
+
         estrutura = extrair_paragrafos(txt)
         metas     = _coletar_metas(estrutura)
+
+        # Se não tem caput com texto, baixa confiança
+        tem_caput = any(b.get("tipo") == "caput" and b.get("conteudo", {}).get("texto") for b in estrutura)
+        if not tem_caput: confianca -= 0.4
 
         art: dict = {
             "id":        id_art,
             "ordem":     ordem[0],
             "numero":    numero,
             "tipo":      "artigo",
+            "confianca": round(max(0.1, confianca), 2),
+            "texto_bruto": txt,  # [NOVO] Guardamos o texto original para reparo via IA
             "estrutura": estrutura,
         }
         if metas:
@@ -546,6 +558,7 @@ def _parse_subsecoes(bloco, lei, ordem):
                 "tipo":    "subsecao",
                 "numero":  m.group(1),
                 "nome":    _extrair_nome(parte, _RE_NUM["subsecao"]),
+                "confianca": 1.0 if _extrair_nome(parte, _RE_NUM["subsecao"]) else 0.7,
                 "artigos": _parse_artigos(parte, lei, ordem),
             })
         else:
@@ -768,6 +781,13 @@ def iterar_artigos(resultado: dict):
                 yield from _dfs(item)
 
     yield from _dfs(resultado)
+
+
+def _iterar_artigos_mut(resultado: dict):
+    """
+    Itera artigos em ordem de documento de forma mutável (permite editar o dict).
+    """
+    yield from iterar_artigos(resultado)
 
 
 # ═══════════════════════════════════════════════════════

@@ -19,6 +19,7 @@
               "ordem": 1,
               "numero": "1º",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -47,6 +48,7 @@
               "ordem": 2,
               "numero": "2º",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -104,6 +106,7 @@
               "ordem": 3,
               "numero": "3º",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -132,6 +135,7 @@
               "ordem": 4,
               "numero": "4º",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -160,6 +164,7 @@
               "ordem": 5,
               "numero": "5º",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -236,6 +241,7 @@
               "ordem": 6,
               "numero": "6º",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -274,6 +280,7 @@
               "ordem": 7,
               "numero": "7º",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -655,6 +662,7 @@
               "ordem": 8,
               "numero": "8º",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -693,6 +701,7 @@
               "ordem": 9,
               "numero": "9º",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -826,6 +835,7 @@
               "ordem": 10,
               "numero": "10",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -864,6 +874,7 @@
               "ordem": 11,
               "numero": "11",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -902,6 +913,7 @@
               "ordem": 12,
               "numero": "12",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -937,6 +949,7 @@
               "ordem": 13,
               "numero": "13",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1076,6 +1089,7 @@
               "ordem": 14,
               "numero": "14",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1203,6 +1217,7 @@
               "ordem": 15,
               "numero": "15",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1241,6 +1256,7 @@
               "ordem": 16,
               "numero": "16",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1279,6 +1295,7 @@
               "ordem": 17,
               "numero": "17",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1307,6 +1324,7 @@
               "ordem": 18,
               "numero": "18",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1424,6 +1442,7 @@
               "ordem": 19,
               "numero": "19",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1462,6 +1481,7 @@
               "ordem": 20,
               "numero": "20",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1587,6 +1607,7 @@
               "ordem": 21,
               "numero": "21",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1644,6 +1665,7 @@
               "ordem": 22,
               "numero": "22",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1682,6 +1704,7 @@
               "ordem": 23,
               "numero": "23",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1808,6 +1831,7 @@
               "ordem": 24,
               "numero": "24",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1874,6 +1898,7 @@
               "ordem": 25,
               "numero": "25",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1948,6 +1973,7 @@
               "ordem": 26,
               "numero": "26",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -1995,6 +2021,7 @@
               "ordem": 27,
               "numero": "27",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -2023,6 +2050,7 @@
               "ordem": 28,
               "numero": "28",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -2136,6 +2164,7 @@
               "ordem": 29,
               "numero": "29",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -2202,6 +2231,7 @@
               "ordem": 30,
               "numero": "30",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -2230,6 +2260,7 @@
               "ordem": 31,
               "numero": "31",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -2270,6 +2301,7 @@
                   "ordem": 32,
                   "numero": "32",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -2326,6 +2358,7 @@
                       "ordem": 33,
                       "numero": "33",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2464,6 +2497,7 @@
                       "ordem": 34,
                       "numero": "34",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2549,6 +2583,7 @@
                       "ordem": 35,
                       "numero": "35",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2615,6 +2650,7 @@
                       "ordem": 36,
                       "numero": "36",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2681,6 +2717,7 @@
                       "ordem": 37,
                       "numero": "37",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2709,6 +2746,7 @@
                       "ordem": 38,
                       "numero": "38",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2737,6 +2775,7 @@
                       "ordem": 39,
                       "numero": "39",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2765,6 +2804,7 @@
                       "ordem": 40,
                       "numero": "40",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2793,6 +2833,7 @@
                       "ordem": 41,
                       "numero": "41",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2821,6 +2862,7 @@
                       "ordem": 42,
                       "numero": "42",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -2856,6 +2898,7 @@
                       "ordem": 43,
                       "numero": "43",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3000,6 +3043,7 @@
                       "ordem": 44,
                       "numero": "44",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3192,6 +3236,7 @@
                       "ordem": 45,
                       "numero": "45",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3306,6 +3351,7 @@
                       "ordem": 46,
                       "numero": "46",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3420,6 +3466,7 @@
                       "ordem": 47,
                       "numero": "47",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3545,6 +3592,7 @@
                       "ordem": 48,
                       "numero": "48",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3599,6 +3647,7 @@
                       "ordem": 49,
                       "numero": "49",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3665,6 +3714,7 @@
                       "ordem": 50,
                       "numero": "50",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3794,6 +3844,7 @@
                       "ordem": 51,
                       "numero": "51",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3870,6 +3921,7 @@
                       "ordem": 52,
                       "numero": "52",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -3907,6 +3959,7 @@
                   "ordem": 53,
                   "numero": "53",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -3935,6 +3988,7 @@
                   "ordem": 54,
                   "numero": "54",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -3963,6 +4017,7 @@
                   "ordem": 55,
                   "numero": "55",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -3991,6 +4046,7 @@
                   "ordem": 56,
                   "numero": "56",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4019,6 +4075,7 @@
                   "ordem": 57,
                   "numero": "57",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4047,6 +4104,7 @@
                   "ordem": 58,
                   "numero": "58",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4101,6 +4159,7 @@
                   "ordem": 59,
                   "numero": "59",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4217,6 +4276,7 @@
                   "ordem": 60,
                   "numero": "60",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4283,6 +4343,7 @@
                   "ordem": 61,
                   "numero": "61",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4449,6 +4510,7 @@
                   "ordem": 62,
                   "numero": "62",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4555,6 +4617,7 @@
                   "ordem": 63,
                   "numero": "63",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4583,6 +4646,7 @@
                   "ordem": 64,
                   "numero": "64",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4651,6 +4715,7 @@
                   "ordem": 65,
                   "numero": "65",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4765,6 +4830,7 @@
                   "ordem": 66,
                   "numero": "66",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4793,6 +4859,7 @@
                   "ordem": 67,
                   "numero": "67",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4821,6 +4888,7 @@
                   "ordem": 68,
                   "numero": "68",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4868,6 +4936,7 @@
                   "ordem": 69,
                   "numero": "69",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4934,6 +5003,7 @@
                   "ordem": 70,
                   "numero": "70",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -4981,6 +5051,7 @@
                   "ordem": 71,
                   "numero": "71",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5028,6 +5099,7 @@
                   "ordem": 72,
                   "numero": "72",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5056,6 +5128,7 @@
                   "ordem": 73,
                   "numero": "73",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5084,6 +5157,7 @@
                   "ordem": 74,
                   "numero": "74",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5112,6 +5186,7 @@
                   "ordem": 75,
                   "numero": "75",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5178,6 +5253,7 @@
                   "ordem": 76,
                   "numero": "76",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5213,6 +5289,7 @@
                   "ordem": 77,
                   "numero": "77",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5338,6 +5415,7 @@
                   "ordem": 78,
                   "numero": "78",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5457,6 +5535,7 @@
                   "ordem": 79,
                   "numero": "79",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5485,6 +5564,7 @@
                   "ordem": 80,
                   "numero": "80",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5513,6 +5593,7 @@
                   "ordem": 81,
                   "numero": "81",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5657,6 +5738,7 @@
                   "ordem": 82,
                   "numero": "82",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5692,6 +5774,7 @@
                   "ordem": 83,
                   "numero": "83",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5916,6 +5999,7 @@
                   "ordem": 84,
                   "numero": "84",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5944,6 +6028,7 @@
                   "ordem": 85,
                   "numero": "85",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -5972,6 +6057,7 @@
                   "ordem": 86,
                   "numero": "86",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6040,6 +6126,7 @@
                   "ordem": 87,
                   "numero": "87",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6068,6 +6155,7 @@
                   "ordem": 88,
                   "numero": "88",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6096,6 +6184,7 @@
                   "ordem": 89,
                   "numero": "89",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6124,6 +6213,7 @@
                   "ordem": 90,
                   "numero": "90",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6159,6 +6249,7 @@
                   "ordem": 91,
                   "numero": "91",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6289,6 +6380,7 @@
                   "ordem": 92,
                   "numero": "91-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6452,6 +6544,7 @@
                   "ordem": 93,
                   "numero": "92",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6679,6 +6772,7 @@
                   "ordem": 94,
                   "numero": "93",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6726,6 +6820,7 @@
                   "ordem": 95,
                   "numero": "94",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6832,6 +6927,7 @@
                   "ordem": 96,
                   "numero": "95",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -6869,6 +6965,7 @@
               "ordem": 97,
               "numero": "96",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -6956,6 +7053,7 @@
               "ordem": 98,
               "numero": "97",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7060,6 +7158,7 @@
               "ordem": 99,
               "numero": "98",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7088,6 +7187,7 @@
               "ordem": 100,
               "numero": "99",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7123,6 +7223,7 @@
               "ordem": 101,
               "numero": "100",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7227,6 +7328,7 @@
               "ordem": 102,
               "numero": "101",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7255,6 +7357,7 @@
               "ordem": 103,
               "numero": "102",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7283,6 +7386,7 @@
               "ordem": 104,
               "numero": "103",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7311,6 +7415,7 @@
               "ordem": 105,
               "numero": "104",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7358,6 +7463,7 @@
               "ordem": 106,
               "numero": "105",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7386,6 +7492,7 @@
               "ordem": 107,
               "numero": "106",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7518,6 +7625,7 @@
               "ordem": 108,
               "numero": "108",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7546,6 +7654,7 @@
               "ordem": 109,
               "numero": "109",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7649,6 +7758,7 @@
               "ordem": 110,
               "numero": "110",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7715,6 +7825,7 @@
               "ordem": 111,
               "numero": "111",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7840,6 +7951,7 @@
               "ordem": 112,
               "numero": "112",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7908,6 +8020,7 @@
               "ordem": 113,
               "numero": "113",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -7936,6 +8049,7 @@
               "ordem": 114,
               "numero": "114",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -8004,6 +8118,7 @@
               "ordem": 115,
               "numero": "115",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -8032,6 +8147,7 @@
               "ordem": 116,
               "numero": "116",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -8157,6 +8273,7 @@
               "ordem": 117,
               "numero": "117",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -8339,6 +8456,7 @@
               "ordem": 118,
               "numero": "118",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -8367,6 +8485,7 @@
               "ordem": 119,
               "numero": "119",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -8395,6 +8514,7 @@
               "ordem": 120,
               "numero": "120",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -8442,6 +8562,7 @@
                   "ordem": 121,
                   "numero": "121",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -8933,6 +9054,7 @@
                   "ordem": 122,
                   "numero": "121-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -9185,6 +9307,7 @@
                   "ordem": 123,
                   "numero": "122",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -9416,6 +9539,7 @@
                   "ordem": 124,
                   "numero": "123",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -9430,6 +9554,7 @@
                   "ordem": 125,
                   "numero": "124",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -9458,6 +9583,7 @@
                   "ordem": 126,
                   "numero": "125",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -9472,6 +9598,7 @@
                   "ordem": 127,
                   "numero": "126",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -9507,6 +9634,7 @@
                   "ordem": 128,
                   "numero": "127",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -9521,6 +9649,7 @@
                   "ordem": 129,
                   "numero": "128",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -9572,6 +9701,7 @@
                   "ordem": 130,
                   "numero": "129",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10017,6 +10147,7 @@
                   "ordem": 131,
                   "numero": "130",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10045,6 +10176,7 @@
                   "ordem": 132,
                   "numero": "131",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10059,6 +10191,7 @@
                   "ordem": 133,
                   "numero": "132",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10094,6 +10227,7 @@
                   "ordem": 134,
                   "numero": "133",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10202,6 +10336,7 @@
                   "ordem": 135,
                   "numero": "134",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10230,6 +10365,7 @@
                   "ordem": 136,
                   "numero": "135",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10265,6 +10401,7 @@
                   "ordem": 137,
                   "numero": "135-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10322,6 +10459,7 @@
                   "ordem": 138,
                   "numero": "136",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10414,6 +10552,7 @@
                   "ordem": 139,
                   "numero": "137",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10442,6 +10581,7 @@
                   "ordem": 140,
                   "numero": "138",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10500,6 +10640,7 @@
                   "ordem": 141,
                   "numero": "139",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10521,6 +10662,7 @@
                   "ordem": 142,
                   "numero": "140",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10596,6 +10738,7 @@
                   "ordem": 143,
                   "numero": "141",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10743,6 +10886,7 @@
                   "ordem": 144,
                   "numero": "142",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10787,6 +10931,7 @@
                   "ordem": 145,
                   "numero": "143",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10822,6 +10967,7 @@
                   "ordem": 146,
                   "numero": "144",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10836,6 +10982,7 @@
                   "ordem": 147,
                   "numero": "145",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -10883,6 +11030,7 @@
                       "ordem": 148,
                       "numero": "146",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -10934,6 +11082,7 @@
                       "ordem": 149,
                       "numero": "146-A",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -11011,6 +11160,7 @@
                       "ordem": 150,
                       "numero": "147",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -11065,6 +11215,7 @@
                       "ordem": 151,
                       "numero": "147-A",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -11229,6 +11380,7 @@
                       "ordem": 152,
                       "numero": "147-B",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -11286,6 +11438,7 @@
                       "ordem": 153,
                       "numero": "148",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -11401,6 +11554,7 @@
                       "ordem": 154,
                       "numero": "149",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -11577,6 +11731,7 @@
                       "ordem": 155,
                       "numero": "149-A",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -11965,6 +12120,7 @@
                       "ordem": 156,
                       "numero": "150",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -12100,6 +12256,7 @@
                       "ordem": 157,
                       "numero": "151",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -12172,6 +12329,7 @@
                       "ordem": 158,
                       "numero": "152",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -12200,6 +12358,7 @@
                       "ordem": 159,
                       "numero": "153",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -12283,6 +12442,7 @@
                       "ordem": 160,
                       "numero": "154",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -12330,6 +12490,7 @@
                       "ordem": 161,
                       "numero": "154-A",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -12561,6 +12722,7 @@
                       "ordem": 162,
                       "numero": "154-B",
                       "tipo": "artigo",
+                      "confianca": 1.0,
                       "estrutura": [
                         {
                           "tipo": "caput",
@@ -12605,6 +12767,7 @@
                   "ordem": 163,
                   "numero": "155",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -12871,6 +13034,7 @@
                   "ordem": 164,
                   "numero": "156",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -12906,6 +13070,7 @@
                   "ordem": 165,
                   "numero": "157",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13244,6 +13409,7 @@
                   "ordem": 166,
                   "numero": "158",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13293,6 +13459,7 @@
                   "ordem": 167,
                   "numero": "159",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13417,6 +13584,7 @@
                   "ordem": 168,
                   "numero": "160",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13438,6 +13606,7 @@
                   "ordem": 169,
                   "numero": "161",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13489,6 +13658,7 @@
                   "ordem": 170,
                   "numero": "162",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13510,6 +13680,7 @@
                   "ordem": 171,
                   "numero": "163",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13575,6 +13746,7 @@
                   "ordem": 172,
                   "numero": "164",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13589,6 +13761,7 @@
                   "ordem": 173,
                   "numero": "165",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13603,6 +13776,7 @@
                   "ordem": 174,
                   "numero": "166",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13617,6 +13791,7 @@
                   "ordem": 175,
                   "numero": "167",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13638,6 +13813,7 @@
                   "ordem": 176,
                   "numero": "168",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13696,6 +13872,7 @@
                   "ordem": 177,
                   "numero": "168-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13947,6 +14124,7 @@
                   "ordem": 178,
                   "numero": "169",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -13984,6 +14162,7 @@
                   "ordem": 179,
                   "numero": "170",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14005,6 +14184,7 @@
                   "ordem": 180,
                   "numero": "171",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14264,6 +14444,7 @@
                   "ordem": 181,
                   "numero": "171-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14302,6 +14483,7 @@
                   "ordem": 182,
                   "numero": "172",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14359,6 +14541,7 @@
                   "ordem": 183,
                   "numero": "173",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14373,6 +14556,7 @@
                   "ordem": 184,
                   "numero": "174",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14387,6 +14571,7 @@
                   "ordem": 185,
                   "numero": "175",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14431,6 +14616,7 @@
                   "ordem": 186,
                   "numero": "176",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14452,6 +14638,7 @@
                   "ordem": 187,
                   "numero": "177",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14559,6 +14746,7 @@
                   "ordem": 188,
                   "numero": "178",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14573,6 +14761,7 @@
                   "ordem": 189,
                   "numero": "179",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14601,6 +14790,7 @@
                   "ordem": 190,
                   "numero": "180",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14802,6 +14992,7 @@
                   "ordem": 191,
                   "numero": "180-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14847,6 +15038,7 @@
                   "ordem": 192,
                   "numero": "181",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14891,6 +15083,7 @@
                   "ordem": 193,
                   "numero": "182",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14942,6 +15135,7 @@
                   "ordem": 194,
                   "numero": "183",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -14993,6 +15187,7 @@
                   "ordem": 195,
                   "numero": "183-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15035,6 +15230,7 @@
                   "ordem": 196,
                   "numero": "184",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15169,6 +15365,7 @@
                   "ordem": 197,
                   "numero": "185",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15197,6 +15394,7 @@
                   "ordem": 198,
                   "numero": "186",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15310,6 +15508,7 @@
                   "ordem": 199,
                   "numero": "187",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15338,6 +15537,7 @@
                   "ordem": 200,
                   "numero": "188",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15366,6 +15566,7 @@
                   "ordem": 201,
                   "numero": "189",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15394,6 +15595,7 @@
                   "ordem": 202,
                   "numero": "190",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15422,6 +15624,7 @@
                   "ordem": 203,
                   "numero": "191",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15457,6 +15660,7 @@
                   "ordem": 204,
                   "numero": "192",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15485,6 +15689,7 @@
                   "ordem": 205,
                   "numero": "193",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15513,6 +15718,7 @@
                   "ordem": 206,
                   "numero": "194",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15541,6 +15747,7 @@
                   "ordem": 207,
                   "numero": "195",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15576,6 +15783,7 @@
                   "ordem": 208,
                   "numero": "196",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15613,6 +15821,7 @@
               "ordem": 209,
               "numero": "197",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15643,6 +15852,7 @@
               "ordem": 210,
               "numero": "198",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15657,6 +15867,7 @@
               "ordem": 211,
               "numero": "199",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15671,6 +15882,7 @@
               "ordem": 212,
               "numero": "200",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15692,6 +15904,7 @@
               "ordem": 213,
               "numero": "201",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15706,6 +15919,7 @@
               "ordem": 214,
               "numero": "202",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15720,6 +15934,7 @@
               "ordem": 215,
               "numero": "203",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15826,6 +16041,7 @@
               "ordem": 216,
               "numero": "204",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15840,6 +16056,7 @@
               "ordem": 217,
               "numero": "205",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15854,6 +16071,7 @@
               "ordem": 218,
               "numero": "206",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15892,6 +16110,7 @@
               "ordem": 219,
               "numero": "207",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -15970,6 +16189,7 @@
                   "ordem": 220,
                   "numero": "208",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -15998,6 +16218,7 @@
                   "ordem": 221,
                   "numero": "209",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16019,6 +16240,7 @@
                   "ordem": 222,
                   "numero": "210",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16033,6 +16255,7 @@
                   "ordem": 223,
                   "numero": "211",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16047,6 +16270,7 @@
                   "ordem": 224,
                   "numero": "212",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16075,6 +16299,7 @@
                   "ordem": 225,
                   "numero": "213",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16171,6 +16396,7 @@
                   "ordem": 226,
                   "numero": "214",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16209,6 +16435,7 @@
                   "ordem": 227,
                   "numero": "215",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16276,6 +16503,7 @@
                   "ordem": 228,
                   "numero": "215-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16314,6 +16542,7 @@
                   "ordem": 229,
                   "numero": "216",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16352,6 +16581,7 @@
                   "ordem": 230,
                   "numero": "216-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16445,6 +16675,7 @@
                   "ordem": 231,
                   "numero": "216-B",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16499,6 +16730,7 @@
                   "ordem": 232,
                   "numero": "217",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16537,6 +16769,7 @@
                   "ordem": 233,
                   "numero": "217-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16700,6 +16933,7 @@
                   "ordem": 234,
                   "numero": "218",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16777,6 +17011,7 @@
                   "ordem": 235,
                   "numero": "218-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16825,6 +17060,7 @@
                   "ordem": 236,
                   "numero": "218-B",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -16980,6 +17216,7 @@
                   "ordem": 237,
                   "numero": "218-C",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17083,6 +17320,7 @@
                   "ordem": 238,
                   "numero": "219",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17111,6 +17349,7 @@
                   "ordem": 239,
                   "numero": "220",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17139,6 +17378,7 @@
                   "ordem": 240,
                   "numero": "221",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17167,6 +17407,7 @@
                   "ordem": 241,
                   "numero": "222",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17202,6 +17443,7 @@
                   "ordem": 242,
                   "numero": "223",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17230,6 +17472,7 @@
                   "ordem": 243,
                   "numero": "224",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17258,6 +17501,7 @@
                   "ordem": 244,
                   "numero": "225",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17315,6 +17559,7 @@
                   "ordem": 245,
                   "numero": "226",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17484,6 +17729,7 @@
                   "ordem": 246,
                   "numero": "227",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17545,6 +17791,7 @@
                   "ordem": 247,
                   "numero": "228",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17626,6 +17873,7 @@
                   "ordem": 248,
                   "numero": "229",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17654,6 +17902,7 @@
                   "ordem": 249,
                   "numero": "230",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17738,6 +17987,7 @@
                   "ordem": 250,
                   "numero": "231",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17776,6 +18026,7 @@
                   "ordem": 251,
                   "numero": "231-A",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17814,6 +18065,7 @@
                   "ordem": 252,
                   "numero": "232",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17842,6 +18094,7 @@
                   "ordem": 253,
                   "numero": "232-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17900,6 +18153,7 @@
                   "ordem": 254,
                   "numero": "233",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17914,6 +18168,7 @@
                   "ordem": 255,
                   "numero": "234",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -17965,6 +18220,7 @@
                   "ordem": 256,
                   "numero": "234-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18091,6 +18347,7 @@
                   "ordem": 257,
                   "numero": "234-B",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18176,6 +18433,7 @@
                   "ordem": 258,
                   "numero": "234-C",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18228,6 +18486,7 @@
                   "ordem": 259,
                   "numero": "235",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18256,6 +18515,7 @@
                   "ordem": 260,
                   "numero": "236",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18277,6 +18537,7 @@
                   "ordem": 261,
                   "numero": "237",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18291,6 +18552,7 @@
                   "ordem": 262,
                   "numero": "238",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18305,6 +18567,7 @@
                   "ordem": 263,
                   "numero": "239",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18319,6 +18582,7 @@
                   "ordem": 264,
                   "numero": "240",
                   "tipo": "artigo",
+                  "confianca": 0.6,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18354,6 +18618,7 @@
                   "ordem": 265,
                   "numero": "241",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18368,6 +18633,7 @@
                   "ordem": 266,
                   "numero": "242",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18435,6 +18701,7 @@
                   "ordem": 267,
                   "numero": "243",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18456,6 +18723,7 @@
                   "ordem": 268,
                   "numero": "244",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18513,6 +18781,7 @@
                   "ordem": 269,
                   "numero": "245",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18589,6 +18858,7 @@
                   "ordem": 270,
                   "numero": "246",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18603,6 +18873,7 @@
                   "ordem": 271,
                   "numero": "247",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18654,6 +18925,7 @@
                   "ordem": 272,
                   "numero": "248",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18668,6 +18940,7 @@
                   "ordem": 273,
                   "numero": "249",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18710,6 +18983,7 @@
                   "ordem": 274,
                   "numero": "250",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18796,6 +19070,7 @@
                   "ordem": 275,
                   "numero": "251",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18831,6 +19106,7 @@
                   "ordem": 276,
                   "numero": "252",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18852,6 +19128,7 @@
                   "ordem": 277,
                   "numero": "253",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18866,6 +19143,7 @@
                   "ordem": 278,
                   "numero": "254",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18880,6 +19158,7 @@
                   "ordem": 279,
                   "numero": "255",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18894,6 +19173,7 @@
                   "ordem": 280,
                   "numero": "256",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18915,6 +19195,7 @@
                   "ordem": 281,
                   "numero": "257",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18929,6 +19210,7 @@
                   "ordem": 282,
                   "numero": "258",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18943,6 +19225,7 @@
                   "ordem": 283,
                   "numero": "259",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -18971,6 +19254,7 @@
                   "ordem": 284,
                   "numero": "260",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19036,6 +19320,7 @@
                   "ordem": 285,
                   "numero": "261",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19071,6 +19356,7 @@
                   "ordem": 286,
                   "numero": "262",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19099,6 +19385,7 @@
                   "ordem": 287,
                   "numero": "263",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19113,6 +19400,7 @@
                   "ordem": 288,
                   "numero": "264",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19134,6 +19422,7 @@
                   "ordem": 289,
                   "numero": "265",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19179,6 +19468,7 @@
                   "ordem": 290,
                   "numero": "266",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19240,6 +19530,7 @@
                   "ordem": 291,
                   "numero": "267",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19282,6 +19573,7 @@
                   "ordem": 292,
                   "numero": "268",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19303,6 +19595,7 @@
                   "ordem": 293,
                   "numero": "269",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19317,6 +19610,7 @@
                   "ordem": 294,
                   "numero": "270",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19359,6 +19653,7 @@
                   "ordem": 295,
                   "numero": "271",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19394,6 +19689,7 @@
                   "ordem": 296,
                   "numero": "272",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19509,6 +19805,7 @@
                   "ordem": 297,
                   "numero": "273",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19739,6 +20036,7 @@
                   "ordem": 298,
                   "numero": "274",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19767,6 +20065,7 @@
                   "ordem": 299,
                   "numero": "275",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19805,6 +20104,7 @@
                   "ordem": 300,
                   "numero": "276",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19833,6 +20133,7 @@
                   "ordem": 301,
                   "numero": "277",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19871,6 +20172,7 @@
                   "ordem": 302,
                   "numero": "278",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19892,6 +20194,7 @@
                   "ordem": 303,
                   "numero": "279",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19920,6 +20223,7 @@
                   "ordem": 304,
                   "numero": "280",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19965,6 +20269,7 @@
                   "ordem": 305,
                   "numero": "281",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -19993,6 +20298,7 @@
                   "ordem": 306,
                   "numero": "282",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20014,6 +20320,7 @@
                   "ordem": 307,
                   "numero": "283",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20028,6 +20335,7 @@
                   "ordem": 308,
                   "numero": "284",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20072,6 +20380,7 @@
                   "ordem": 309,
                   "numero": "285",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20095,6 +20404,7 @@
               "ordem": 310,
               "numero": "286",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -20140,6 +20450,7 @@
               "ordem": 311,
               "numero": "287",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -20154,6 +20465,7 @@
               "ordem": 312,
               "numero": "288",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -20260,6 +20572,7 @@
               "ordem": 313,
               "numero": "288-A",
               "tipo": "artigo",
+              "confianca": 1.0,
               "estrutura": [
                 {
                   "tipo": "caput",
@@ -20310,6 +20623,7 @@
                   "ordem": 314,
                   "numero": "289",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20368,6 +20682,7 @@
                   "ordem": 315,
                   "numero": "290",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20403,6 +20718,7 @@
                   "ordem": 316,
                   "numero": "291",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20417,6 +20733,7 @@
                   "ordem": 317,
                   "numero": "292",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20445,6 +20762,7 @@
                   "ordem": 318,
                   "numero": "293",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20671,6 +20989,7 @@
                   "ordem": 319,
                   "numero": "294",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20685,6 +21004,7 @@
                   "ordem": 320,
                   "numero": "295",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20706,6 +21026,7 @@
                   "ordem": 321,
                   "numero": "296",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20787,6 +21108,7 @@
                   "ordem": 322,
                   "numero": "297",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20924,6 +21246,7 @@
                   "ordem": 323,
                   "numero": "298",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -20971,6 +21294,7 @@
                   "ordem": 324,
                   "numero": "299",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21006,6 +21330,7 @@
                   "ordem": 325,
                   "numero": "300",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21020,6 +21345,7 @@
                   "ordem": 326,
                   "numero": "301",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21048,6 +21374,7 @@
                   "ordem": 327,
                   "numero": "302",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21069,6 +21396,7 @@
                   "ordem": 328,
                   "numero": "303",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21090,6 +21418,7 @@
                   "ordem": 329,
                   "numero": "304",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21104,6 +21433,7 @@
                   "ordem": 330,
                   "numero": "305",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21125,6 +21455,7 @@
                   "ordem": 331,
                   "numero": "306",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21146,6 +21477,7 @@
                   "ordem": 332,
                   "numero": "307",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21160,6 +21492,7 @@
                   "ordem": 333,
                   "numero": "308",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21174,6 +21507,7 @@
                   "ordem": 334,
                   "numero": "309",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21219,6 +21553,7 @@
                   "ordem": 335,
                   "numero": "310",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21267,6 +21602,7 @@
                   "ordem": 336,
                   "numero": "311",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21457,6 +21793,7 @@
                   "ordem": 337,
                   "numero": "311-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21654,6 +21991,7 @@
                   "ordem": 338,
                   "numero": "312",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21689,6 +22027,7 @@
                   "ordem": 339,
                   "numero": "313",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21717,6 +22056,7 @@
                   "ordem": 340,
                   "numero": "313-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21765,6 +22105,7 @@
                   "ordem": 341,
                   "numero": "313-B",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21822,6 +22163,7 @@
                   "ordem": 342,
                   "numero": "314",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21836,6 +22178,7 @@
                   "ordem": 343,
                   "numero": "315",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21850,6 +22193,7 @@
                   "ordem": 344,
                   "numero": "316",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21914,6 +22258,7 @@
                   "ordem": 345,
                   "numero": "317",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21956,6 +22301,7 @@
                   "ordem": 346,
                   "numero": "318",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -21984,6 +22330,7 @@
                   "ordem": 347,
                   "numero": "319",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22012,6 +22359,7 @@
                   "ordem": 348,
                   "numero": "319-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22040,6 +22388,7 @@
                   "ordem": 349,
                   "numero": "320",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22054,6 +22403,7 @@
                   "ordem": 350,
                   "numero": "321",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22075,6 +22425,7 @@
                   "ordem": 351,
                   "numero": "322",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22089,6 +22440,7 @@
                   "ordem": 352,
                   "numero": "323",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22117,6 +22469,7 @@
                   "ordem": 353,
                   "numero": "324",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22131,6 +22484,7 @@
                   "ordem": 354,
                   "numero": "325",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22235,6 +22589,7 @@
                   "ordem": 355,
                   "numero": "326",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22249,6 +22604,7 @@
                   "ordem": 356,
                   "numero": "327",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22310,6 +22666,7 @@
                   "ordem": 357,
                   "numero": "328",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22331,6 +22688,7 @@
                   "ordem": 358,
                   "numero": "329",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22359,6 +22717,7 @@
                   "ordem": 359,
                   "numero": "330",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22373,6 +22732,7 @@
                   "ordem": 360,
                   "numero": "331",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22401,6 +22761,7 @@
                   "ordem": 361,
                   "numero": "332",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22458,6 +22819,7 @@
                   "ordem": 362,
                   "numero": "333",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22493,6 +22855,7 @@
                   "ordem": 363,
                   "numero": "334",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22666,6 +23029,7 @@
                   "ordem": 364,
                   "numero": "334-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22858,6 +23222,7 @@
                   "ordem": 365,
                   "numero": "335",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22879,6 +23244,7 @@
                   "ordem": 366,
                   "numero": "336",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22893,6 +23259,7 @@
                   "ordem": 367,
                   "numero": "337",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -22921,6 +23288,7 @@
                   "ordem": 368,
                   "numero": "337-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23189,6 +23557,7 @@
                   "ordem": 369,
                   "numero": "337-B",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23256,6 +23625,7 @@
                   "ordem": 370,
                   "numero": "337-C",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23323,6 +23693,7 @@
                   "ordem": 371,
                   "numero": "337-D",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23377,6 +23748,7 @@
                   "ordem": 372,
                   "numero": "337-E",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23425,6 +23797,7 @@
                   "ordem": 373,
                   "numero": "337-F",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23473,6 +23846,7 @@
                   "ordem": 374,
                   "numero": "337-G",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23521,6 +23895,7 @@
                   "ordem": 375,
                   "numero": "337-H",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23569,6 +23944,7 @@
                   "ordem": 376,
                   "numero": "337-I",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23617,6 +23993,7 @@
                   "ordem": 377,
                   "numero": "337-J",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23665,6 +24042,7 @@
                   "ordem": 378,
                   "numero": "337-K",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23732,6 +24110,7 @@
                   "ordem": 379,
                   "numero": "337-L",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23877,6 +24256,7 @@
                   "ordem": 380,
                   "numero": "337-M",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -23973,6 +24353,7 @@
                   "ordem": 381,
                   "numero": "337-N",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24021,6 +24402,7 @@
                   "ordem": 382,
                   "numero": "337-O",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24097,6 +24479,7 @@
                   "ordem": 383,
                   "numero": "337-P",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24132,6 +24515,7 @@
                   "ordem": 384,
                   "numero": "338",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24160,6 +24544,7 @@
                   "ordem": 385,
                   "numero": "338-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24255,6 +24640,7 @@
                   "ordem": 386,
                   "numero": "339",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24297,6 +24683,7 @@
                   "ordem": 387,
                   "numero": "340",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24311,6 +24698,7 @@
                   "ordem": 388,
                   "numero": "341",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24325,6 +24713,7 @@
                   "ordem": 389,
                   "numero": "342",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24411,6 +24800,7 @@
                   "ordem": 390,
                   "numero": "343",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24468,6 +24858,7 @@
                   "ordem": 391,
                   "numero": "344",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24503,6 +24894,7 @@
                   "ordem": 392,
                   "numero": "345",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24524,6 +24916,7 @@
                   "ordem": 393,
                   "numero": "346",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24538,6 +24931,7 @@
                   "ordem": 394,
                   "numero": "347",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24559,6 +24953,7 @@
                   "ordem": 395,
                   "numero": "348",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24587,6 +24982,7 @@
                   "ordem": 396,
                   "numero": "349",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24601,6 +24997,7 @@
                   "ordem": 397,
                   "numero": "349-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24639,6 +25036,7 @@
                   "ordem": 398,
                   "numero": "350",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24677,6 +25075,7 @@
                   "ordem": 399,
                   "numero": "351",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24719,6 +25118,7 @@
                   "ordem": 400,
                   "numero": "352",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24733,6 +25133,7 @@
                   "ordem": 401,
                   "numero": "353",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24747,6 +25148,7 @@
                   "ordem": 402,
                   "numero": "354",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24761,6 +25163,7 @@
                   "ordem": 403,
                   "numero": "355",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24782,6 +25185,7 @@
                   "ordem": 404,
                   "numero": "356",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24796,6 +25200,7 @@
                   "ordem": 405,
                   "numero": "357",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24817,6 +25222,7 @@
                   "ordem": 406,
                   "numero": "358",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24831,6 +25237,7 @@
                   "ordem": 407,
                   "numero": "359",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24852,6 +25259,7 @@
                   "ordem": 408,
                   "numero": "359-A",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -24959,6 +25367,7 @@
                   "ordem": 409,
                   "numero": "359-B",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25007,6 +25416,7 @@
                   "ordem": 410,
                   "numero": "359-C",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25055,6 +25465,7 @@
                   "ordem": 411,
                   "numero": "359-D",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25103,6 +25514,7 @@
                   "ordem": 412,
                   "numero": "359-E",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25151,6 +25563,7 @@
                   "ordem": 413,
                   "numero": "359-F",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25199,6 +25612,7 @@
                   "ordem": 414,
                   "numero": "359-G",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25247,6 +25661,7 @@
                   "ordem": 415,
                   "numero": "359-H",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25299,6 +25714,7 @@
                   "ordem": 416,
                   "numero": "359-I",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25455,6 +25871,7 @@
                   "ordem": 417,
                   "numero": "359-J",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25533,6 +25950,7 @@
                   "ordem": 418,
                   "numero": "359-K",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25754,6 +26172,7 @@
                   "ordem": 419,
                   "numero": "359-L",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25832,6 +26251,7 @@
                   "ordem": 420,
                   "numero": "359-M",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25897,6 +26317,7 @@
                   "ordem": 421,
                   "numero": "359-N",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -25985,6 +26406,7 @@
                   "ordem": 422,
                   "numero": "359-O",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -26053,6 +26475,7 @@
                   "ordem": 423,
                   "numero": "359-P",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -26141,6 +26564,7 @@
                   "ordem": 424,
                   "numero": "359-Q",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -26196,6 +26620,7 @@
                   "ordem": 425,
                   "numero": "359-R",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -26267,6 +26692,7 @@
                   "ordem": 426,
                   "numero": "359-T",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -26335,6 +26761,7 @@
                   "ordem": 427,
                   "numero": "359-U",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -26383,6 +26810,7 @@
                   "ordem": 428,
                   "numero": "360",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",
@@ -26397,6 +26825,7 @@
                   "ordem": 429,
                   "numero": "361",
                   "tipo": "artigo",
+                  "confianca": 1.0,
                   "estrutura": [
                     {
                       "tipo": "caput",

@@ -3,12 +3,12 @@
     "codigo": "cp",
     "ementa": "Alteração de limites Art."
   },
-  "timestamp": "2026-02-27T20:04:19.030355",
+  "timestamp": "2026-02-28T13:40:52.617088",
   "total_artigos": 429,
   "total_titulos": 2,
   "artigos_por_titulo": {
-    "Título GERAL — ": 120,
-    "Título ESPECIAL — ": 309
+    "Parte GERAL — ": 120,
+    "Parte ESPECIAL — ": 309
   },
   "artigos_vazios": [],
   "artigos_sem_texto_caput": [
@@ -67,6 +67,12 @@
   "ids_duplicados": [],
   "incisos_sem_conteudo": [],
   "alineas_fora_de_lugar": [],
+  "gaps_numeracao": [
+    "Salto de 106 para 108 entre lei-cp-art-106 e lei-cp-art-108"
+  ],
+  "blocos_vazios": [
+    "Capitulo V ()"
+  ],
   "estatisticas": {
     "total_incisos": 347,
     "total_alineas": 75

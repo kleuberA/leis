@@ -25,9 +25,10 @@ import sys
 from pathlib import Path
 
 from downloader import baixar_lei, baixar_lei_url, listar_leis, info_lei
-from parser import parse_lei
+from parser import parse_lei, _iterar_artigos_mut
 from validator import validar_estrutura, imprimir_relatorio
 from crossref import extrair_crossrefs_estrutura
+from smart_parser import smart_parser
 
 logging.basicConfig(
     level=logging.INFO,
@@ -95,6 +96,28 @@ def run(
         encoding="utf-8",
     )
     logger.info(f"      JSON salvo: {saida_json}")
+
+    # ── ETAPA 2.5: Smart Repair (IA) ─────────────────────────────
+    if smart_parser.enabled:
+        logger.info(f"[2.5] Smart Repair (IA)")
+        reparados = 0
+        for art in _iterar_artigos_mut(estrutura):
+            if art.get("confianca", 1.0) < 0.7:
+                texto_bruto = art.get("texto_bruto")
+                if not texto_bruto: continue
+                
+                novo_art = smart_parser.recuperar_artigo(texto_bruto, art.get("numero", ""))
+                if novo_art:
+                    # Atualiza o nó mantendo ID e Ordem originais
+                    art["numero"]    = novo_art.get("numero", art["numero"])
+                    art["estrutura"] = novo_art.get("estrutura", art["estrutura"])
+                    art["confianca"] = novo_art.get("confianca_ia", 0.9)
+                    art["reparado_ia"] = True
+                    reparados += 1
+                    
+        if reparados:
+            logger.info(f"      {reparados} artigos reparados via IA.")
+            saida_json.write_text(json.dumps(estrutura, ensure_ascii=False, indent=2), encoding="utf-8")
 
     # ── ETAPA 3: Cross-references ────────────────────────────────
     crossrefs = []
@@ -177,6 +200,40 @@ def run_batch(
     return resultados
 
 
+def suggest_config(url: str, nome: str = "") -> dict:
+    """Gera uma sugestão de configuração para o leis.yaml a partir da URL."""
+    from downloader import baixar_lei_url
+    from parser import parse_lei
+    
+    print(f"🔍 Analisando URL para sugestão de config: {url}")
+    try:
+        texto = baixar_lei_url(url, usar_cache=True)
+        # Tenta inferir o código do final da URL
+        sugestao_codigo = Path(url).stem.replace("l", "").replace("compilado", "").replace("compilada", "")
+        if not sugestao_codigo: sugestao_codigo = "nova_lei"
+        
+        estrutura = parse_lei(texto, codigo_lei=sugestao_codigo)
+        
+        # Infeção básica de tags
+        tags = []
+        if "penal" in nome.lower() or "crime" in nome.lower(): tags.append("penal")
+        if "civil" in nome.lower(): tags.append("civil")
+        
+        config = {
+            sugestao_codigo: {
+                "nome": nome or estrutura.get("lei", {}).get("ementa", "Nova Lei")[:60] + "...",
+                "url": url,
+                "fonte": "planalto" if "planalto.gov.br" in url else "auto",
+                "encoding": "latin-1" if "planalto.gov.br" in url else "utf-8",
+                "tags": tags
+            }
+        }
+        return config
+    except Exception as e:
+        print(f"❌ Erro ao sugerir config: {e}")
+        return {}
+
+
 # ─────────────────────────────────────────────────────────────
 # CLI
 # ─────────────────────────────────────────────────────────────
@@ -192,6 +249,8 @@ def main():
                        help="Múltiplos códigos para processamento em lote")
     grupo.add_argument("--listar", action="store_true",
                        help="Lista todas as leis disponíveis no catálogo")
+    grupo.add_argument("--suggest", nargs=2, metavar=("URL", "NOME"),
+                       help="Sugerir configuração para uma nova lei")
 
     ap.add_argument("--url",    help="URL direta (ignora catálogo, requer --codigo)")
     ap.add_argument("--codigo", help="Código da lei ao usar --url")
@@ -202,6 +261,8 @@ def main():
                     help="Força re-download mesmo com cache disponível")
     ap.add_argument("--sem-refs", action="store_true",
                     help="Pula extração de cross-references")
+    ap.add_argument("--review", action="store_true",
+                    help="Gera relatório de revisão HTML após o processamento")
     ap.add_argument("--saida", default=".",
                     help="Diretório de saída dos arquivos (padrão: .)")
 
@@ -209,9 +270,17 @@ def main():
 
     if args.listar:
         print("\nLeis disponíveis no catálogo:\n")
+        from downloader import listar_leis
         for cod, nome in listar_leis().items():
             print(f"  {cod:12} {nome}")
         print()
+        return
+
+    if args.suggest:
+        import yaml
+        sugestao = suggest_config(args.suggest[0], args.suggest[1])
+        print("\n--- SUGESTÃO PARA config/leis.yaml ---")
+        print(yaml.dump(sugestao, allow_unicode=True, default_flow_style=False))
         return
 
     saida_dir  = Path(args.saida)
@@ -220,7 +289,6 @@ def main():
 
     if args.batch:
         run_batch(args.batch, usar_cache=usar_cache, saida_dir=saida_dir)
-
     elif args.url:
         if not args.codigo:
             ap.error("--url requer --codigo")
@@ -232,7 +300,9 @@ def main():
             extrair_refs=extrair,
             saida_dir=saida_dir,
         )
-
+        if args.review:
+            from review_viewer import generate_review_html
+            generate_review_html(f"struct_{args.codigo}.json", f"raw_{args.codigo}.txt", f"review_{args.codigo}.html")
     elif args.lei:
         run(
             codigo=args.lei,
@@ -240,7 +310,9 @@ def main():
             extrair_refs=extrair,
             saida_dir=saida_dir,
         )
-
+        if args.review:
+            from review_viewer import generate_review_html
+            generate_review_html(f"struct_{args.lei}.json", f"raw_{args.lei}.txt", f"review_{args.lei}.html")
     else:
         # Padrão: LDB
         logger.info("Nenhuma lei especificada — usando padrão: LDB (9394)")
