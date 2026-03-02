@@ -1,0 +1,39 @@
+# Ambiente
+.env
+.venv/
+env/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Cache e dados gerados
+cache/
+data/
+
+# Outputs do pipeline (gerados automaticamente)
+raw_*.txt
+struct_*.json
+relatorio_*.json
+crossrefs_*.json
+review_*.html
+*_fixed.json
+
+# Testes
+test_output.txt
+test_failures.txt
+test_capture_*.txt
+.pytest_cache/
+htmlcov/
+.coverage
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
