@@ -65,6 +65,14 @@ def normalizar_texto(texto: str) -> str:
     # § partido em 2 linhas
     texto = re.sub(r"\n§\n(\d+[°oº](?:-[A-Za-z])?\s)", r"\n§ \1", texto)
 
+    # [NOVO] Fix para marcadores de Artigo/Hierarquia quebrados por artefatos de PDF/HTML
+    # Ex: "A rt. 107", "C apítulo", "S eção", "T ítulo"
+    texto = re.sub(r"\n\s*A\s+rt\.\s*(\d+)", r"\nArt. \1", texto, flags=re.IGNORECASE)
+    texto = re.sub(r"\n\s*C\s+ap[ií]tulo", r"\nCapítulo", texto, flags=re.IGNORECASE)
+    texto = re.sub(r"\n\s*S\s+e[çc][ãa]o", r"\nSeção", texto, flags=re.IGNORECASE)
+    texto = re.sub(r"\n\s*T\s+[ií]tulo",   r"\nTítulo", texto, flags=re.IGNORECASE)
+    texto = re.sub(r"\n\s*L\s+ivro",      r"\nLivro", texto, flags=re.IGNORECASE)
+
     # Ordinal partido após dígito
     texto = re.sub(r"(\d)\n(o)\n",    r"\1º\n", texto)
     texto = re.sub(r"(\d)\n([°º])\n", r"\1º\n", texto)
@@ -377,8 +385,8 @@ def extrair_paragrafos(txt_art: str) -> list:
 # FASE 5 — PARSE DE ARTIGOS
 # ═══════════════════════════════════════════════════════
 
-_SPLIT_ARTIGO = re.compile(r"\n(?=Art\.?\s*\d)")   # SEM IGNORECASE
-_RE_ART_NUM   = re.compile(r"Art\.?\s*(\d+[°oº]?(?:-[A-Za-z])?)")
+_SPLIT_ARTIGO = re.compile(r"\n(?=(?:Art\.?|A\s*rt\.?)\s*\d)", re.IGNORECASE)
+_RE_ART_NUM   = re.compile(r"(?:Art\.?|A\s*rt\.?)\s*(\d+[°oº]?(?:-[A-Za-z])?)", re.IGNORECASE)
 
 
 def _coletar_metas(obj) -> list:
@@ -399,7 +407,7 @@ def _parse_artigos(bloco: str, lei: str, ordem: list) -> list:
     for txt in _SPLIT_ARTIGO.split(bloco):
         txt = txt.strip()
 
-        if not txt.startswith("Art"):
+        if not re.match(r"^(?:Art|A\s*rt)", txt, re.IGNORECASE):
             continue
 
         if txt.startswith("referência_interna:"):

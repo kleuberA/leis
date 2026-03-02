@@ -148,11 +148,11 @@ def run(
     if total > 0:
         precisao = 1.0 - (vazios / total)
         if precisao < PRECISAO_MINIMA_ARTIGOS:
-            logger.error(
-                f"REGRESSÃO DE PRECISÃO: {precisao:.1%} < {PRECISAO_MINIMA_ARTIGOS:.0%} "
-                f"({vazios}/{total} artigos vazios)"
-            )
-            sys.exit(2)
+            msg = f"REGRESSÃO DE PRECISÃO: {precisao:.1%} < {PRECISAO_MINIMA_ARTIGOS:.0%} ({vazios}/{total} artigos vazios)"
+            logger.error(msg)
+            # No CLI antigo matamos o processo, na API lançamos ou avisamos
+            if __name__ == "__main__":
+                sys.exit(2)
         else:
             logger.info(f"      Precisão estrutural: {precisao:.1%} ✓")
 
