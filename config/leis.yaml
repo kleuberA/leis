@@ -36,7 +36,7 @@ leis:
   # ── Trabalho ─────────────────────────────────────────────────
   "clt":
     nome: "CLT — Consolidação das Leis do Trabalho"
-    url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm"
+    url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/Del5452compilado.htm"
     fonte: planalto
     encoding: latin-1
     tags: [trabalho]

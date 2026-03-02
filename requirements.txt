@@ -6,17 +6,21 @@ lxml>=5.0.0
 # Retry robusto
 tenacity>=8.2.0
 
-# Neo4j (para fase de grafo)
+# Neo4j (para fase de grafo — opcional)
 neo4j>=5.14.0
 
-# Utilitários opcionais
-python-dotenv>=1.0.0   # para credenciais Neo4j em .env
-pyyaml>=6.0            # para config/leis.yaml futuro
+# Utilitários
+python-dotenv>=1.0.0
+pyyaml>=6.0
 
-# IA Adaptativa
+# IA Adaptativa (opcional — funciona sem)
 google-generativeai>=0.3.0
 
 # API e Servidor Web
 fastapi>=0.109.0
-uvicorn>=0.27.0
+uvicorn[standard]>=0.27.0
 python-multipart>=0.0.6
+
+# Testes
+pytest>=8.0.0
+httpx>=0.27.0
