@@ -22,6 +22,13 @@ class AdapterPlanalto(AdapterBase):
 
     def extrair_texto(self, html_bytes: bytes) -> str:
         html = self._decodificar(html_bytes)
+        
+        # [FIX] Planalto costuma incluir </body></html> no meio do documento (ex: Código Civil)
+        # o que faz com que o parser LXML pare de processar o restante da lei.
+        html = re.sub(r"</body>", "", html, flags=re.IGNORECASE)
+        html = re.sub(r"</html>", "", html, flags=re.IGNORECASE)
+        html += "</body></html>"
+
         soup = BeautifulSoup(html, "lxml")
 
         self._remover_tags_ruido(soup)

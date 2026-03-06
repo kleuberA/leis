@@ -19,9 +19,12 @@ from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends, Query, Sec
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyHeader
 from pathlib import Path
+import os
 import json
 import logging
 import re
+import queue
+import asyncio
 from datetime import datetime
 from typing import Optional, List
 from pydantic import BaseModel, Field
@@ -50,12 +53,16 @@ app = FastAPI(
     openapi_url="/api/v1/openapi.json",
 )
 
+# CORS — origens permitidas (separar por vírgula no .env)
+_cors_raw = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173,http://localhost:8000")
+CORS_ORIGINS = [o.strip() for o in _cors_raw.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
-    allow_credentials=False,
-    allow_methods=["GET", "POST", "PATCH", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type"],
+    allow_origins=CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # ─── Autenticação ────────────────────────────────────────────
@@ -142,6 +149,17 @@ class ArtigoUpdate(BaseModel):
     confianca: Optional[float] = None
 
 
+class ParserOptions(BaseModel):
+    tem_rubricas: bool = Field(False, description="Ativa extração de rubricas de artigos")
+    rigor: str = Field("normal", description="Nível de rigor da normalização (normal, alto)")
+
+
+class PipelineUrlRequest(BaseModel):
+    url: str = Field(..., description="URL da lei")
+    fonte: str = Field("planalto", description="Fonte da lei (planalto, senado, camara)")
+    opcoes: Optional[ParserOptions] = None
+
+
 class PipelineResponse(BaseModel):
     codigo: str
     status: str
@@ -165,6 +183,7 @@ class HealthResponse(BaseModel):
 # ─── Estado do Pipeline (em memória — para produção usar Redis/DB) ───
 
 _pipeline_jobs: dict[str, PipelineStatus] = {}
+_pipeline_logs: dict[str, queue.Queue] = {}
 
 # ─── Helpers ─────────────────────────────────────────────────
 
@@ -268,33 +287,39 @@ def find_article_mut(node, article_id):
 # ─── Background task ─────────────────────────────────────────
 
 
-def _executar_pipeline_background(codigo: str):
-    """Executa o pipeline como tarefa de background."""
+def _executar_pipeline_background(codigo: str, opcoes: dict = None):
+    """Executa o pipeline e atualiza o status global, alimentando a fila de logs."""
+    job = _pipeline_jobs.get(codigo)
+    if not job: return
+
+    log_queue = _pipeline_logs.get(codigo)
+    
+    def callback(msg):
+        if log_queue:
+            log_queue.put(msg)
+        if job:
+            job.mensagem = msg
+
     try:
-        _pipeline_jobs[codigo] = PipelineStatus(
-            codigo=codigo,
-            status="processando",
-            mensagem="Pipeline em execução...",
-            iniciado_em=datetime.now().isoformat(),
+        job.status = "processando"
+        pipeline.run(
+            codigo, 
+            saida_dir=settings.DATA_DIR, 
+            opcoes=opcoes,
+            progress_callback=callback,
+            persistir=False # Sempre manual via API agora
         )
-        resultado = pipeline.run(codigo=codigo, usar_cache=True)
-        total_blocos = len(resultado.get("estrutura", {}).get("titulos", []))
-        _pipeline_jobs[codigo] = PipelineStatus(
-            codigo=codigo,
-            status="concluido",
-            mensagem=f"Pipeline concluído. {total_blocos} blocos detectados.",
-            iniciado_em=_pipeline_jobs[codigo].iniciado_em,
-            concluido_em=datetime.now().isoformat(),
-        )
+        job.status = "concluido"
+        job.mensagem = "Processamento finalizado. Pronto para salvar."
     except Exception as e:
-        logger.error(f"Erro no pipeline para {codigo}: {e}")
-        _pipeline_jobs[codigo] = PipelineStatus(
-            codigo=codigo,
-            status="erro",
-            mensagem=f"Erro: {str(e)[:200]}",
-            iniciado_em=_pipeline_jobs.get(codigo, PipelineStatus(codigo=codigo, status="erro")).iniciado_em,
-            concluido_em=datetime.now().isoformat(),
-        )
+        logger.error(f"Erro no pipeline background ({codigo}): {e}")
+        job.status = "erro"
+        job.mensagem = f"Erro no processamento: {str(e)}"
+        if log_queue:
+            log_queue.put(f"ERRO: {str(e)}")
+    finally:
+        if log_queue:
+            log_queue.put(None) # Sinal de fim de stream
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -336,7 +361,9 @@ def get_catalogo(tag: Optional[str] = Query(None, description="Filtrar por tag")
                 "nome": cfg.get("nome", cod),
                 "tags": cfg.get("tags", []),
                 "fonte": cfg.get("fonte", "planalto"),
+                "url": cfg.get("url", ""),
                 "processada": _data_path("struct", cod).exists(),
+                "id_banco": storage._get_by_url(cfg.get("url", "")).get("id_lei") if cfg.get("url") else None
             }
         return resultado
     except Exception as e:
@@ -354,14 +381,18 @@ def get_catalogo(tag: Optional[str] = Query(None, description="Filtrar por tag")
 @app.get("/api/v1/leis/{codigo}", response_model=LeiResumo, tags=["Leis"])
 def get_lei_resumo(codigo: str):
     """Retorna um resumo de uma lei (metadados, contagens)."""
-    data = _carregar_lei_json(codigo)
-    artigos = _coletar_artigos_lista(data)
+    lei_info = data.get("lei", {})
+    url = lei_info.get("url", "")
+    id_banco = storage._get_by_url(url).get("id_lei") if url else None
+
     return {
-        "codigo": data.get("lei", {}).get("codigo", codigo),
-        "nome": data.get("lei", {}).get("ementa", "Não identificada"),
+        "codigo": lei_info.get("codigo", codigo),
+        "nome": lei_info.get("ementa", "Não identificada"),
+        "url": url,
         "total_artigos": len(artigos),
         "total_titulos": len(data.get("titulos", [])),
         "processada": True,
+        "id_banco": str(id_banco) if id_banco else None
     }
 
 
@@ -501,10 +532,75 @@ def get_relatorio(codigo: str):
 # ─── Pipeline (protegido) ───────────────────────────────────
 
 
+@app.post("/api/v1/pipeline/url", response_model=PipelineResponse, tags=["Pipeline"])
+def trigger_url_pipeline(
+    request: PipelineUrlRequest,
+    background_tasks: BackgroundTasks,
+    _auth: bool = Depends(verify_api_key),
+):
+    """
+    Inicia o pipeline a partir de uma URL direta.
+    O código da lei será o MD5 da URL.
+    """
+    import hashlib
+    url = request.url
+    codigo = hashlib.md5(url.encode()).hexdigest()
+    logger.info(f"Trigger URL: {url} -> {codigo}")
+
+    # Verifica se já está processando
+    job = _pipeline_jobs.get(codigo)
+    if job and job.status == "processando":
+        logger.info(f"Já processando: {codigo}")
+        return {
+            "codigo": codigo,
+            "status": "ja_processando",
+            "mensagem": f"A URL '{url}' já está sendo processada.",
+        }
+
+    # Baixa no foreground para garantir que a URL é válida e ter o raw
+    try:
+        from downloader import baixar_lei_url
+        logger.info(f"Baixando URL: {url}")
+        texto_limpo = baixar_lei_url(url, fonte=request.fonte, usar_cache=True)
+        # Salva o raw em data/raw/
+        raw_path = settings.DATA_DIR / "raw" / f"raw_{codigo}.txt"
+        logger.info(f"Salvando raw em: {raw_path}")
+        with open(raw_path, "w", encoding="utf-8") as f:
+            f.write(texto_limpo)
+    except Exception as e:
+        logger.error(f"Erro ao baixar URL {url}: {e}")
+        raise HTTPException(status_code=400, detail={
+            "type": "download_error",
+            "title": "Erro de download",
+            "detail": f"Não foi possível baixar a lei da URL: {str(e)}",
+        })
+
+    # Cria fila de logs
+    _pipeline_logs[codigo] = queue.Queue()
+
+    # Inicia o pipeline em background
+    _pipeline_jobs[codigo] = PipelineStatus(
+        codigo=codigo,
+        status="pendente",
+        mensagem="Pipeline enfileirado por URL.",
+        iniciado_em=datetime.now().isoformat(),
+    )
+    # Extrai opções se existirem
+    opcoes_dict = request.opcoes.dict() if request.opcoes else None
+    background_tasks.add_task(_executar_pipeline_background, codigo, opcoes_dict)
+
+    return {
+        "codigo": codigo,
+        "status": "iniciado",
+        "mensagem": f"Processamento da URL iniciado. ID temporário: {codigo}. Acompanhe em /api/v1/pipeline/{codigo}/events",
+    }
+
+
 @app.post("/api/v1/pipeline/{codigo}", response_model=PipelineResponse, tags=["Pipeline"])
 def trigger_pipeline(
     codigo: str,
     background_tasks: BackgroundTasks,
+    opcoes: Optional[ParserOptions] = None,
     _auth: bool = Depends(verify_api_key),
 ):
     """
@@ -512,12 +608,15 @@ def trigger_pipeline(
     Use GET /api/v1/pipeline/{codigo}/status para acompanhar.
     Requer header X-API-Key.
     """
+    # Verifica se a lei existe no catálogo OU se existe um arquivo raw (para URLs)
     catalogo = listar_leis()
-    if codigo not in catalogo:
+    raw_path = settings.DATA_DIR / "raw" / f"raw_{codigo}.txt"
+    
+    if codigo not in catalogo and not raw_path.exists():
         raise HTTPException(status_code=404, detail={
             "type": "not_found",
             "title": "Lei não encontrada",
-            "detail": f"A lei '{codigo}' não existe no catálogo.",
+            "detail": f"A lei '{codigo}' não existe no catálogo e nenhum arquivo bruto foi encontrado.",
         })
 
     # Verifica se já está processando
@@ -529,6 +628,9 @@ def trigger_pipeline(
             "mensagem": f"Pipeline para '{codigo}' já está em execução.",
         }
 
+    # Cria fila de logs
+    _pipeline_logs[codigo] = queue.Queue()
+
     # Inicia o pipeline em background
     _pipeline_jobs[codigo] = PipelineStatus(
         codigo=codigo,
@@ -536,13 +638,71 @@ def trigger_pipeline(
         mensagem="Pipeline enfileirado.",
         iniciado_em=datetime.now().isoformat(),
     )
-    background_tasks.add_task(_executar_pipeline_background, codigo)
+    # Extrai opções se existirem
+    opcoes_dict = opcoes.dict() if opcoes else None
+    background_tasks.add_task(_executar_pipeline_background, codigo, opcoes_dict)
 
     return {
         "codigo": codigo,
         "status": "iniciado",
-        "mensagem": f"Pipeline iniciado para '{codigo}'. Acompanhe em GET /api/v1/pipeline/{codigo}/status",
+        "mensagem": f"Pipeline iniciado para '{codigo}'. Acompanhe os logs em SSE /api/v1/pipeline/{codigo}/events",
     }
+
+
+@app.get("/api/v1/pipeline/{codigo}/events", tags=["Pipeline"])
+async def pipeline_events(codigo: str):
+    """Stream de logs do pipeline via Server-Sent Events (SSE)."""
+    from fastapi.responses import StreamingResponse
+
+    async def event_generator():
+        q = _pipeline_logs.get(codigo)
+        if not q:
+            # Se não há fila, mas já foi processado, manda o status final
+            if _data_path("struct", codigo).exists():
+                yield "data: Processamento concluído anteriormente.\n\n"
+                return
+            yield "data: Nenhum pipeline ativo para este código.\n\n"
+            return
+
+        while True:
+            try:
+                # Usa loop assíncrono para não travar o worker
+                msg = await asyncio.to_thread(q.get, timeout=30)
+                if msg is None: break # Fim do pipeline
+                yield f"data: {msg}\n\n"
+            except queue.Empty:
+                yield "data: ...\n\n" # Keep-alive
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
+@app.post("/api/v1/leis/{codigo}/save", tags=["Pipeline"])
+def save_lei_to_db(codigo: str, _auth: bool = Depends(verify_api_key)):
+    """Persiste a lei processada no Supabase (manual)."""
+    from supabase_storage import storage
+    from downloader import calcular_fingerprint
+    
+    path_struct = _data_path("struct", codigo)
+    path_raw = settings.DATA_DIR / "raw" / f"raw_{codigo}.txt"
+    
+    if not path_struct.exists():
+        raise HTTPException(status_code=404, detail="Lei não processada. Execute o pipeline primeiro.")
+        
+    with open(path_struct, "r", encoding="utf-8") as f:
+        estrutura = json.load(f)
+        
+    hash_txt = "unknown"
+    if path_raw.exists():
+        hash_txt = calcular_fingerprint(path_raw.read_bytes())
+        
+    origem = estrutura.get("lei", {}).get("url", "manual")
+    
+    sucesso = storage.salvar_lei_completa(estrutura, origem, hash_txt)
+    
+    if sucesso:
+        return {"status": "sucesso", "mensagem": "Lei persistida no Supabase com sucesso."}
+    else:
+        raise HTTPException(status_code=500, detail="Erro ao salvar no Supabase.")
 
 
 @app.get("/api/v1/pipeline/{codigo}/status", response_model=PipelineStatus, tags=["Pipeline"])
@@ -563,6 +723,28 @@ def pipeline_status(codigo: str):
             mensagem="Pipeline nunca foi executado para esta lei.",
         )
     return job
+
+
+def _executar_pipeline_background(codigo: str, opcoes: dict = None):
+    """Executa o pipeline e atualiza o status global."""
+    job = _pipeline_jobs.get(codigo)
+    if job:
+        job.status = "processando"
+        job.mensagem = "Processando download e parse..."
+
+    try:
+        # Chama o pipeline real
+        # Passa opcoes para o pipeline
+        pipeline.run(codigo, saida_dir=settings.DATA_DIR, opcoes=opcoes)
+
+        if job:
+            job.status = "concluido"
+            job.mensagem = "Processamento finalizado com sucesso."
+    except Exception as e:
+        logger.error(f"Erro no pipeline background ({codigo}): {e}")
+        if job:
+            job.status = "erro"
+            job.mensagem = f"Erro no processamento: {str(e)}"
 
 
 # ─── Correção Manual (protegido) ────────────────────────────
@@ -625,6 +807,26 @@ def get_lei_estrutura(codigo: str):
     Use /artigos com paginação quando possível.
     """
     return _carregar_lei_json(codigo)
+
+
+@app.get("/api/v1/leis/{codigo}/raw", tags=["Leis"])
+def get_lei_raw(codigo: str):
+    """Retorna o texto bruto (raw) da lei."""
+    path = _data_path("raw", codigo)
+    # Ajuste para o nome de arquivo correto esperado por _data_path("raw", ...)
+    # _data_path("raw", "cf88") retorna data/raw/raw_cf88.json? Não, pera. 
+    # _data_path usa prefixo 'raw' e sufixo .json por padrão. 
+    # Mas nossos arquivos raw são .txt.
+    
+    raw_path = settings.DATA_DIR / "raw" / f"raw_{codigo}.txt"
+    if not raw_path.exists():
+         raise HTTPException(status_code=404, detail={
+            "type": "not_found",
+            "title": "Texto bruto não encontrado",
+            "detail": f"O arquivo bruto para a lei '{codigo}' não existe.",
+        })
+    with open(raw_path, "r", encoding="utf-8") as f:
+        return {"codigo": codigo, "conteudo": f.read()}
 
 
 # ─── Startup ─────────────────────────────────────────────────

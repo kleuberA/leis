@@ -26,9 +26,11 @@ from pathlib import Path
 
 from downloader import baixar_lei, baixar_lei_url, listar_leis, info_lei
 from parser import parse_lei, _iterar_artigos_mut
-from validator import validar_estrutura, imprimir_relatorio
+from validator import validar_estrutura, imprimir_relatorio, precisa_revisao
 from crossref import extrair_crossrefs_estrutura
 from smart_parser import smart_parser
+from supabase_storage import storage
+from downloader import calcular_fingerprint
 
 logging.basicConfig(
     level=logging.INFO,
@@ -47,6 +49,9 @@ def run(
     usar_cache: bool = True,
     extrair_refs: bool = True,
     saida_dir: Path | None = None,
+    opcoes: dict | None = None,
+    progress_callback: callable = None,
+    persistir: bool = False,
 ) -> dict:
     """
     Executa o pipeline completo para uma lei.
@@ -58,6 +63,9 @@ def run(
         usar_cache:  Se True, usa HTML em cache quando disponível.
         extrair_refs: Se True, extrai cross-references e salva JSON.
         saida_dir:   Diretório de saída. Padrão: diretório atual.
+        opcoes:      Opções de parse (ex: tem_rubricas, rigor).
+        progress_callback: Função para reportar progresso real-time.
+        persistir:   Se True, salva no Supabase automaticamente.
 
     Returns:
         Dict com 'estrutura', 'relatorio', e opcionalmente 'crossrefs'.
@@ -70,32 +78,48 @@ def run(
     saida_relat = base / f"relatorio_{codigo}.json"
     saida_refs  = base / f"crossrefs_{codigo}.json"
 
-    # Resolve nome da lei para logs
-    cfg_lei  = info_lei(codigo) or {}
-    nome_lei = cfg_lei.get("nome", f"Lei {codigo}")
+    def log(msg, level=logging.INFO):
+        logger.log(level, msg)
+        if progress_callback:
+            progress_callback(msg)
 
-    logger.info(f"{'═'*55}")
-    logger.info(f"  Pipeline: {nome_lei}")
-    logger.info(f"{'═'*55}")
+    log(f"{'═'*55}")
+    log(f"  Pipeline: {nome_lei}")
+    log(f"{'═'*55}")
 
     # ── ETAPA 1: Download ────────────────────────────────────────
-    logger.info(f"[1/4] Download")
+    log(f"[1/4] Navegando até a lei...")
+    
+    # Obtém o conteúdo bruto e calcula fingerprint
     if url:
+        log(f"      Lei encontrada no site: {url}")
         texto = baixar_lei_url(url, fonte=fonte, usar_cache=usar_cache)
     else:
+        log(f"      Lei encontrada no catálogo: {codigo}")
         texto = baixar_lei(codigo, usar_cache=usar_cache)
 
+    log(f"      Download concluído ({len(texto):,} caracteres).")
     saida_txt.write_text(texto, encoding="utf-8")
-    logger.info(f"      Texto salvo: {saida_txt} ({len(texto):,} chars)")
+    hash_txt = calcular_fingerprint(texto.encode("utf-8"))
+    log(f"      Fingerprint: {hash_txt[:16]}...")
 
     # ── ETAPA 2: Parse ───────────────────────────────────────────
-    logger.info(f"[2/4] Parse")
-    estrutura = parse_lei(texto, codigo_lei=codigo)
+    log(f"[2/4] Iniciando parsing da estrutura...")
+    estrutura = parse_lei(texto, codigo_lei=codigo, opcoes=opcoes)
+    log(f"      Parse concluído.")
+    
+    # ── ETAPA 2.1: Supabase Storage ──────────────────────────────
+    if persistir:
+        log(f"[2.1] Armazenamento (Supabase)")
+        origem = url or (cfg_lei.get("url") if cfg_lei else "manual")
+        storage.salvar_lei_completa(estrutura, origem, hash_txt)
+    else:
+        log(f"[2.1] Armazenamento automático desativado.")
+
     saida_json.write_text(
         json.dumps(estrutura, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    logger.info(f"      JSON salvo: {saida_json}")
 
     # ── ETAPA 2.5: Smart Repair (IA) ─────────────────────────────
     if smart_parser.enabled:
@@ -122,25 +146,32 @@ def run(
     # ── ETAPA 3: Cross-references ────────────────────────────────
     crossrefs = []
     if extrair_refs:
-        logger.info(f"[3/4] Cross-references")
+        log(f"[3/4] Extraindo referências cruzadas...")
         crossrefs = extrair_crossrefs_estrutura(estrutura, codigo_lei=codigo)
         saida_refs.write_text(
             json.dumps(crossrefs, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
-        logger.info(f"      {len(crossrefs)} referências salvas: {saida_refs}")
+        log(f"      {len(crossrefs)} referências encontradas.")
     else:
-        logger.info(f"[3/4] Cross-references (pulado)")
+        log(f"[3/4] Cross-references ignoradas.")
 
     # ── ETAPA 4: Validação + guarda de precisão ──────────────────
-    logger.info(f"[4/4] Validação")
+    log(f"[4/4] Validando integridade...")
     relatorio = validar_estrutura(estrutura)
+    precisa_rev = precisa_revisao(relatorio)
+    
+    # Atualiza status no Supabase se precisar de revisão
+    if persistir and precisa_rev:
+        log("      Atenção: Lei marcada para REVISÃO HUMANA no banco.", level=logging.WARNING)
+        storage._update("leis", {"id_lei": estrutura.get("lei", {}).get("id_lei", 0)}, {"needs_review": True})
+
     saida_relat.write_text(
         json.dumps(relatorio, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
     imprimir_relatorio(relatorio)
-    logger.info(f"      Relatório salvo: {saida_relat}")
+    log(f"      Relatório gerado em JSON.")
 
     # Verifica threshold de qualidade
     total   = relatorio.get("total_artigos", 0)
@@ -157,6 +188,55 @@ def run(
             logger.info(f"      Precisão estrutural: {precisao:.1%} ✓")
 
     return {"estrutura": estrutura, "relatorio": relatorio, "crossrefs": crossrefs}
+
+
+def concatenar_texto_artigo(artigo: dict) -> str:
+    """
+    Concatena caput + incisos + alineas + paragrafos em um único bloco de texto,
+    preservando a estrutura para leitura humana.
+    """
+    partes = []
+    
+    for bloco in artigo.get("estrutura", []):
+        tipo = bloco.get("tipo")
+        conteudo = bloco.get("conteudo", {})
+        
+        if not isinstance(conteudo, dict):
+            continue
+            
+        texto_bloco = conteudo.get("texto", "").strip()
+        
+        if tipo == "caput":
+            if texto_bloco:
+                partes.append(texto_bloco)
+        elif tipo == "paragrafo":
+            num = bloco.get("numero", "")
+            prefixo = f"§ {num}" if num != "único" else "Parágrafo único."
+            if texto_bloco:
+                partes.append(f"{prefixo} {texto_bloco}")
+            else:
+                partes.append(prefixo)
+        
+        # Incisos (podem estar no caput ou no parágrafo no schema atual)
+        for inciso in conteudo.get("incisos", []):
+            num_inc = inciso.get("numero", "")
+            cont_inc = inciso.get("conteudo", {})
+            texto_inc = cont_inc.get("texto", "").strip()
+            partes.append(f"{num_inc} - {texto_inc}")
+            
+            # Alíneas do inciso
+            for alinea in cont_inc.get("alineas", []):
+                letra = alinea.get("letra", "")
+                texto_al = alinea.get("texto", "").strip()
+                partes.append(f"  {letra}) {texto_al}")
+                
+        # Alíneas diretas do bloco (raro, mas possível)
+        for alinea in conteudo.get("alineas", []):
+            letra = alinea.get("letra", "")
+            texto_al = alinea.get("texto", "").strip()
+            partes.append(f"{letra}) {texto_al}")
+
+    return "\n".join(partes)
 
 
 def run_batch(
@@ -265,6 +345,10 @@ def main():
                     help="Gera relatório de revisão HTML após o processamento")
     ap.add_argument("--saida", default=".",
                     help="Diretório de saída dos arquivos (padrão: .)")
+    ap.add_argument("--rubricas", action="store_true",
+                    help="Ativa a extração de rubricas de artigos")
+    ap.add_argument("--rigor", choices=["normal", "alto"], default="normal",
+                    help="Define o rigor da normalização (padrão: normal)")
 
     args = ap.parse_args()
 
@@ -286,6 +370,10 @@ def main():
     saida_dir  = Path(args.saida)
     usar_cache = not args.sem_cache
     extrair    = not args.sem_refs
+    opcoes = {
+        "tem_rubricas": args.rubricas,
+        "rigor": args.rigor
+    }
 
     if args.batch:
         run_batch(args.batch, usar_cache=usar_cache, saida_dir=saida_dir)
@@ -299,6 +387,7 @@ def main():
             usar_cache=usar_cache,
             extrair_refs=extrair,
             saida_dir=saida_dir,
+            opcoes=opcoes,
         )
         if args.review:
             from review_viewer import generate_review_html
@@ -309,6 +398,7 @@ def main():
             usar_cache=usar_cache,
             extrair_refs=extrair,
             saida_dir=saida_dir,
+            opcoes=opcoes,
         )
         if args.review:
             from review_viewer import generate_review_html
@@ -321,6 +411,7 @@ def main():
             usar_cache=usar_cache,
             extrair_refs=extrair,
             saida_dir=saida_dir,
+            opcoes=opcoes,
         )
 
 

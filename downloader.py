@@ -16,7 +16,7 @@ import threading
 from pathlib import Path
 from typing import Optional
 
-import requests
+import httpx
 import yaml
 from tenacity import (
     retry,
@@ -138,8 +138,13 @@ def _rpm_para_dominio(fonte: str) -> tuple[str, int]:
     """Retorna (dominio, rpm) para uma fonte a partir do catálogo."""
     cfg = _FONTES.get(fonte, {})
     dominio = cfg.get("dominio", fonte)
-    rpm     = cfg.get("rate_limit_rpm", 20)
+    rpm     = cfg.get("rate_limit_rpm", 40) # Aumentado padrão
     return dominio, rpm
+
+
+def calcular_fingerprint(conteudo: bytes) -> str:
+    """Calcula o hash SHA-256 do conteúdo para detecção de mudanças."""
+    return hashlib.sha256(conteudo).hexdigest()
 
 
 # ─────────────────────────────────────────────────────────────
@@ -171,26 +176,27 @@ def _salvar_cache(url: str, conteudo: bytes) -> None:
 
 def _fazer_requisicao(url: str, timeout: int = 25) -> bytes:
     """
-    Executa requisição HTTP com retry automático.
-    O rate limiting é aplicado ANTES da chamada (pelo chamador).
+    Executa requisição HTTP com retry automático usando httpx.
     """
 
     @retry(
         retry=retry_if_exception_type((
-            requests.exceptions.ConnectionError,
-            requests.exceptions.Timeout,
-            requests.exceptions.HTTPError,
+            httpx.ConnectError,
+            httpx.TimeoutException,
+            httpx.HTTPStatusError,
+            httpx.RequestError,
         )),
-        stop=stop_after_attempt(4),
+        stop=stop_after_attempt(5),
         wait=wait_exponential(multiplier=1, min=2, max=30),
         before_sleep=before_sleep_log(logger, logging.WARNING),
         reraise=True,
     )
     def _get() -> bytes:
         logger.info(f"[http] GET {url}")
-        r = requests.get(url, headers=HEADERS, timeout=timeout)
-        r.raise_for_status()
-        return r.content
+        with httpx.Client(headers=HEADERS, timeout=timeout, follow_redirects=True) as client:
+            r = client.get(url)
+            r.raise_for_status()
+            return r.content
 
     return _get()
 

@@ -1,6 +1,7 @@
 """
-parser.py — v8
+parser.py — v9
 Converte texto bruto de leis brasileiras em JSON hierárquico.
+PROXIMA_VERSAO — Suporte a rubricas (títulos de artigos).
 
 Leis cobertas e testadas:
   - LDB (9394):   TÍTULO → CAPÍTULO → SEÇÃO → ARTIGO
@@ -134,6 +135,16 @@ def normalizar_texto(texto: str) -> str:
         r"\n",
         texto,
     )
+
+    # [NOVO] Colapso de palavras estruturais espaçadas (ex: P A R T E  G E R A L)
+    # Lista de termos críticos para hierarquia
+    termos_hierarquia = ["PARTE", "LIVRO", "TITULO", "TÍTULO", "CAPITULO", "CAPÍTULO", "SECAO", "SEÇÃO", "SUBSECAO", "SUBSEÇÃO", "ARTIGO", "GERAL", "ESPECIAL"]
+    
+    for termo in termos_hierarquia:
+        # Cria regex que aceita um ou mais espaços entre cada letra do termo
+        # Ex para PARTE: P\s+A\s+R\s+T\s+E
+        pattern = r"\b" + r"\s+".join(list(termo)) + r"\b"
+        texto = re.sub(pattern, termo, texto, flags=re.IGNORECASE)
 
     # Colapsa 3+ linhas vazias → 2
     texto = re.sub(r"\n{3,}", "\n\n", texto)
@@ -303,7 +314,7 @@ def extrair_alineas(texto: str) -> dict:
 
 
 _SPLIT_INCISO = re.compile(
-    r"\n[ \t]*([IVXLCDM]{1,7}(?:-[A-Z])?)"
+    r"\n[ \t]*([IVXLCDM]{1,7}(?:-[A-Z]{1,2})?)"
     r"[ \t]*\n?[ \t]*"
     r"[-\x96\u2013\u2014][ \t]*",
 )
@@ -333,7 +344,7 @@ def extrair_incisos(texto: str) -> dict:
 _SPLIT_PARAGRAFO = re.compile(
     r"\n"
     r"("
-    r"§\s*\d+[°oº]?(?:-[A-Za-z])?(?:\s*[-–.]\s*)?"
+    r"§\s*\d+[°oº]?(?:-[A-Za-z]{1,2})?(?:\s*[-–.]\s*)?"
     r"|"
     r"Parágrafo\s+único\s*(?:[-–.]\s*)?"
     r")",
@@ -341,7 +352,7 @@ _SPLIT_PARAGRAFO = re.compile(
 )
 
 _RE_STRIP_ART = re.compile(
-    r"^Art\.?\s*\d+[°oº]?(?:-[A-Za-z])?(?:\s*[-–.]\s*|\s+)"
+    r"^Art\.?\s*\d+(?:\.\d+)*[°oº]?(?:-[A-Za-z]{1,2})?(?:\s*[-–.]\s*|\s+)"
 )
 
 
@@ -367,7 +378,7 @@ def extrair_paragrafos(txt_art: str) -> list:
         if re.search(r"único", marcador, re.IGNORECASE):
             numero = "único"
         else:
-            m = re.search(r"(\d+[°oº║]?(?:-[A-Za-z])?)", marcador)
+            m = re.search(r"(\d+[°oº║]?(?:-[A-Za-z]{1,2})?)", marcador)
             numero = m.group(1) if m else None
             if numero:
                 numero = re.sub(r"[°oº║]", "", numero)
@@ -386,7 +397,7 @@ def extrair_paragrafos(txt_art: str) -> list:
 # ═══════════════════════════════════════════════════════
 
 _SPLIT_ARTIGO = re.compile(r"\n(?=(?:Art\.?|A\s*rt\.?)\s*\d)", re.IGNORECASE)
-_RE_ART_NUM   = re.compile(r"(?:Art\.?|A\s*rt\.?)\s*(\d+[°oº]?(?:-[A-Za-z])?)", re.IGNORECASE)
+_RE_ART_NUM   = re.compile(r"(?:Art\.?|A\s*rt\.?)\s*(\d+(?:\.\d+)*[°oº]?(?:-[A-Za-z]{1,2})?)", re.IGNORECASE)
 
 
 def _coletar_metas(obj) -> list:
@@ -402,25 +413,54 @@ def _coletar_metas(obj) -> list:
     return result
 
 
-def _parse_artigos(bloco: str, lei: str, ordem: list) -> list:
+def _parse_artigos(bloco: str, lei: str, ordem: list, opcoes: dict = None) -> list:
+    if opcoes is None:
+        opcoes = {"tem_rubricas": False}
+    
     artigos = []
-    for txt in _SPLIT_ARTIGO.split(bloco):
-        txt = txt.strip()
+    # Splitting by Art. prefix
+    chunks = _SPLIT_ARTIGO.split(bloco)
+    if not chunks:
+        return []
 
-        if not re.match(r"^(?:Art|A\s*rt)", txt, re.IGNORECASE):
+    # O primeiro chunk (chunks[0]) pode conter material ANTES do primeiro Artigo
+    # (ex: rubrica do Art 1, ou restos de nomes de marcadores)
+    rubrica_atual = ""
+    if opcoes.get("tem_rubricas"):
+        pre_artigo, rubrica_inicial = separar_rubrica(chunks[0])
+        rubrica_atual = rubrica_inicial
+
+    # Processamos a partir do chunks[1], que garantidamente começa com "Art."
+    for i in range(1, len(chunks)):
+        txt = chunks[i].strip()
+        if not txt:
             continue
 
-        if txt.startswith("referência_interna:"):
+        # O txt atual termina possivelmente com a rubrica do PRÓXIMO artigo
+        # Extraímos essa rubrica para uso no próximo loop, e limpamos o txt atual
+        texto_limpo = txt
+        proxima_rubrica = ""
+        
+        if opcoes.get("tem_rubricas"):
+            texto_limpo, proxima_rubrica = separar_rubrica(txt)
+
+        if not re.match(r"^(?:Art|A\s*rt)", texto_limpo, re.IGNORECASE):
+            # Se por algum motivo o split falhou em deixar o Art no início,
+            # (não deve acontecer com o split regex atual), guardamos e ignoramos
+            rubrica_atual = proxima_rubrica
             continue
 
-        m = _RE_ART_NUM.match(txt)
+        m = _RE_ART_NUM.match(texto_limpo)
         if not m:
+            rubrica_atual = proxima_rubrica
             continue
-        numero = m.group(1)
 
-        resto = txt[m.end():m.end() + 3].strip()
-        if re.match(r"^[,;]", resto):
-            logger.debug(f"Ref. cruzada descartada: {txt[:40]!r}")
+        numero = m.group(1)
+        resto_match = texto_limpo[m.end():m.end() + 3].strip()
+        if re.match(r"^[,;]", resto_match):
+            # Provável referência cruzada no meio do texto, descartar
+            # mas manter a rubrica para o próximo legítimo
+            rubrica_atual = proxima_rubrica
             continue
 
         ordem[0] += 1
@@ -428,29 +468,37 @@ def _parse_artigos(bloco: str, lei: str, ordem: list) -> list:
 
         # Cálculo de Confiança do Artigo
         confianca = 1.0
-        if not txt.startswith("Art"): confianca -= 0.3
-        if len(txt) < 10: confianca -= 0.5
-        if "referência_interna" in txt: confianca -= 0.2
+        if not texto_limpo.startswith("Art"):
+             confianca -= 0.3
+        if len(texto_limpo) < 10:
+             confianca -= 0.5
 
-        estrutura = extrair_paragrafos(txt)
+        # Faz o parse da estrutura (parágrafos, incisos, etc.) do texto limpo
+        estrutura = extrair_paragrafos(texto_limpo)
         metas     = _coletar_metas(estrutura)
 
-        # Se não tem caput com texto, baixa confiança
         tem_caput = any(b.get("tipo") == "caput" and b.get("conteudo", {}).get("texto") for b in estrutura)
-        if not tem_caput: confianca -= 0.4
+        if not tem_caput:
+            confianca -= 0.4
 
         art: dict = {
             "id":        id_art,
             "ordem":     ordem[0],
             "numero":    numero,
             "tipo":      "artigo",
+            "rubrica":   rubrica_atual,
             "confianca": round(max(0.1, confianca), 2),
-            "texto_bruto": txt,  # [NOVO] Guardamos o texto original para reparo via IA
+            "texto_bruto": texto_limpo,
             "estrutura": estrutura,
         }
         if metas:
             art["alteracoes"] = metas
+        
         artigos.append(art)
+        
+        # Prepara para o próximo artigo
+        rubrica_atual = proxima_rubrica
+
     return artigos
 
 
@@ -494,9 +542,46 @@ _RE_NUM = {
 
 _RE_ESTRUTURAL = re.compile(
     r"^(?:T[IÍ]TULO|CAP[IÍ]TULO|SE[ÇC][ÃA]O|SUBSE[ÇC][ÃA]O"
-    r"|LIVRO|PARTE|Art\.?\s*\d|§\s*\d|[IVXLCDM]{1,7}\s*[-–])",
+    r"|LIVRO|PARTE|Art\.?\s*\d|§|Par[áa]grafo|[IVXLCDM]{1,7}\s*[-–])",
     re.IGNORECASE,
 )
+
+
+def separar_rubrica(texto: str) -> tuple[str, str]:
+    """
+    Tenta extrair uma rubrica do final de um bloco de texto.
+    A rubrica é a última linha não-vazia, não-estrutural e não-metadado puro.
+    """
+    if not texto:
+        return "", ""
+    # Remove espaços à direita mantendo quebras de linha para fatiamento
+    linhas = texto.rstrip().split('\n')
+
+    idx_rubrica = -1
+    for i in range(len(linhas) - 1, -1, -1):
+        linha = linhas[i].strip()
+        if not linha:
+            continue
+        # Se for metadado puro, ignora e continua subindo
+        if linha.startswith("(") and linha.endswith(")"):
+            continue
+        # Se for um marcador estrutural, a busca por rubrica para aqui
+        if _RE_ESTRUTURAL.match(linha):
+            break
+
+        # Heurística de rubrica: curta e sem pontuação final de parágrafo/item
+        if 0 < len(linha) < 150 and not linha.endswith((".", ";", ":", "—")):
+            idx_rubrica = i
+            break
+        else:
+            break
+
+    if idx_rubrica != -1:
+        rubrica = linhas[idx_rubrica].strip()
+        resto = "\n".join(linhas[:idx_rubrica]).strip()
+        return resto, rubrica
+
+    return texto.strip(), ""
 
 
 def _extrair_nome(bloco: str, re_num: re.Pattern) -> str:
@@ -552,11 +637,21 @@ def _extrair_nome(bloco: str, re_num: re.Pattern) -> str:
 
     # [BUG10 FIX] Pós-processamento final: garante que o nome resultante
     # não contenha nenhum fragmento de artigo que tenha escapado
-    nome_raw = limpar_texto_final(" ".join(partes))
-    return _truncar_na_fronteira_artigo(nome_raw)
+    nome_raw_lines = "\n".join(partes)
+    nome_sem_artigo = _truncar_na_fronteira_artigo(nome_raw_lines)
+    
+    # [NOVO] Separa rubrica do final do nome, se houver múltiplas linhas
+    # A rubrica do Art 1 costuma estar logo após o nome do Título/Capítulo
+    linhas_finais = [l.strip() for l in nome_sem_artigo.split('\n') if l.strip()]
+    if len(linhas_finais) > 1:
+        nome_limpo, rubrica_encontrada = separar_rubrica(nome_sem_artigo)
+        if rubrica_encontrada and nome_limpo.strip():
+            return limpar_texto_final(nome_limpo)
+            
+    return limpar_texto_final(nome_sem_artigo)
 
 
-def _parse_subsecoes(bloco, lei, ordem):
+def _parse_subsecoes(bloco, lei, ordem, opcoes):
     resultado = []
     for parte in _SPLIT_SUBSECAO.split(bloco):
         parte = parte.strip()
@@ -567,14 +662,14 @@ def _parse_subsecoes(bloco, lei, ordem):
                 "numero":  m.group(1),
                 "nome":    _extrair_nome(parte, _RE_NUM["subsecao"]),
                 "confianca": 1.0 if _extrair_nome(parte, _RE_NUM["subsecao"]) else 0.7,
-                "artigos": _parse_artigos(parte, lei, ordem),
+                "artigos": _parse_artigos(parte, lei, ordem, opcoes),
             })
         else:
-            resultado.extend(_parse_artigos(parte, lei, ordem))
+            resultado.extend(_parse_artigos(parte, lei, ordem, opcoes))
     return resultado
 
 
-def _parse_secoes(bloco, lei, ordem):
+def _parse_secoes(bloco, lei, ordem, opcoes):
     resultado = []
     for parte in _SPLIT_SECAO.split(bloco):
         parte = parte.strip()
@@ -584,14 +679,14 @@ def _parse_secoes(bloco, lei, ordem):
                 "tipo":   "secao",
                 "numero": m.group(1),
                 "nome":   _extrair_nome(parte, _RE_NUM["secao"]),
-                "filhos": _parse_subsecoes(parte, lei, ordem),
+                "filhos": _parse_subsecoes(parte, lei, ordem, opcoes),
             })
         else:
-            resultado.extend(_parse_subsecoes(parte, lei, ordem))
+            resultado.extend(_parse_subsecoes(parte, lei, ordem, opcoes))
     return resultado
 
 
-def _parse_capitulos(bloco, lei, ordem):
+def _parse_capitulos(bloco, lei, ordem, opcoes):
     resultado = []
     for parte in _SPLIT_CAPITULO.split(bloco):
         parte = parte.strip()
@@ -601,14 +696,14 @@ def _parse_capitulos(bloco, lei, ordem):
                 "tipo":   "capitulo",
                 "numero": m.group(1),
                 "nome":   _extrair_nome(parte, _RE_NUM["capitulo"]),
-                "filhos": _parse_secoes(parte, lei, ordem),
+                "filhos": _parse_secoes(parte, lei, ordem, opcoes),
             })
         else:
-            resultado.extend(_parse_secoes(parte, lei, ordem))
+            resultado.extend(_parse_secoes(parte, lei, ordem, opcoes))
     return resultado
 
 
-def _parse_titulos(bloco, lei, ordem):
+def _parse_titulos(bloco, lei, ordem, opcoes):
     resultado = []
     for parte in _SPLIT_TITULO.split(bloco):
         parte = parte.strip()
@@ -618,14 +713,14 @@ def _parse_titulos(bloco, lei, ordem):
                 "tipo":   "titulo",
                 "numero": m.group(1),
                 "nome":   _extrair_nome(parte, _RE_NUM["titulo"]),
-                "filhos": _parse_capitulos(parte, lei, ordem),
+                "filhos": _parse_capitulos(parte, lei, ordem, opcoes),
             })
         else:
-            resultado.extend(_parse_capitulos(parte, lei, ordem))
+            resultado.extend(_parse_capitulos(parte, lei, ordem, opcoes))
     return resultado
 
 
-def _parse_livros(bloco, lei, ordem):
+def _parse_livros(bloco, lei, ordem, opcoes):
     """
     [BUG3 FIX] Filtra "Livro IV\n." como referência cruzada.
     """
@@ -641,20 +736,20 @@ def _parse_livros(bloco, lei, ordem):
                     primeira = s
                     break
             if re.match(r"^[.,;]$", primeira):
-                resultado.extend(_parse_titulos(parte, lei, ordem))
+                resultado.extend(_parse_titulos(parte, lei, ordem, opcoes))
                 continue
             resultado.append({
                 "tipo":   "livro",
                 "numero": m.group(1),
                 "nome":   _extrair_nome(parte, _RE_NUM["livro"]),
-                "filhos": _parse_titulos(parte, lei, ordem),
+                "filhos": _parse_titulos(parte, lei, ordem, opcoes),
             })
         else:
-            resultado.extend(_parse_titulos(parte, lei, ordem))
+            resultado.extend(_parse_titulos(parte, lei, ordem, opcoes))
     return resultado
 
 
-def _parse_partes(bloco, lei, ordem):
+def _parse_partes(bloco, lei, ordem, opcoes):
     resultado = []
     for parte in _SPLIT_PARTE.split(bloco):
         parte = parte.strip()
@@ -663,7 +758,7 @@ def _parse_partes(bloco, lei, ordem):
             numero = m.group(1).upper()
             nome   = _extrair_nome(parte, _RE_NUM["parte"])
             tem_livro = bool(_SPLIT_LIVRO.search(parte))
-            filhos = _parse_livros(parte, lei, ordem) if tem_livro else _parse_titulos(parte, lei, ordem)
+            filhos = _parse_livros(parte, lei, ordem, opcoes) if tem_livro else _parse_titulos(parte, lei, ordem, opcoes)
             resultado.append({
                 "tipo":   "parte",
                 "numero": numero,
@@ -673,9 +768,9 @@ def _parse_partes(bloco, lei, ordem):
         else:
             tem_livro = bool(_SPLIT_LIVRO.search(parte))
             if tem_livro:
-                resultado.extend(_parse_livros(parte, lei, ordem))
+                resultado.extend(_parse_livros(parte, lei, ordem, opcoes))
             else:
-                resultado.extend(_parse_titulos(parte, lei, ordem))
+                resultado.extend(_parse_titulos(parte, lei, ordem, opcoes))
     return resultado
 
 
@@ -718,11 +813,18 @@ def _detectar_raiz(texto: str) -> str:
 # PARSE PRINCIPAL
 # ═══════════════════════════════════════════════════════
 
-def parse_lei(texto: str, codigo_lei: str = "0000") -> dict:
+def parse_lei(texto: str, codigo_lei: str = "0000", opcoes: dict = None) -> dict:
     """
     Converte texto bruto de uma lei em JSON hierárquico.
     A hierarquia é auto-detectada (PARTE > LIVRO > TÍTULO > CAPÍTULO > SEÇÃO).
+    
+    opcoes:
+      - tem_rubricas: bool (padrão False)
+      - rigor: str ("normal", "alto")
     """
+    if opcoes is None:
+        opcoes = {"tem_rubricas": False, "rigor": "normal"}
+
     texto = normalizar_texto(texto)
 
     m_ementa = re.search(
@@ -738,14 +840,14 @@ def parse_lei(texto: str, codigo_lei: str = "0000") -> dict:
 
     ordem = [0]
     raiz = _detectar_raiz(texto)
-    logger.info(f"Lei {codigo_lei}: raiz = {raiz}")
+    logger.info(f"Lei {codigo_lei}: raiz = {raiz}, opcoes = {opcoes}")
 
     if raiz == "parte":
-        resultado["titulos"] = _parse_partes(texto, codigo_lei, ordem)
+        resultado["titulos"] = _parse_partes(texto, codigo_lei, ordem, opcoes)
     elif raiz == "livro":
-        resultado["titulos"] = _parse_livros(texto, codigo_lei, ordem)
+        resultado["titulos"] = _parse_livros(texto, codigo_lei, ordem, opcoes)
     elif raiz == "titulo":
-        resultado["titulos"] = _parse_titulos(texto, codigo_lei, ordem)
+        resultado["titulos"] = _parse_titulos(texto, codigo_lei, ordem, opcoes)
     elif raiz == "capitulo":
         for parte in _SPLIT_CAPITULO.split(texto)[1:]:
             parte = parte.strip()
@@ -755,10 +857,10 @@ def parse_lei(texto: str, codigo_lei: str = "0000") -> dict:
                     "tipo":   "capitulo",
                     "numero": m.group(1),
                     "nome":   _extrair_nome(parte, _RE_NUM["capitulo"]),
-                    "filhos": _parse_secoes(parte, codigo_lei, ordem),
+                    "filhos": _parse_secoes(parte, codigo_lei, ordem, opcoes),
                 })
     else:
-        resultado["titulos"] = _parse_artigos(texto, codigo_lei, ordem)
+        resultado["titulos"] = _parse_artigos(texto, codigo_lei, ordem, opcoes)
 
     logger.info(
         f"Lei {codigo_lei}: {ordem[0]} artigos, "

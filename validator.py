@@ -327,6 +327,26 @@ def _linha(label: str, lista: list) -> None:
             print(f"   ... e mais {len(lista) - 5}")
 
 
+def precisa_revisao(r: dict) -> bool:
+    """
+    Determina se a lei precisa de revisão humana com base no relatório.
+    """
+    # Critérios para revisão obrigatória:
+    # 1. IDs duplicados
+    # 2. Artigos vazios (não revogados)
+    # 3. Gaps de numeração significativos (> 2)
+    # 4. Erros em alíneas
+    
+    if r.get("ids_duplicados"): return True
+    if r.get("artigos_vazios"): return True
+    if r.get("alineas_fora_de_lugar"): return True
+    
+    # Gaps de numeração (aceita até 2 gaps pequenos como normal, ex: revogações não detectadas)
+    if len(r.get("gaps_numeracao", [])) > 2: return True
+    
+    return False
+
+
 # ═══════════════════════════════════════════════════════════════
 # CLI
 # ═══════════════════════════════════════════════════════════════
