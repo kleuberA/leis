@@ -83,6 +83,9 @@ def run(
         if progress_callback:
             progress_callback(msg)
 
+    cfg_lei  = info_lei(codigo)
+    nome_lei = cfg_lei.get("nome", codigo) if cfg_lei else codigo
+
     log(f"{'═'*55}")
     log(f"  Pipeline: {nome_lei}")
     log(f"{'═'*55}")

@@ -1,8 +1,9 @@
 import os
 import json
 import logging
-from typing import Optional
+from typing import Optional, Dict, Any
 import google.generativeai as genai
+import httpx
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -10,12 +11,16 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 # Configuração do modelo
-# O usuário deve fornecer GOOGLE_API_KEY no .env
 API_KEY = os.getenv("GOOGLE_API_KEY")
-if API_KEY:
+OLLAMA_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "gemini").lower() # 'gemini' ou 'ollama'
+
+if API_KEY and LLM_PROVIDER == "gemini":
     genai.configure(api_key=API_KEY)
+elif LLM_PROVIDER == "ollama":
+    logger.info(f"SmartParser: Usando Ollama em {OLLAMA_URL}")
 else:
-    logger.warning("GOOGLE_API_KEY não encontrada. SmartParser operará em modo offline (inativo).")
+    logger.warning("Nenhum provedor de LLM configurado corretamente (GOOGLE_API_KEY ou OLLAMA_BASE_URL).")
 
 PROMPT_SISTEMA = """
 Você é um especialista em direito brasileiro e processamento de dados legislativos.
@@ -53,7 +58,7 @@ SCHEMA JSON ESPERADO:
     {
       "tipo": "paragrafo",
       "numero": "1" ou "único",
-      "conteudo": { ... mesmo formato do caput ... }
+      "conteudo": { "texto": "...", "incisos": [] }
     }
   ]
 }
@@ -65,39 +70,49 @@ IMPORTANTE:
 """
 
 class SmartParser:
-    def __init__(self, model_name: str = "gemini-2.0-flash"):
-        self.enabled = bool(API_KEY)
-        if self.enabled:
+    def __init__(self, model_name: str = None):
+        self.provider = LLM_PROVIDER
+        self.model_name = model_name or os.getenv("LLM_MODEL", "gemini-2.0-flash" if self.provider == "gemini" else "llama3")
+        
+        self.enabled = False
+        if self.provider == "gemini" and API_KEY:
             self.model = genai.GenerativeModel(
-                model_name=model_name,
+                model_name=self.model_name,
                 system_instruction=PROMPT_SISTEMA
             )
+            self.enabled = True
+        elif self.provider == "ollama":
+            self.enabled = True # Assume valid if configured
 
     def recuperar_artigo(self, texto_bruto: str, numero_sugerido: str = "") -> Optional[dict]:
         """
-        Usa LLM para tentar recuperar a estrutura de um artigo que falhou no regex.
+        Usa LLM (Gemini ou Ollama) para recuperar a estrutura de um artigo que falhou no regex.
         """
         if not self.enabled:
             return None
 
         try:
-            logger.info(f"SmartParser: Tentando recuperar Art. {numero_sugerido}")
-            prompt = f"Converta este texto de artigo de lei para JSON:\n\n{texto_bruto}"
+            logger.info(f"SmartParser ({self.provider}): Tentando recuperar Art. {numero_sugerido}")
+            prompt = f"{PROMPT_SISTEMA if self.provider == 'ollama' else ''}\n\nConverta este texto de artigo de lei para JSON:\n\n{texto_bruto}"
             
-            response = self.model.generate_content(prompt)
-            
+            if self.provider == "gemini":
+                response = self.model.generate_content(prompt)
+                raw_json = response.text.strip()
+            else:
+                raw_json = self._call_ollama(prompt)
+                
             # Limpa possíveis blocos de código markdown
-            raw_json = response.text.strip()
-            if raw_json.startswith("```json"):
-                raw_json = raw_json[7:-3].strip()
-            elif raw_json.startswith("```"):
-                raw_json = raw_json[3:-3].strip()
+            if "```json" in raw_json:
+                raw_json = raw_json.split("```json")[1].split("```")[0].strip()
+            elif "```" in raw_json:
+                raw_json = raw_json.split("```")[1].split("```")[0].strip()
                 
             dados = json.loads(raw_json)
             
             # Validação mínima do schema
             if "numero" in dados and "estrutura" in dados:
-                dados["confianca_ia"] = 0.9  # IA gera com alta confiança estrutural se o JSON for válido
+                dados["confianca_ia"] = 0.9
+                dados["llm_provider"] = self.provider
                 return dados
                 
             return None
@@ -105,5 +120,23 @@ class SmartParser:
             logger.error(f"Erro no SmartParser: {e}")
             return None
 
+    def _call_ollama(self, prompt: str) -> str:
+        """Chamada direta para a API do Ollama."""
+        try:
+            with httpx.Client(timeout=60.0) as client:
+                payload = {
+                    "model": self.model_name,
+                    "prompt": prompt,
+                    "stream": False,
+                    "format": "json"
+                }
+                r = client.post(f"{OLLAMA_URL}/api/generate", json=payload)
+                r.raise_for_status()
+                return r.json().get("response", "")
+        except Exception as e:
+            logger.error(f"Erro ao chamar Ollama: {e}")
+            raise
+
 # Singleton
 smart_parser = SmartParser()
+

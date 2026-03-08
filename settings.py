@@ -36,9 +36,22 @@ API_SECRET_KEY = os.getenv("API_SECRET_KEY", "")
 _cors_raw = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173")
 CORS_ORIGINS = [o.strip() for o in _cors_raw.split(",") if o.strip()]
 
-# ─── Google AI ───────────────────────────────────────────────
+# ─── Google AI / Ollama ───────────────────────────────────────
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "gemini").lower()
+LLM_MODEL = os.getenv("LLM_MODEL", "gemini-2.0-flash" if LLM_PROVIDER == "gemini" else "llama3")
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+
+# ─── Performance & Security ──────────────────────────────────
+
+# Ativa cache em memória para leis muito acessadas (evita I/O JSON)
+ENABLE_API_CACHE = os.getenv("ENABLE_API_CACHE", "true").lower() == "true"
+CACHE_TTL = int(os.getenv("CACHE_TTL", "3600")) # 1 hora
+
+# Rate Limiting
+ENABLE_RATE_LIMIT = os.getenv("ENABLE_RATE_LIMIT", "true").lower() == "true"
+RATE_LIMIT_DEFAULT = os.getenv("RATE_LIMIT_DEFAULT", "20/minute")
 
 # ─── Pipeline ────────────────────────────────────────────────
 

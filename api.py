@@ -28,11 +28,24 @@ import asyncio
 from datetime import datetime
 from typing import Optional, List
 from pydantic import BaseModel, Field
+from functools import lru_cache
 
 import settings
 import pipeline
 from downloader import listar_leis
 from parser import iterar_artigos
+
+# ─── Cache em Memória ────────────────────────────────────────
+# Cache para os JSONs estruturados das leis (ex: Código Civil é pesado)
+@lru_cache(maxsize=10)
+def _get_lei_cache(codigo: str, mtime: float):
+    """
+    Carrega o JSON e faz cache. 
+    O mtime é usado como parte da chave para invalidar se o arquivo mudar.
+    """
+    path = _data_path("struct", codigo)
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 # ─── Logging ─────────────────────────────────────────────────
 
@@ -213,7 +226,7 @@ def _data_path(tipo: str, codigo: str) -> Path:
 
 
 def _carregar_lei_json(codigo: str) -> dict:
-    """Carrega o JSON estruturado de uma lei."""
+    """Carrega o JSON estruturado de uma lei (com cache opcional)."""
     path = _data_path("struct", codigo)
     if not path.exists():
         raise HTTPException(
@@ -221,9 +234,15 @@ def _carregar_lei_json(codigo: str) -> dict:
             detail={
                 "type": "not_found",
                 "title": "Lei não processada",
-                "detail": f"A lei '{codigo}' ainda não foi processada pelo pipeline. Execute POST /api/v1/pipeline/{codigo} primeiro.",
+                "detail": f"A lei '{codigo}' ainda não foi processada pelo pipeline.",
             },
         )
+    
+    if settings.ENABLE_API_CACHE:
+        # Usa o timestamp de modificação para invalidar o cache automaticamente se o arquivo mudar
+        mtime = os.path.getmtime(path)
+        return _get_lei_cache(codigo, mtime)
+    
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
