@@ -35,6 +35,12 @@ import pipeline
 from downloader import listar_leis
 from parser import iterar_artigos
 
+# Import storage safely - may fail if Supabase is not configured
+try:
+    from supabase_storage import storage
+except Exception:
+    storage = None
+
 # ─── Cache em Memória ────────────────────────────────────────
 # Cache para os JSONs estruturados das leis (ex: Código Civil é pesado)
 @lru_cache(maxsize=10)
@@ -382,7 +388,7 @@ def get_catalogo(tag: Optional[str] = Query(None, description="Filtrar por tag")
                 "fonte": cfg.get("fonte", "planalto"),
                 "url": cfg.get("url", ""),
                 "processada": _data_path("struct", cod).exists(),
-                "id_banco": storage._get_by_url(cfg.get("url", "")).get("id_lei") if cfg.get("url") else None
+                "id_banco": (storage._get_by_url(cfg.get("url", "")) or {}).get("id_lei") if (cfg.get("url") and storage) else None
             }
         return resultado
     except Exception as e:
@@ -400,9 +406,11 @@ def get_catalogo(tag: Optional[str] = Query(None, description="Filtrar por tag")
 @app.get("/api/v1/leis/{codigo}", response_model=LeiResumo, tags=["Leis"])
 def get_lei_resumo(codigo: str):
     """Retorna um resumo de uma lei (metadados, contagens)."""
+    data = _carregar_lei_json(codigo)
+    artigos = _coletar_artigos_lista(data)
     lei_info = data.get("lei", {})
     url = lei_info.get("url", "")
-    id_banco = storage._get_by_url(url).get("id_lei") if url else None
+    id_banco = (storage._get_by_url(url) or {}).get("id_lei") if (url and storage) else None
 
     return {
         "codigo": lei_info.get("codigo", codigo),
@@ -686,11 +694,11 @@ async def pipeline_events(codigo: str):
         while True:
             try:
                 # Usa loop assíncrono para não travar o worker
-                msg = await asyncio.to_thread(q.get, timeout=30)
+                msg = await asyncio.to_thread(q.get, timeout=5)
                 if msg is None: break # Fim do pipeline
                 yield f"data: {msg}\n\n"
             except queue.Empty:
-                yield "data: ...\n\n" # Keep-alive
+                yield ": keep-alive\n\n" # SSE comment, not shown to client
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
@@ -744,26 +752,8 @@ def pipeline_status(codigo: str):
     return job
 
 
-def _executar_pipeline_background(codigo: str, opcoes: dict = None):
-    """Executa o pipeline e atualiza o status global."""
-    job = _pipeline_jobs.get(codigo)
-    if job:
-        job.status = "processando"
-        job.mensagem = "Processando download e parse..."
-
-    try:
-        # Chama o pipeline real
-        # Passa opcoes para o pipeline
-        pipeline.run(codigo, saida_dir=settings.DATA_DIR, opcoes=opcoes)
-
-        if job:
-            job.status = "concluido"
-            job.mensagem = "Processamento finalizado com sucesso."
-    except Exception as e:
-        logger.error(f"Erro no pipeline background ({codigo}): {e}")
-        if job:
-            job.status = "erro"
-            job.mensagem = f"Erro no processamento: {str(e)}"
+# NOTE: Duplicate _executar_pipeline_background was removed.
+# The correct version with log queue support is defined above (around line 309).
 
 
 # ─── Correção Manual (protegido) ────────────────────────────
