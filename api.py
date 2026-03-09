@@ -312,7 +312,7 @@ def find_article_mut(node, article_id):
 # ─── Background task ─────────────────────────────────────────
 
 
-def _executar_pipeline_background(codigo: str, opcoes: dict = None):
+def _executar_pipeline_background(codigo: str, opcoes: dict = None, url: str = None, fonte: str = "planalto"):
     """Executa o pipeline e atualiza o status global, alimentando a fila de logs."""
     job = _pipeline_jobs.get(codigo)
     if not job: return
@@ -328,7 +328,9 @@ def _executar_pipeline_background(codigo: str, opcoes: dict = None):
     try:
         job.status = "processando"
         pipeline.run(
-            codigo, 
+            codigo=codigo, 
+            url=url,
+            fonte=fonte,
             saida_dir=settings.DATA_DIR, 
             opcoes=opcoes,
             progress_callback=callback,
@@ -614,7 +616,7 @@ def trigger_url_pipeline(
     )
     # Extrai opções se existirem
     opcoes_dict = request.opcoes.dict() if request.opcoes else None
-    background_tasks.add_task(_executar_pipeline_background, codigo, opcoes_dict)
+    background_tasks.add_task(_executar_pipeline_background, codigo, opcoes_dict, url, request.fonte)
 
     return {
         "codigo": codigo,
