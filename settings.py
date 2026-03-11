@@ -22,7 +22,7 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 (DATA_DIR / "raw").mkdir(exist_ok=True)
 (DATA_DIR / "struct").mkdir(exist_ok=True)
 (DATA_DIR / "crossrefs").mkdir(exist_ok=True)
-(DATA_DIR / "relatorios").mkdir(exist_ok=True)
+(DATA_DIR / "relatorio").mkdir(exist_ok=True)
 
 # ─── API ─────────────────────────────────────────────────────
 

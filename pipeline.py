@@ -73,10 +73,16 @@ def run(
     base = saida_dir or Path(".")
     base.mkdir(parents=True, exist_ok=True)
 
-    saida_txt   = base / f"raw_{codigo}.txt"
-    saida_json  = base / f"struct_{codigo}.json"
-    saida_relat = base / f"relatorio_{codigo}.json"
-    saida_refs  = base / f"crossrefs_{codigo}.json"
+    # Organização em subpastas conforme api.py
+    (base / "raw").mkdir(exist_ok=True)
+    (base / "struct").mkdir(exist_ok=True)
+    (base / "relatorio").mkdir(exist_ok=True)
+    (base / "crossrefs").mkdir(exist_ok=True)
+
+    saida_txt   = base / "raw" / f"raw_{codigo}.txt"
+    saida_json  = base / "struct" / f"struct_{codigo}.json"
+    saida_relat = base / "relatorio" / f"relatorio_{codigo}.json"
+    saida_refs  = base / "crossrefs" / f"crossrefs_{codigo}.json"
 
     def log(msg, level=logging.INFO):
         logger.log(level, msg)

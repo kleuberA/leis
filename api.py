@@ -32,7 +32,7 @@ from functools import lru_cache
 
 import settings
 import pipeline
-from downloader import listar_leis
+from downloader import info_lei
 from parser import iterar_artigos
 
 # Import storage safely - may fail if Supabase is not configured
@@ -425,6 +425,12 @@ def get_lei_resumo(codigo: str):
     }
 
 
+@app.get("/api/v1/leis/{codigo}/estrutura", tags=["Leis"])
+def get_lei_estrutura(codigo: str):
+    """Retorna a estrutura completa da lei (JSON bruto)."""
+    return _carregar_lei_json(codigo)
+
+
 # ─── Artigos com Paginação ──────────────────────────────────
 
 
@@ -611,17 +617,18 @@ def trigger_url_pipeline(
     _pipeline_jobs[codigo] = PipelineStatus(
         codigo=codigo,
         status="pendente",
-        mensagem="Pipeline enfileirado por URL.",
+        mensagem="Download concluído. Iniciando processamento...",
         iniciado_em=datetime.now().isoformat(),
     )
-    # Extrai opções se existirem
+    _pipeline_logs[codigo] = queue.Queue()
+    
     opcoes_dict = request.opcoes.dict() if request.opcoes else None
-    background_tasks.add_task(_executar_pipeline_background, codigo, opcoes_dict, url, request.fonte)
+    background_tasks.add_task(_executar_pipeline_background, codigo, opcoes_dict, url=url, fonte=request.fonte or "planalto")
 
     return {
         "codigo": codigo,
         "status": "iniciado",
-        "mensagem": f"Processamento da URL iniciado. ID temporário: {codigo}. Acompanhe em /api/v1/pipeline/{codigo}/events",
+        "mensagem": f"Processamento da URL iniciado. ID: {codigo}. Acompanhe via SSE.",
     }
 
 
@@ -637,11 +644,10 @@ def trigger_pipeline(
     Use GET /api/v1/pipeline/{codigo}/status para acompanhar.
     Requer header X-API-Key.
     """
-    # Verifica se a lei existe no catálogo OU se existe um arquivo raw (para URLs)
-    catalogo = listar_leis()
+    lei_cfg = info_lei(codigo)
     raw_path = settings.DATA_DIR / "raw" / f"raw_{codigo}.txt"
     
-    if codigo not in catalogo and not raw_path.exists():
+    if not lei_cfg and not raw_path.exists():
         raise HTTPException(status_code=404, detail={
             "type": "not_found",
             "title": "Lei não encontrada",
@@ -660,6 +666,24 @@ def trigger_pipeline(
     # Cria fila de logs
     _pipeline_logs[codigo] = queue.Queue()
 
+    # Tenta descobrir a URL e Fonte se for uma lei de URL (não no catálogo)
+    url = None
+    fonte = "planalto"
+    
+    if lei_cfg:
+        url = lei_cfg.get("url")
+        fonte = lei_cfg.get("fonte", "planalto")
+    else:
+        # Se não está no catálogo, tenta carregar do struct existente para pegar a URL
+        path_struct = _data_path("struct", codigo)
+        if path_struct.exists():
+            try:
+                with open(path_struct, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    url = data.get("lei", {}).get("url")
+                    fonte = data.get("lei", {}).get("fonte", "planalto")
+            except: pass
+
     # Inicia o pipeline em background
     _pipeline_jobs[codigo] = PipelineStatus(
         codigo=codigo,
@@ -669,12 +693,12 @@ def trigger_pipeline(
     )
     # Extrai opções se existirem
     opcoes_dict = opcoes.dict() if opcoes else None
-    background_tasks.add_task(_executar_pipeline_background, codigo, opcoes_dict)
+    background_tasks.add_task(_executar_pipeline_background, codigo, opcoes_dict, url=url, fonte=fonte)
 
     return {
         "codigo": codigo,
         "status": "iniciado",
-        "mensagem": f"Pipeline iniciado para '{codigo}'. Acompanhe os logs em SSE /api/v1/pipeline/{codigo}/events",
+        "mensagem": f"Pipeline iniciado para '{codigo}'. Acompanhe os logs via SSE.",
     }
 
 
