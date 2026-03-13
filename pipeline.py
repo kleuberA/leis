@@ -114,14 +114,15 @@ def run(
 
     # ── ETAPA 2: Parse ───────────────────────────────────────────
     log(f"[2/4] Iniciando parsing da estrutura...")
-    estrutura = parse_lei(texto, codigo_lei=codigo, opcoes=opcoes)
+    
+    url_lei = url or (cfg_lei.get("url") if cfg_lei else None)
+    estrutura = parse_lei(texto, codigo_lei=codigo, url=url_lei, opcoes=opcoes)
     log(f"      Parse concluído.")
     
     # ── ETAPA 2.1: Supabase Storage ──────────────────────────────
     if persistir:
         log(f"[2.1] Armazenamento (Supabase)")
-        origem = url or (cfg_lei.get("url") if cfg_lei else "manual")
-        storage.salvar_lei_completa(estrutura, origem, hash_txt)
+        storage.salvar_lei_completa(estrutura, url_lei or "manual", hash_txt)
     else:
         log(f"[2.1] Armazenamento automático desativado.")
 
@@ -301,7 +302,7 @@ def suggest_config(url: str, nome: str = "") -> dict:
         sugestao_codigo = Path(url).stem.replace("l", "").replace("compilado", "").replace("compilada", "")
         if not sugestao_codigo: sugestao_codigo = "nova_lei"
         
-        estrutura = parse_lei(texto, codigo_lei=sugestao_codigo)
+        estrutura = parse_lei(texto, codigo_lei=sugestao_codigo, url=url)
         
         # Infeção básica de tags
         tags = []

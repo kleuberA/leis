@@ -32,7 +32,7 @@ from functools import lru_cache
 
 import settings
 import pipeline
-from downloader import info_lei
+from downloader import info_lei, atualizar_lei_catalogo
 from parser import iterar_artigos
 
 # Import storage safely - may fail if Supabase is not configured
@@ -144,6 +144,15 @@ class ArtigosResponse(BaseModel):
     paginacao: PaginacaoMeta
 
 
+class LeiCatalogoInput(BaseModel):
+    codigo: str = Field(..., description="Código identificador da lei (ex: 9394, clt)")
+    nome: str = Field(..., description="Nome completo da lei")
+    url: str = Field(..., description="URL oficial da lei (preferencialmente compilada)")
+    fonte: str = Field("planalto", description="Fonte (planalto, senado, camara)")
+    encoding: str = Field("latin-1", description="Encoding esperado")
+    tags: List[str] = Field(default_factory=list, description="Tags de agrupamento")
+
+
 class ArtigoDetalhado(BaseModel):
     id: str
     ordem: int
@@ -177,6 +186,13 @@ class PipelineUrlRequest(BaseModel):
     url: str = Field(..., description="URL da lei")
     fonte: str = Field("planalto", description="Fonte da lei (planalto, senado, camara)")
     opcoes: Optional[ParserOptions] = None
+
+
+class LeiMetadataUpdate(BaseModel):
+    nome: Optional[str] = Field(None, description="Novo nome da lei")
+    url: Optional[str] = Field(None, description="Nova URL da lei")
+    tags: Optional[List[str]] = Field(None, description="Novas tags")
+    fonte: Optional[str] = Field(None, description="Nova fonte (planalto, senado, camara)")
 
 
 class PipelineResponse(BaseModel):
@@ -400,6 +416,76 @@ def get_catalogo(tag: Optional[str] = Query(None, description="Filtrar por tag")
             "title": "Erro interno",
             "detail": "Não foi possível carregar o catálogo de leis.",
         })
+
+
+@app.post("/api/v1/leis/catalogo", tags=["Leis"])
+def add_to_catalogo(lei: LeiCatalogoInput, _auth: bool = Depends(verify_api_key)):
+    """ Adiciona ou atualiza uma lei no catálogo (config/leis.yaml). """
+    try:
+        import yaml
+        config_path = settings.CONFIG_PATH
+
+        if not config_path.parent.exists():
+            config_path.parent.mkdir(parents=True)
+
+        if not config_path.exists():
+            data = {"leis": {}, "fontes": {}}
+        else:
+            with open(config_path, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {"leis": {}, "fontes": {}}
+
+        if "leis" not in data:
+            data["leis"] = {}
+
+        data["leis"][lei.codigo] = {
+            "nome": lei.nome,
+            "url": lei.url,
+            "fonte": lei.fonte,
+            "encoding": lei.encoding,
+            "tags": lei.tags
+        }
+
+        with open(config_path, "w", encoding="utf-8") as f:
+            yaml.dump(data, f, allow_unicode=True, sort_keys=False)
+
+        logger.info(f"Lei {lei.codigo} adicionada/atualizada no catálogo por API.")
+        return {"status": "sucesso", "codigo": lei.codigo}
+        
+    except Exception as e:
+        logger.error(f"Erro ao atualizar catálogo: {e}")
+        raise HTTPException(status_code=500, detail={
+            "type": "internal_error",
+            "title": "Erro ao atualizar catálogo",
+            "detail": str(e)
+        })
+
+
+@app.patch("/api/v1/leis/{codigo}/metadata", tags=["Leis"])
+async def patch_lei_metadata(
+    codigo: str, 
+    update: LeiMetadataUpdate,
+    _auth: bool = Depends(verify_api_key)
+):
+    """
+    Atualiza parcialmente os metadados de uma lei no catálogo (nome, tags, url, etc).
+    """
+    # Filtra apenas campos fornecidos
+    dados = {k: v for k, v in update.model_dump().items() if v is not None}
+    
+    if not dados:
+        raise HTTPException(status_code=400, detail="Nenhum dado para informar")
+
+    sucesso = atualizar_lei_catalogo(codigo, dados)
+    
+    if not sucesso:
+        raise HTTPException(status_code=404, detail=f"Lei '{codigo}' não encontrada no catálogo")
+
+    return {
+        "status": "sucesso",
+        "mensagem": f"Metadados da lei '{codigo}' atualizados",
+        "codigo": codigo,
+        "campos_atualizados": list(dados.keys())
+    }
 
 
 # ─── Lei Individual (resumo) ────────────────────────────────

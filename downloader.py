@@ -76,6 +76,31 @@ def info_lei(codigo: str) -> Optional[dict]:
     return _LEIS.get(str(codigo))
 
 
+def atualizar_lei_catalogo(codigo: str, novos_dados: dict) -> bool:
+    """
+    Atualiza os metadados de uma lei no arquivo YAML.
+    """
+    codigo = str(codigo)
+    if codigo not in _LEIS:
+        return False
+
+    # Atualiza em memória (para uso imediato se não houver reload)
+    _LEIS[codigo].update(novos_dados)
+
+    # Persiste no arquivo
+    try:
+        conteudo = _carregar_catalogo()
+        if "leis" in conteudo and codigo in conteudo["leis"]:
+            conteudo["leis"][codigo].update(novos_dados)
+            with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+                yaml.dump(conteudo, f, allow_unicode=True, sort_keys=False)
+            return True
+    except Exception as e:
+        logger.error(f"Erro ao salvar catálogo: {e}")
+    
+    return False
+
+
 # ─────────────────────────────────────────────────────────────
 # Rate limiter por domínio (token bucket thread-safe)
 # ─────────────────────────────────────────────────────────────

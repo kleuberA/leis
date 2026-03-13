@@ -813,7 +813,7 @@ def _detectar_raiz(texto: str) -> str:
 # PARSE PRINCIPAL
 # ═══════════════════════════════════════════════════════
 
-def parse_lei(texto: str, codigo_lei: str = "0000", opcoes: dict = None) -> dict:
+def parse_lei(texto: str, codigo_lei: str = "0000", url: str = None, opcoes: dict = None) -> dict:
     """
     Converte texto bruto de uma lei em JSON hierárquico.
     A hierarquia é auto-detectada (PARTE > LIVRO > TÍTULO > CAPÍTULO > SEÇÃO).
@@ -834,7 +834,7 @@ def parse_lei(texto: str, codigo_lei: str = "0000", opcoes: dict = None) -> dict
     ementa = limpar_texto_final(m_ementa.group(0)) if m_ementa else ""
 
     resultado = {
-        "lei":     {"codigo": codigo_lei, "ementa": ementa},
+        "lei":     {"codigo": codigo_lei, "ementa": ementa, "url": url},
         "titulos": [],
     }
 
