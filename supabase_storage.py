@@ -26,11 +26,13 @@ class SupabaseStorage:
         try:
             with httpx.Client() as client:
                 r = client.post(f"{self.url}/rest/v1/{table}", headers=self.headers, json=data)
-                r.raise_for_status()
+                if r.status_code >= 400:
+                    logger.error(f"Error inserting into {table}: {r.status_code} - {r.text}")
+                    return None
                 res = r.json()
                 return res[0] if res else None
         except Exception as e:
-            logger.error(f"Error inserting into {table}: {e}")
+            logger.error(f"Exception during post to {table}: {e}")
             return None
 
     def _get_by_url(self, url: str) -> Optional[Dict[str, Any]]:
@@ -68,7 +70,7 @@ class SupabaseStorage:
             "nome": info.get("nome", "Sem Nome"),
             "tipo": self._mapear_tipo_lei(info.get("tipo", "Outro")),
             "ementa": info.get("ementa", ""),
-            "data_publicacao": info.get("data_publicacao"),
+            "data_publicacao": info.get("data_publicacao") or None,
             "orgao_emissor": info.get("orgao_emissor", "Planalto"),
             "url_origem": url_origem,
             "hash_html": hash_html,
@@ -101,9 +103,11 @@ class SupabaseStorage:
             with httpx.Client() as client:
                 query = "&".join([f"{k}=eq.{v}" for k, v in filters.items()])
                 r = client.patch(f"{self.url}/rest/v1/{table}?{query}", headers=self.headers, json=data)
+                if r.status_code >= 400:
+                    logger.error(f"Error updating {table}: {r.status_code} - {r.text}")
                 r.raise_for_status()
         except Exception as e:
-            logger.error(f"Error updating {table}: {e}")
+            logger.error(f"Exception during update to {table}: {e}")
 
     def _limpar_estrutura_lei(self, id_lei: int):
         """Remove artigos e estruturas intermediárias para re-população."""
