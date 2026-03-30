@@ -924,4 +924,10 @@ if __name__ == "__main__":
     with open(saida, "w", encoding="utf-8") as f:
         json.dump(resultado, f, ensure_ascii=False, indent=2)
 
+    print(f"Salvo em '{saida}'") 
+    resultado = parse_lei(txt, codigo_lei=codigo)
+
+    with open(saida, "w", encoding="utf-8") as f:
+        json.dump(resultado, f, ensure_ascii=False, indent=2)
+
     print(f"Salvo em '{saida}'")
