@@ -263,6 +263,25 @@ def baixar_lei(
     return baixar_lei_url(url, fonte=fonte, usar_cache=usar_cache)
 
 
+def _canonizar_url_planalto(url: str) -> str:
+    """
+    Tenta garantir que o link do Planalto aponte para a versão compilada (atualizada).
+    Ex: l8080.htm -> l8080compilado.htm
+    """
+    if "planalto.gov.br" not in url or "compilado" in url.lower():
+        return url
+    
+    # Padroniza extensões e tenta inserir 'compilado' antes do .htm
+    if url.endswith(".htm") or url.endswith(".html"):
+        base, ext = url.rsplit(".", 1)
+        # Verifica se já não termina com compilado/compilada
+        if not (base.lower().endswith("compilado") or base.lower().endswith("compilada")):
+            nova_url = f"{base}compilado.{ext}"
+            return nova_url
+            
+    return url
+
+
 def baixar_lei_url(
     url: str,
     fonte: str = "planalto",
@@ -279,6 +298,13 @@ def baixar_lei_url(
     Returns:
         Texto limpo da lei.
     """
+    # 0. Canonização (Planalto)
+    if fonte == "planalto":
+        url_original = url
+        url = _canonizar_url_planalto(url)
+        if url != url_original:
+            logger.info(f"[download] Canonizando Planalto: {url_original} -> {url}")
+
     # 1. Cache
     html_bytes = _carregar_cache(url) if usar_cache else None
 

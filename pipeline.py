@@ -133,19 +133,31 @@ def run(
 
     # ── ETAPA 2.5: Smart Repair (IA) ─────────────────────────────
     if smart_parser.enabled:
-        logger.info(f"[2.5] Smart Repair (IA)")
+        log(f"[2.5] Smart Repair (IA) — Corrigindo falhas estruturais...")
         reparados = 0
-        for art in _iterar_artigos_mut(estrutura):
+        pulos = 0
+        from parser import iterar_artigos_contextual
+        for art, context in iterar_artigos_contextual(estrutura):
+            # Se a confiança for baixa, tentamos recuperar com IA
             if art.get("confianca", 1.0) < 0.7:
                 texto_bruto = art.get("texto_bruto")
-                if not texto_bruto: continue
+                if not texto_bruto or len(texto_bruto) < 5:
+                    pulos += 1
+                    continue
                 
-                novo_art = smart_parser.recuperar_artigo(texto_bruto, art.get("numero", ""))
+                # Passa o contexto (breadcrumb) para a IA (ex: Título I > Capítulo II)
+                # para que ela não alucine a numeração ou rubrica.
+                novo_art = smart_parser.recuperar_artigo(
+                    texto_bruto, 
+                    art.get("numero", ""),
+                    contexto=context
+                )
+                
                 if novo_art:
                     # Atualiza o nó mantendo ID e Ordem originais
                     art["numero"]    = novo_art.get("numero", art["numero"])
                     art["estrutura"] = novo_art.get("estrutura", art["estrutura"])
-                    art["confianca"] = novo_art.get("confianca_ia", 0.9)
+                    art["confianca"] = novo_art.get("confianca_ia", 0.95)
                     art["reparado_ia"] = True
                     reparados += 1
                     

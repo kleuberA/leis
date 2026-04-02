@@ -144,7 +144,10 @@ def _detectar_gaps_numeracao(artigos: list) -> list:
     gaps = []
     def _to_int(num_str):
         if not num_str: return None
-        m = re.search(r"(\d+)", str(num_str))
+        # Remove pontos de milhar se existirem (ex: 1.000 -> 1000)
+        # Exige 3 dígitos após o ponto para ser considerado milhar
+        s = re.sub(r"\.(\d{3})", r"\1", str(num_str))
+        m = re.search(r"(\d+)", s)
         return int(m.group(1)) if m else None
 
     # Filtra apenas os que têm número legível

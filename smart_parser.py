@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import logging
 from typing import Optional, Dict, Any
@@ -23,50 +24,42 @@ else:
     logger.warning("Nenhum provedor de LLM configurado corretamente (GOOGLE_API_KEY ou OLLAMA_BASE_URL).")
 
 PROMPT_SISTEMA = """
-Você é um especialista em direito brasileiro e processamento de dados legislativos.
+Você é um especialista em direito brasileiro e processamento de dados legislativos de ALTA PRECISÃO.
 Sua tarefa é converter o texto bruto de um ARTIGO de lei brasileira em uma estrutura JSON específica.
 
-REGRAS DE ESTRUTURA:
-1. Identifique o Caput, Parágrafos, Incisos e Alíneas.
-2. O "caput" é o texto principal do artigo logo após seu número.
-3. Parágrafos podem ser "Parágrafo único" ou numerados (§ 1º, § 2º, etc.).
-4. Incisos são numerados em romanos (I, II, III, etc.).
-5. Alíneas são identificadas por letras seguidas de parênteses (a), b), c), etc.).
-6. Metadados: Identifique trechos entre parênteses que indicam alterações (ex: "Redação dada pela Lei nº...").
+REGRAS CRÍTICAS:
+1. FIDELIDADE ABSOLUTA: Não altere uma única letra do texto legal. Não resuma, não parafraseie.
+2. ESTRUTURA:
+   - "caput": Texto principal do artigo.
+   - "paragrafo": § 1º, § 2º ou "único".
+   - "inciso": I, II, III (romanos).
+   - "alinea": a), b), c) (letras).
+3. HIERARQUIA: Garanta que incisos dentro de parágrafos estejam corretamente aninhados.
+4. METADADOS: Capture notas de redação (ex: "Redação dada pela Lei...") no campo metadados.
+5. NÃO ALUCINE: Se o texto estiver truncado ou ilegível, preserve o que existe. Nunca invente conteúdo.
 
-SCHEMA JSON ESPERADO:
+SCHEMA JSON:
 {
-  "numero": "string (ex: 5º, 15, 4º-A)",
+  "numero": "string",
   "estrutura": [
     {
-      "tipo": "caput",
+      "tipo": "caput" | "paragrafo",
+      "numero": "string" (apenas para paragrafo),
       "conteudo": {
-        "texto": "texto do caput sem o número Art. X",
+        "texto": "string",
         "incisos": [
-            {
-                "tipo": "inciso",
-                "numero": "I",
-                "conteudo": {
-                    "texto": "texto do inciso",
-                    "alineas": [{"tipo": "alinea", "letra": "a", "texto": "..."}]
-                }
-            }
+          {
+            "numero": "string",
+            "conteudo": { "texto": "string", "alineas": [...] }
+          }
         ],
-        "metadados": [{"tipo": "redacao", "norma": "Lei X", "ano": "2023"}]
+        "metadados": [{"tipo": "string", "norma": "string", "ano": "string"}]
       }
-    },
-    {
-      "tipo": "paragrafo",
-      "numero": "1" ou "único",
-      "conteudo": { "texto": "...", "incisos": [] }
     }
   ]
 }
 
-IMPORTANTE:
-- Retorne APENAS o JSON, sem markdown ou explicações.
-- Se não conseguir identificar algo, deixe o campo vazio ou nulo.
-- Preserve a fidelidade técnica do texto.
+IMPORTANTE: Retorne APENAS o JSON bruto.
 """
 
 class SmartParser:
@@ -84,16 +77,19 @@ class SmartParser:
         elif self.provider == "ollama":
             self.enabled = True # Assume valid if configured
 
-    def recuperar_artigo(self, texto_bruto: str, numero_sugerido: str = "") -> Optional[dict]:
+    def recuperar_artigo(self, texto_bruto: str, numero_sugerido: str = "", contexto: str = "") -> Optional[dict]:
         """
-        Usa LLM (Gemini ou Ollama) para recuperar a estrutura de um artigo que falhou no regex.
+        Usa LLM para recuperar a estrutura de um artigo que falhou no regex.
+        Inclui contexto hierárquico (Título/Capítulo) para maior precisão.
         """
         if not self.enabled:
             return None
 
         try:
             logger.info(f"SmartParser ({self.provider}): Tentando recuperar Art. {numero_sugerido}")
-            prompt = f"{PROMPT_SISTEMA if self.provider == 'ollama' else ''}\n\nConverta este texto de artigo de lei para JSON:\n\n{texto_bruto}"
+            
+            prompt_contexto = f"\nCONTEXTO DA LEI: {contexto}\n" if contexto else ""
+            prompt = f"{PROMPT_SISTEMA if self.provider == 'ollama' else ''}\n{prompt_contexto}\nConverta este texto de artigo para JSON:\n\n{texto_bruto}"
             
             if self.provider == "gemini":
                 response = self.model.generate_content(prompt)
@@ -101,23 +97,28 @@ class SmartParser:
             else:
                 raw_json = self._call_ollama(prompt)
                 
-            # Limpa possíveis blocos de código markdown
-            if "```json" in raw_json:
-                raw_json = raw_json.split("```json")[1].split("```")[0].strip()
-            elif "```" in raw_json:
-                raw_json = raw_json.split("```")[1].split("```")[0].strip()
+            # Limpeza robusta de blocos de código
+            raw_json = re.sub(r"```json\s*", "", raw_json)
+            raw_json = re.sub(r"```\s*$", "", raw_json)
+            raw_json = raw_json.strip()
                 
             dados = json.loads(raw_json)
             
-            # Validação mínima do schema
+            # Validação rigorosa dos campos obrigatórios
             if "numero" in dados and "estrutura" in dados:
-                dados["confianca_ia"] = 0.9
+                # Normalização básica de campos para evitar erros no frontend
+                for item in dados["estrutura"]:
+                    if "conteudo" not in item: item["conteudo"] = {"texto": ""}
+                    if "incisos" not in item["conteudo"]: item["conteudo"]["incisos"] = []
+                
+                dados["confianca_ia"] = 0.95
                 dados["llm_provider"] = self.provider
+                dados["original_prompt_contexto"] = contexto
                 return dados
                 
             return None
         except Exception as e:
-            logger.error(f"Erro no SmartParser: {e}")
+            logger.error(f"Erro no SmartParser ao processar Art. {numero_sugerido}: {e}")
             return None
 
     def _call_ollama(self, prompt: str) -> str:

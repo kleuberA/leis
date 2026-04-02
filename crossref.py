@@ -40,7 +40,7 @@ _RE_CROSSREF = re.compile(
     r"previsto\s+n[oa]s?|na\s+forma\s+d[oa]s?|nos?\s+moldes\s+d[oa]s?|"
     r"(?:a\s+que\s+se\s+refere|referidos?\s+n[oa]s?)\s+)?"
     r"art(?:igo)?s?\.?\s*"
-    r"(\d+[°oº]?(?:-[A-Za-z])?)"                       # g1: número do artigo
+    r"(\d+(?:\.\d{3})*[°oº]?(?:-[A-Za-z])?)"             # g1: número do artigo (suporta milhares)
     r"(?:[,\s]+(?:§\s*(\d+[°oº]?)|par[aá]grafo\s+(?:(\d+)|único)))?"
     r"(?:[,\s°oº]+inciso\s+([IVXLCDM]+))?"            # g4: inciso
     r"(?:[,\s]+al[\xed\xec]nea\s+[\x27\x22]?([a-z])[\x27\x22]?)?",

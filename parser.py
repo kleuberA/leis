@@ -68,7 +68,8 @@ def normalizar_texto(texto: str) -> str:
 
     # [NOVO] Fix para marcadores de Artigo/Hierarquia quebrados por artefatos de PDF/HTML
     # Ex: "A rt. 107", "C apítulo", "S eção", "T ítulo"
-    texto = re.sub(r"\n\s*A\s+rt\.\s*(\d+)", r"\nArt. \1", texto, flags=re.IGNORECASE)
+    # Agora suporta milhares (ex: Art. 1.000)
+    texto = re.sub(r"\n\s*A\s+rt\.\s*(\d+(?:\.\d{3})*)", r"\nArt. \1", texto, flags=re.IGNORECASE)
     texto = re.sub(r"\n\s*C\s+ap[ií]tulo", r"\nCapítulo", texto, flags=re.IGNORECASE)
     texto = re.sub(r"\n\s*S\s+e[çc][ãa]o", r"\nSeção", texto, flags=re.IGNORECASE)
     texto = re.sub(r"\n\s*T\s+[ií]tulo",   r"\nTítulo", texto, flags=re.IGNORECASE)
@@ -80,8 +81,8 @@ def normalizar_texto(texto: str) -> str:
     texto = re.sub(r"(\d)\n(o)$",    r"\1º",   texto, flags=re.MULTILINE)
     texto = re.sub(r"(\d)\n([°º])$",  r"\1º",  texto, flags=re.MULTILINE)
 
-    # Ordinal partido após Art.N
-    texto = re.sub(r"(Art\.\s*\d+)\n([°oº])\n", r"\1\2\n", texto)
+    # Ordinal partido após Art.N (suporta milhares)
+    texto = re.sub(r"(Art\.\s*\d+(?:\.\d{3})*)\n([°oº])\n", r"\1\2\n", texto)
 
     def _fix_art_partido(texto):
         linhas = texto.splitlines()
@@ -90,7 +91,7 @@ def normalizar_texto(texto: str) -> str:
         while i < len(linhas):
             l = linhas[i]
             s = l.strip()
-            m = re.match(r'^(Art\.?\s*\d+[°oº]?(?:-[A-Za-z])?)\s*$', s)
+            m = re.match(r'^(Art\.?\s*\d+(?:\.\d{3})*[°oº]?(?:-[A-Za-z])?)\s*$', s)
             if m and i + 1 < len(linhas):
                 prox = linhas[i + 1].strip()
                 if prox == '.':
@@ -138,13 +139,17 @@ def normalizar_texto(texto: str) -> str:
 
     # [NOVO] Colapso de palavras estruturais espaçadas (ex: P A R T E  G E R A L)
     # Lista de termos críticos para hierarquia
-    termos_hierarquia = ["PARTE", "LIVRO", "TITULO", "TÍTULO", "CAPITULO", "CAPÍTULO", "SECAO", "SEÇÃO", "SUBSECAO", "SUBSEÇÃO", "ARTIGO", "GERAL", "ESPECIAL"]
+    termos_hierarquia = ["PARTE", "LIVRO", "TITULO", "TÍTULO", "CAPITULO", "CAPÍTULO", "SECAO", "SEÇÃO", "SUBSECAO", "SUBSEÇÃO", "ARTIGO", "GERAL", "ESPECIAL", "CONSTITUIÇÃO", "FEDERAL"]
     
     for termo in termos_hierarquia:
         # Cria regex que aceita um ou mais espaços entre cada letra do termo
-        # Ex para PARTE: P\s+A\s+R\s+T\s+E
+        # Ex para PARTE: P\s*A\s*R\s*T\s*E
         pattern = r"\b" + r"\s+".join(list(termo)) + r"\b"
         texto = re.sub(pattern, termo, texto, flags=re.IGNORECASE)
+
+    # [NOVO] Remoção de números de página e rodapés comuns em PDFs do Planalto
+    texto = re.sub(r"\n\s*\d+\s*/\s*\d+\s*\n", "\n", texto) # "1 / 50"
+    texto = re.sub(r"\nEste texto não substitui o publicado no DOU\s*\n", "\n", texto, flags=re.IGNORECASE)
 
     # Colapsa 3+ linhas vazias → 2
     texto = re.sub(r"\n{3,}", "\n\n", texto)
@@ -198,8 +203,9 @@ def _id_num(numero: str) -> str:
 
 # Detecta "Art. N" ou "§ N" precedidos de espaço (embutidos no meio de uma linha)
 # Não usa re.IGNORECASE aqui: "Art." normativo é sempre maiúsculo (BUG1).
+# Suporta múltiplos dígitos e milhares (BUG fix 1000+).
 _RE_ARTIGO_OU_PARA_EMBUTIDO = re.compile(
-    r"\s+(?:Art\.?\s*\d|§\s*\d)"
+    r"\s+(?:Art\.?\s*\d+(?:\.\d{3})*|§\s*\d+(?:\.\d{3})*)"
 )
 
 
@@ -344,7 +350,7 @@ def extrair_incisos(texto: str) -> dict:
 _SPLIT_PARAGRAFO = re.compile(
     r"\n"
     r"("
-    r"§\s*\d+[°oº]?(?:-[A-Za-z]{1,2})?(?:\s*[-–.]\s*)?"
+    r"§\s*\d+(?:\.\d{3})*[°oº]?(?:-[A-Za-z]{1,2})?(?:\s*[-–.]\s*)?"
     r"|"
     r"Parágrafo\s+único\s*(?:[-–.]\s*)?"
     r")",
@@ -352,7 +358,7 @@ _SPLIT_PARAGRAFO = re.compile(
 )
 
 _RE_STRIP_ART = re.compile(
-    r"^Art\.?\s*\d+(?:\.\d+)*[°oº]?(?:-[A-Za-z]{1,2})?(?:\s*[-–.]\s*|\s+)"
+    r"^Art\.?\s*\d+(?:\.\d{3})*[°oº]?(?:-[A-Za-z]{1,2})?(?:\s*[-–.]\s*|\s+)"
 )
 
 
@@ -396,8 +402,8 @@ def extrair_paragrafos(txt_art: str) -> list:
 # FASE 5 — PARSE DE ARTIGOS
 # ═══════════════════════════════════════════════════════
 
-_SPLIT_ARTIGO = re.compile(r"\n(?=(?:Art\.?|A\s*rt\.?)\s*\d)", re.IGNORECASE)
-_RE_ART_NUM   = re.compile(r"(?:Art\.?|A\s*rt\.?)\s*(\d+(?:\.\d+)*[°oº]?(?:-[A-Za-z]{1,2})?)", re.IGNORECASE)
+_SPLIT_ARTIGO = re.compile(r"\n(?=(?:Art\.?|A\s*rt\.?)\s*\d+)", re.IGNORECASE)
+_RE_ART_NUM   = re.compile(r"(?:Art\.?|A\s*rt\.?)\s*(\d+(?:\.\d{3})*[°oº]?(?:-[A-Za-z]{1,2})?)", re.IGNORECASE)
 
 
 def _coletar_metas(obj) -> list:
@@ -640,15 +646,12 @@ def _extrair_nome(bloco: str, re_num: re.Pattern) -> str:
     nome_raw_lines = "\n".join(partes)
     nome_sem_artigo = _truncar_na_fronteira_artigo(nome_raw_lines)
     
-    # [NOVO] Separa rubrica do final do nome, se houver múltiplas linhas
-    # A rubrica do Art 1 costuma estar logo após o nome do Título/Capítulo
-    linhas_finais = [l.strip() for l in nome_sem_artigo.split('\n') if l.strip()]
-    if len(linhas_finais) > 1:
-        nome_limpo, rubrica_encontrada = separar_rubrica(nome_sem_artigo)
-        if rubrica_encontrada and nome_limpo.strip():
-            return limpar_texto_final(nome_limpo)
-            
-    return limpar_texto_final(nome_sem_artigo)
+    # [BUG10-FINAL] Garantia de que CAPUT ou ARTIGO no final do nome sejam cortados
+    nome_final = limpar_texto_final(nome_sem_artigo)
+    # Corta em 'Art.' se sobrar no final devido a falhas de regex prévias
+    nome_final = re.split(r'\s+Art\.', nome_final, flags=re.IGNORECASE)[0].strip()
+
+    return nome_final
 
 
 def _parse_subsecoes(bloco, lei, ordem, opcoes):
@@ -876,6 +879,7 @@ def parse_lei(texto: str, codigo_lei: str = "0000", url: str = None, opcoes: dic
 def iterar_artigos(resultado: dict):
     """
     Itera artigos em ordem de documento usando DFS pré-ordem.
+    Retorna apenas o dicionário do artigo.
     """
     def _dfs(node):
         if isinstance(node, dict):
@@ -893,9 +897,39 @@ def iterar_artigos(resultado: dict):
     yield from _dfs(resultado)
 
 
+def iterar_artigos_contextual(resultado: dict):
+    """
+    Itera artigos em ordem de documento, retornando (artigo, breadcrumb).
+    Útil para fornecer contexto à IA no Smart Repair.
+    """
+    def _dfs(node, breadcrumb=""):
+        if isinstance(node, dict):
+            tipo = node.get("tipo", "")
+            numero = node.get("numero", "")
+            nome = node.get("nome", "")
+            
+            paco = f"{tipo.capitalize()} {numero}" if numero else tipo.capitalize()
+            if nome: paco += f" ({nome})"
+            
+            novo_breadcrumb = f"{breadcrumb} > {paco}" if breadcrumb else paco
+            
+            if tipo == "artigo":
+                yield node, breadcrumb # Contexto do pai
+            else:
+                for chave in ("titulos", "filhos", "artigos", "estrutura"):
+                    if chave in node and isinstance(node[chave], list):
+                        for item in node[chave]:
+                            yield from _dfs(item, novo_breadcrumb)
+        elif isinstance(node, list):
+            for item in node:
+                yield from _dfs(item, breadcrumb)
+
+    yield from _dfs(resultado)
+
+
 def _iterar_artigos_mut(resultado: dict):
     """
-    Itera artigos em ordem de documento de forma mutável (permite editar o dict).
+    Itera artigos de forma mutável.
     """
     yield from iterar_artigos(resultado)
 
