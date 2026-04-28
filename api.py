@@ -91,17 +91,27 @@ api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 
 async def verify_api_key(api_key: Optional[str] = Security(api_key_header)):
     """Verifica a API key para endpoints protegidos."""
+    # Em produção, a chave É OBRIGATÓRIA.
+    # Só permitimos bypass se DEV_MODE=true estiver no .env
     if not settings.API_SECRET_KEY:
-        # Se não configurou chave, permite acesso (desenvolvimento)
-        return True
+        if settings.DEV_MODE:
+            logger.warning("ALERTA: Acesso sem chave permitido (DEV_MODE=True)")
+            return True
+        else:
+            logger.error("Acesso bloqueado: API_SECRET_KEY não configurada no servidor.")
+            raise HTTPException(
+                status_code=500,
+                detail="Configuração de segurança incompleta no servidor."
+            )
+            
     if api_key != settings.API_SECRET_KEY:
         raise HTTPException(
             status_code=401,
             detail={
-                "type": "authentication_error",
+                "type": "authentication_failed",
                 "title": "Chave de API inválida",
-                "detail": "O header X-API-Key é obrigatório e deve conter uma chave válida.",
-            },
+                "detail": "A chave fornecida no header X-API-Key está incorreta ou ausente.",
+            }
         )
     return True
 

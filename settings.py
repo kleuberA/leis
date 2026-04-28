@@ -32,6 +32,11 @@ API_PORT = int(os.getenv("API_PORT", "8000"))
 # Chave de autenticação para endpoints protegidos (POST/PATCH)
 API_SECRET_KEY = os.getenv("API_SECRET_KEY", "")
 
+# Ambiente (production, development, testing)
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development").lower()
+# Modo dev permite bypass de auth se a chave estiver vazia
+DEV_MODE = os.getenv("DEV_MODE", "false").lower() == "true"
+
 # CORS — origens permitidas (separar por vírgula no .env)
 _cors_raw = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173")
 CORS_ORIGINS = [o.strip() for o in _cors_raw.split(",") if o.strip()]

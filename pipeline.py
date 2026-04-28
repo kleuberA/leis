@@ -92,9 +92,9 @@ def run(
     cfg_lei  = info_lei(codigo)
     nome_lei = cfg_lei.get("nome", codigo) if cfg_lei else codigo
 
-    log(f"{'═'*55}")
+    log(f"{'='*55}")
     log(f"  Pipeline: {nome_lei}")
-    log(f"{'═'*55}")
+    log(f"{'='*55}")
 
     # ── ETAPA 1: Download ────────────────────────────────────────
     log(f"[1/4] Navegando até a lei...")
@@ -207,7 +207,7 @@ def run(
             if __name__ == "__main__":
                 sys.exit(2)
         else:
-            logger.info(f"      Precisão estrutural: {precisao:.1%} ✓")
+            logger.info(f"      Precisão estrutural: {precisao:.1%} [OK]")
 
     return {"estrutura": estrutura, "relatorio": relatorio, "crossrefs": crossrefs}
 
@@ -292,12 +292,12 @@ def run_batch(
             erros.append({"codigo": codigo, "erro": msg})
 
     # Sumário do batch
-    logger.info(f"\n{'═'*55}")
+    logger.info(f"\n{'='*55}")
     logger.info(f"  BATCH CONCLUÍDO: {len(resultados)} ok, {len(erros)} erro(s)")
     if erros:
         for e in erros:
-            logger.error(f"  ✗ {e['codigo']}: {e['erro']}")
-    logger.info(f"{'═'*55}")
+            logger.error(f"  [X] {e['codigo']}: {e['erro']}")
+    logger.info(f"{'='*55}")
 
     return resultados
 

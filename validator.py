@@ -281,51 +281,51 @@ def validar_estrutura(dados: dict | list) -> dict:
 
 def imprimir_relatorio(r: dict) -> None:
     lei = r.get("lei", {})
-    print("\n" + "═" * 50)
+    print("\n" + "=" * 50)
     print("  RELATÓRIO ESTRUTURAL")
     if lei:
         print(f"  Lei {lei.get('codigo', '?')}")
     print(f"  Gerado em: {r.get('timestamp', '?')}")
-    print("═" * 50)
+    print("=" * 50)
 
-    print(f"\n📚 Total de artigos:    {r['total_artigos']}")
-    print(f"📂 Total de títulos:    {r['total_titulos']}")
+    print(f"\n[Artigos] Total de artigos:    {r['total_artigos']}")
+    print(f"\n[Titulos] Total de títulos:    {r['total_titulos']}")
 
     est = r.get("estatisticas", {})
     if est:
-        print(f"📋 Total de incisos:    {est.get('total_incisos', 0)}")
-        print(f"📌 Total de alíneas:    {est.get('total_alineas', 0)}")
+        print(f"[Incisos] Total de incisos:    {est.get('total_incisos', 0)}")
+        print(f"[Alineas] Total de alíneas:    {est.get('total_alineas', 0)}")
 
-    print("\n📊 Artigos por título:")
+    print("\n[Stats] Artigos por título:")
     for titulo, qtd in r.get("artigos_por_titulo", {}).items():
         print(f"   {titulo}: {qtd}")
 
-    print(f"\n{'─'*40}")
-    _linha("🔴 IDs duplicados",          r["ids_duplicados"])
-    _linha("🔴 Artigos vazios",           r["artigos_vazios"])
-    _linha("🟠 Caput sem texto",          r["artigos_sem_texto_caput"])
-    _linha("🟡 Artigos revogados",        r["artigos_revogados"])
-    _linha("🟡 Incisos sem conteúdo",     r["incisos_sem_conteudo"])
-    _linha("🟡 Alíneas fora de lugar",    r["alineas_fora_de_lugar"])
-    _linha("🟠 Gaps de numeração",        r["gaps_numeracao"])
-    _linha("🟠 Blocos estruturais vazios", r["blocos_vazios"])
+    print(f"\n{'-'*40}")
+    _linha("[RED] IDs duplicados",          r["ids_duplicados"])
+    _linha("[RED] Artigos vazios",           r["artigos_vazios"])
+    _linha("[ORG] Caput sem texto",          r["artigos_sem_texto_caput"])
+    _linha("[YEL] Artigos revogados",        r["artigos_revogados"])
+    _linha("[YEL] Incisos sem conteúdo",     r["incisos_sem_conteudo"])
+    _linha("[YEL] Alíneas fora de lugar",    r["alineas_fora_de_lugar"])
+    _linha("[ORG] Gaps de numeração",        r["gaps_numeracao"])
+    _linha("[ORG] Blocos estruturais vazios", r["blocos_vazios"])
 
     if r.get("warnings"):
-        print(f"\n⚠️  Warnings ({len(r['warnings'])}):")
+        print(f"\n[!] Warnings ({len(r['warnings'])}):")
         for w in r["warnings"][:10]:
-            print(f"   • {w}")
+            print(f"   - {w}")
         if len(r["warnings"]) > 10:
             print(f"   ... e mais {len(r['warnings']) - 10}")
 
-    print("\n" + "═" * 50 + "\n")
+    print("\n" + "=" * 50 + "\n")
 
 
 def _linha(label: str, lista: list) -> None:
-    status = "✅ Nenhum" if not lista else f"{len(lista)} encontrado(s)"
+    status = "[OK] Nenhum" if not lista else f"{len(lista)} encontrado(s)"
     print(f"{label}: {status}")
     if lista:
         for item in lista[:5]:
-            print(f"   • {item}")
+            print(f"   - {item}")
         if len(lista) > 5:
             print(f"   ... e mais {len(lista) - 5}")
 
