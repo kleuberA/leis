@@ -205,6 +205,16 @@ class LeiMetadataUpdate(BaseModel):
     fonte: Optional[str] = Field(None, description="Nova fonte (planalto, senado, camara)")
 
 
+class LeiBancoUpdate(BaseModel):
+    nome: Optional[str] = None
+    tipo: Optional[str] = None
+    ementa: Optional[str] = None
+    data_publicacao: Optional[str] = None
+    orgao_emissor: Optional[str] = None
+    status: Optional[str] = None
+    needs_review: Optional[bool] = None
+
+
 class PipelineResponse(BaseModel):
     codigo: str
     status: str
@@ -496,6 +506,38 @@ async def patch_lei_metadata(
         "codigo": codigo,
         "campos_atualizados": list(dados.keys())
     }
+
+
+# ─── Gerenciamento de Banco (Supabase) ─────────────────────────
+
+
+@app.get("/api/v1/leis/banco/todas", tags=["Gerenciamento"])
+def list_leis_banco(_auth: bool = Depends(verify_api_key)):
+    """Lista todas as leis salvas no banco de dados (Supabase)."""
+    if not storage:
+        raise HTTPException(status_code=503, detail="Storage não configurado")
+    return storage.list_leis()
+
+
+@app.patch("/api/v1/leis/banco/{id_lei}", tags=["Gerenciamento"])
+def update_lei_banco(
+    id_lei: int, 
+    update: LeiBancoUpdate, 
+    _auth: bool = Depends(verify_api_key)
+):
+    """Atualiza metadados de uma lei diretamente no banco de dados."""
+    if not storage:
+        raise HTTPException(status_code=503, detail="Storage não configurado")
+    
+    dados = {k: v for k, v in update.model_dump().items() if v is not None}
+    if not dados:
+        raise HTTPException(status_code=400, detail="Nenhum dado para atualizar")
+    
+    sucesso = storage.update_lei(id_lei, dados)
+    if not sucesso:
+        raise HTTPException(status_code=500, detail="Erro ao atualizar lei no banco")
+    
+    return {"status": "sucesso", "id_lei": id_lei, "campos_atualizados": list(dados.keys())}
 
 
 # ─── Lei Individual (resumo) ────────────────────────────────

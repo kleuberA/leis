@@ -185,4 +185,32 @@ class SupabaseStorage:
         }
         return tabelas.get(tipo)
 
+    def list_leis(self) -> list:
+        """Lista todas as leis do banco."""
+        try:
+            with httpx.Client() as client:
+                r = client.get(f"{self.url}/rest/v1/leis?select=*&order=atualizado_em.desc", headers=self.headers)
+                r.raise_for_status()
+                return r.json()
+        except Exception as e:
+            logger.error(f"Error listing laws: {e}")
+            return []
+
+    def update_lei(self, id_lei: int, data: Dict[str, Any]) -> bool:
+        """Atualiza metadados de uma lei específica."""
+        try:
+            # Garante que atualizado_em seja 'now' se não for passado
+            if "atualizado_em" not in data:
+                data["atualizado_em"] = "now()"
+                
+            with httpx.Client() as client:
+                r = client.patch(f"{self.url}/rest/v1/leis?id_lei=eq.{id_lei}", headers=self.headers, json=data)
+                if r.status_code >= 400:
+                    logger.error(f"Error updating law {id_lei}: {r.status_code} - {r.text}")
+                    return False
+                return True
+        except Exception as e:
+            logger.error(f"Exception during law update: {e}")
+            return False
+
 storage = SupabaseStorage()
