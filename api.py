@@ -402,6 +402,35 @@ def health_check():
     }
 
 
+@app.get("/api/v1/debug/storage", tags=["Sistema"])
+def debug_storage(_auth: bool = Depends(verify_api_key)):
+    """Verifica a configuração e conectividade com o storage."""
+    if not storage:
+        return {
+            "status": "error",
+            "message": "Storage (Supabase) não inicializado. Verifique se as variáveis SUPABASE_URL e SUPABASE_KEY estão configuradas."
+        }
+    
+    try:
+        # Tenta uma consulta simples (limit 1)
+        import httpx
+        with httpx.Client() as client:
+            r = client.get(f"{storage.url}/rest/v1/leis?select=id_lei&limit=1", headers=storage.headers)
+            return {
+                "status": "ok" if r.status_code < 400 else "error",
+                "supabase_url": storage.url,
+                "supabase_status_code": r.status_code,
+                "supabase_response": r.text if r.status_code >= 400 else "Conexão estabelecida com sucesso",
+                "has_key": bool(storage.key),
+                "key_preview": f"{storage.key[:10]}..." if storage.key else None
+            }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": f"Falha ao conectar com Supabase: {str(e)}"
+        }
+
+
 # ─── Catálogo ────────────────────────────────────────────────
 
 

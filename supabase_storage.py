@@ -190,10 +190,12 @@ class SupabaseStorage:
         try:
             with httpx.Client() as client:
                 r = client.get(f"{self.url}/rest/v1/leis?select=*&order=atualizado_em.desc", headers=self.headers)
-                r.raise_for_status()
+                if r.status_code >= 400:
+                    logger.error(f"Error listing laws from Supabase: {r.status_code} - {r.text}")
+                    return []
                 return r.json()
         except Exception as e:
-            logger.error(f"Error listing laws: {e}")
+            logger.error(f"Exception during list_leis: {e}")
             return []
 
     def update_lei(self, id_lei: int, data: Dict[str, Any]) -> bool:
