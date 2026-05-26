@@ -198,6 +198,20 @@ class PipelineUrlRequest(BaseModel):
     opcoes: Optional[ParserOptions] = None
 
 
+def _normalize_pipeline_url(url: str) -> str:
+    url = url.strip()
+    if not url:
+        raise ValueError("URL vazia")
+
+    if not re.match(r'^[a-zA-Z][a-zA-Z0-9+\-.]*://', url):
+        if url.startswith("www.") or "." in url.split("/")[0]:
+            url = f"https://{url}"
+        else:
+            raise ValueError("URL inválida. Informe um endereço com http:// ou https://")
+
+    return url
+
+
 class LeiMetadataUpdate(BaseModel):
     nome: Optional[str] = Field(None, description="Novo nome da lei")
     url: Optional[str] = Field(None, description="Nova URL da lei")
@@ -758,7 +772,15 @@ def trigger_url_pipeline(
     O código da lei será o MD5 da URL.
     """
     import hashlib
-    url = request.url
+    try:
+        url = _normalize_pipeline_url(request.url)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail={
+            "type": "invalid_url",
+            "title": "URL inválida",
+            "detail": str(exc),
+        })
+
     codigo = hashlib.md5(url.encode()).hexdigest()
     logger.info(f"Trigger URL: {url} -> {codigo}")
 
