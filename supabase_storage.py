@@ -523,5 +523,220 @@ class SupabaseStorage:
             logger.error(f"Exception during law update: {e}")
             return False
 
+    def obter_lei_completa(self, id_lei: int) -> Optional[dict]:
+        """
+        Recupera do Supabase todos os elementos e artigos de uma lei específica,
+        reconstrói a árvore hierárquica e retorna no formato compatível com o frontend.
+        """
+        # 1. Buscar metadados da lei
+        try:
+            with httpx.Client() as client:
+                r = client.get(f"{self.url}/rest/v1/leis?id_lei=eq.{id_lei}", headers=self.headers)
+                r.raise_for_status()
+                leis = r.json()
+                if not leis:
+                    return None
+                lei_meta = leis[0]
+        except Exception as e:
+            logger.error(f"Erro ao buscar metadados da lei {id_lei}: {e}")
+            return None
+
+        # Helper para carregar todas as linhas paginadas
+        def _fetch_all_rows(table: str) -> list:
+            all_rows = []
+            limit = 1000
+            offset = 0
+            with httpx.Client(timeout=30.0) as client:
+                while True:
+                    url = f"{self.url}/rest/v1/{table}?id_lei=eq.{id_lei}&order=ordem.asc&limit={limit}&offset={offset}"
+                    r = client.get(url, headers=self.headers)
+                    if r.status_code >= 400:
+                        logger.error(f"Erro ao buscar {table} (status {r.status_code}): {r.text}")
+                        break
+                    rows = r.json()
+                    if not rows:
+                        break
+                    all_rows.extend(rows)
+                    if len(rows) < limit:
+                        break
+                    offset += limit
+            return all_rows
+
+        # 2. Buscar todas as tabelas estruturais e artigos
+        tables = ["partes", "livros", "titulos", "subtitulos", "capitulos", "secoes", "subsecoes", "artigos"]
+        data_by_table = {}
+        for t in tables:
+            data_by_table[t] = _fetch_all_rows(t)
+
+        # 3. Mapear nome_completo / nome para extrair numero e nome limpo
+        def _extrair_numero_nome(tipo: str, nome: str, nome_completo: str) -> Tuple[str, str]:
+            tipo_upper = tipo.upper()
+            if not nome_completo:
+                return "", nome or ""
+            if nome_completo.upper().startswith(tipo_upper):
+                rest = nome_completo[len(tipo_upper):].strip()
+                if " - " in rest:
+                    parts = rest.split(" - ", 1)
+                    return parts[0].strip(), parts[1].strip()
+                else:
+                    if not nome:
+                        return "", rest
+                    else:
+                        return rest, nome
+            return "", nome or nome_completo
+
+        # 4. Criar dicionário de nós mapeados por (tipo, id)
+        nodes = {}
+        plural_to_singular = {
+            "partes": "parte",
+            "livros": "livro",
+            "titulos": "titulo",
+            "subtitulos": "subtitulo",
+            "capitulos": "capitulo",
+            "secoes": "secao",
+            "subsecoes": "subsecao"
+        }
+
+        # Nós estruturais
+        for plural, singular in plural_to_singular.items():
+            pk_col = f"id_{singular}"
+            for row in data_by_table[plural]:
+                node_id = row[pk_col]
+                numero, clean_nome = _extrair_numero_nome(singular, row.get("nome"), row.get("nome_completo"))
+                node = {
+                    "tipo": singular,
+                    "numero": numero,
+                    "nome": clean_nome,
+                    "ordem": row.get("ordem", 0),
+                    "filhos": []
+                }
+                nodes[(singular, node_id)] = (node, row)
+
+        # Artigos
+        for row in data_by_table["artigos"]:
+            artigo_id = row["id_artigo"]
+            
+            # Parse json columns if needed
+            estrutura_val = row.get("estrutura")
+            if isinstance(estrutura_val, str):
+                try:
+                    estrutura_val = json.loads(estrutura_val)
+                except Exception:
+                    estrutura_val = None
+            
+            alteracoes_val = row.get("alteracoes")
+            if isinstance(alteracoes_val, str):
+                try:
+                    alteracoes_val = json.loads(alteracoes_val)
+                except Exception:
+                    alteracoes_val = None
+
+            node = {
+                "id": str(artigo_id), # usar string id
+                "tipo": "artigo",
+                "numero": row.get("numero", ""),
+                "ordem": row.get("ordem", 0),
+                "estrutura": estrutura_val or [{"tipo": "caput", "conteudo": {"texto": row.get("texto", "")}}],
+                "alteracoes": alteracoes_val or []
+            }
+            nodes[("artigo", artigo_id)] = (node, row)
+
+        # 5. Resolver parentesco
+        ancestor_cols = [
+            ("subsecao", "id_subsecao"),
+            ("secao", "id_secao"),
+            ("capitulo", "id_capitulo"),
+            ("subtitulo", "id_subtitulo"),
+            ("titulo", "id_titulo"),
+            ("livro", "id_livro"),
+            ("parte", "id_parte")
+        ]
+
+        def _encontrar_pai(tipo: str, row: dict) -> Optional[Tuple[str, int]]:
+            hierarchy_order = ["artigo", "subsecao", "secao", "capitulo", "subtitulo", "titulo", "livro", "parte"]
+            try:
+                type_idx = hierarchy_order.index(tipo)
+            except ValueError:
+                type_idx = 0
+
+            for ancestor_type, col in ancestor_cols:
+                try:
+                    anc_idx = hierarchy_order.index(ancestor_type)
+                except ValueError:
+                    continue
+                if anc_idx > type_idx:
+                    parent_id = row.get(col)
+                    if parent_id is not None:
+                        return ancestor_type, parent_id
+            return None
+
+        root_nodes = []
+        for key, (node, row) in nodes.items():
+            tipo, node_id = key
+            parent_key = _encontrar_pai(tipo, row)
+            
+            if parent_key and parent_key in nodes:
+                parent_node, _ = nodes[parent_key]
+                parent_node.setdefault("filhos", []).append(node)
+            else:
+                root_nodes.append(node)
+
+        # Ordenar recursivamente
+        def _sort_children(n: dict):
+            if "filhos" in n and isinstance(n["filhos"], list):
+                n["filhos"].sort(key=lambda x: x.get("ordem", 0))
+                for child in n["filhos"]:
+                    _sort_children(child)
+
+        for n in root_nodes:
+            _sort_children(n)
+
+        # 6. Agrupar artigos avulsos na raiz (se houver)
+        root_articles = [n for n in root_nodes if n["tipo"] == "artigo"]
+        root_structural = [n for n in root_nodes if n["tipo"] != "artigo"]
+
+        if root_articles:
+            root_articles.sort(key=lambda x: x.get("ordem", 0))
+            dummy_titulo = {
+                "tipo": "titulo",
+                "numero": "",
+                "nome": "Disposições Gerais" if len(root_articles) > 1 else "",
+                "filhos": root_articles
+            }
+            root_nodes = root_structural + [dummy_titulo]
+        else:
+            root_nodes = root_structural
+
+        # 7. Separar em partes, livros, titulos
+        partes_root = []
+        livros_root = []
+        titulos_root = []
+
+        for node in root_nodes:
+            t = node["tipo"]
+            if t == "parte":
+                partes_root.append(node)
+            elif t == "livro":
+                livros_root.append(node)
+            else:
+                titulos_root.append(node)
+
+        partes_root.sort(key=lambda x: x.get("ordem", 0))
+        livros_root.sort(key=lambda x: x.get("ordem", 0))
+        titulos_root.sort(key=lambda x: x.get("ordem", 0))
+
+        # 8. Retornar estrutura final no formato de LeiJson
+        return {
+            "lei": {
+                "codigo": str(id_lei),
+                "nome": lei_meta.get("nome", "Sem Nome"),
+                "ementa": lei_meta.get("ementa", ""),
+                "url": lei_meta.get("url_origem", "")
+            },
+            "partes": partes_root,
+            "livros": livros_root,
+            "titulos": titulos_root
+        }
+
 
 storage = SupabaseStorage()

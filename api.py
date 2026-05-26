@@ -548,6 +548,19 @@ def list_leis_banco(_auth: bool = Depends(verify_api_key)):
     return storage.list_leis()
 
 
+@app.get("/api/v1/leis/banco/{id_lei}/estrutura", tags=["Gerenciamento"])
+def get_lei_banco_estrutura(id_lei: int, _auth: bool = Depends(verify_api_key)):
+    """Retorna a estrutura completa de uma lei do banco de dados (Supabase) reconstruída."""
+    if not storage:
+        raise HTTPException(status_code=503, detail="Storage não configurado")
+    
+    estrutura = storage.obter_lei_completa(id_lei)
+    if not estrutura:
+        raise HTTPException(status_code=404, detail="Lei não encontrada no banco de dados")
+        
+    return estrutura
+
+
 @app.patch("/api/v1/leis/banco/{id_lei}", tags=["Gerenciamento"])
 def update_lei_banco(
     id_lei: int, 
