@@ -221,6 +221,7 @@ class LeiMetadataUpdate(BaseModel):
 
 class LeiBancoUpdate(BaseModel):
     nome: Optional[str] = None
+    titulo: Optional[str] = None
     tipo: Optional[str] = None
     ementa: Optional[str] = None
     data_publicacao: Optional[str] = None
@@ -929,6 +930,26 @@ async def pipeline_events(codigo: str):
                 yield ": keep-alive\n\n" # SSE comment, not shown to client
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
+@app.put("/api/v1/leis/{codigo}/estrutura", tags=["Leis"])
+def update_lei_estrutura(codigo: str, estrutura: dict, _auth: bool = Depends(verify_api_key)):
+    """Sobrescreve a estrutura JSON de uma lei localmente no servidor."""
+    path = _data_path("struct", codigo)
+    if not path.parent.exists():
+        path.parent.mkdir(parents=True, exist_ok=True)
+    
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(estrutura, f, ensure_ascii=False, indent=2)
+        
+        if settings.ENABLE_API_CACHE:
+            _get_lei_cache.cache_clear()
+            
+        return {"status": "sucesso", "mensagem": "Estrutura da lei atualizada no servidor."}
+    except Exception as e:
+        logger.error(f"Erro ao salvar estrutura da lei {codigo}: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro ao salvar arquivo: {str(e)}")
 
 
 @app.post("/api/v1/leis/{codigo}/save", tags=["Pipeline"])

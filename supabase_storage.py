@@ -731,7 +731,9 @@ class SupabaseStorage:
                 "codigo": str(id_lei),
                 "nome": lei_meta.get("nome", "Sem Nome"),
                 "ementa": lei_meta.get("ementa", ""),
-                "url": lei_meta.get("url_origem", "")
+                "url": lei_meta.get("url_origem", ""),
+                "revisado": lei_meta.get("revisado", False),
+                "id_banco": str(id_lei)
             },
             "partes": partes_root,
             "livros": livros_root,
